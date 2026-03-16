@@ -10,9 +10,7 @@
 
 This repository contains the Process Portfolio and System prototype for **Run4ever**, developed by **Group D1** for the **CPT208 Human-Centric Computing** module at Xi'an Jiaotong-Liverpool University (XJTLU). 
 
-Targeting the "C1 Go Runners" design theme, Run4ever utilizes LBS (Location-Based Services) and wearable device integration to create a gamified, geofencing treasure hunt system. It aims to enhance runners' intrinsic motivation while providing event organizers with lightweight digital tools to manage on-site interactive segments.
-
-🌐 **Live Portfolio / Web App:** [Insert your GitHub Pages or Vercel URL here]
+Run4ever utilizes LBS (Location-Based Services) and wearable device integration to create a gamified, geofencing treasure hunt system. It aims to enhance runners' intrinsic motivation while providing event organizers with lightweight digital tools to manage on-site interactive segments.
 
 ## 📂 Portfolio Structure
 
