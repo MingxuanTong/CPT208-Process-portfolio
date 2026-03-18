@@ -1,4 +1,4 @@
-# 🏃 Run4ever - CPT208 Process Portfolio
+# 🏃 RunLink - CPT208 Process Portfolio
 
 > **A playful onsite location-based system for runners, transforming ordinary running into an exciting "exploration mission".**
 
@@ -8,9 +8,9 @@
 
 ## 📌 About The Project
 
-This repository contains the Process Portfolio and System prototype for **Run4ever**, developed by **Group D1** for the **CPT208 Human-Centric Computing** module at Xi'an Jiaotong-Liverpool University (XJTLU). 
+This repository contains the Process Portfolio and System prototype for **RunLink**, developed by **Group D1** for the **CPT208 Human-Centric Computing** module at Xi'an Jiaotong-Liverpool University (XJTLU). 
 
-Run4ever utilizes LBS (Location-Based Services) and wearable device integration to create a gamified, geofencing treasure hunt system. It aims to enhance runners' intrinsic motivation while providing event organizers with lightweight digital tools to manage on-site interactive segments.
+RunLink utilizes LBS (Location-Based Services) and wearable device integration to create a gamified, geofencing treasure hunt system. It aims to enhance runners' intrinsic motivation while providing event organizers with lightweight digital tools to manage on-site interactive segments.
 
 ## 📂 Portfolio Structure
 
