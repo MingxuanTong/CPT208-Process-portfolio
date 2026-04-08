@@ -17,7 +17,7 @@ RunLink utilizes LBS (Location-Based Services) and wearable device integration t
 The portfolio is structured to document our complete human-centric design process:
 
 1. **[Motivation & Research](pages/research.html):** Project motivation, academic/commercial gap analysis, and user personas (Tom the Runner & Sarah the Organizer).
-2. **[User Requirements](pages/requirements.html):** User journey map, core playful requirements (Must-haves), and field research evidence from Suzhou Grand Canal.
+2. **[User Requirements](pages/requirements.html):** User journey map, core functional requirements, and field research evidence from Suzhou Grand Canal.
 3. **[Ideation & Alternatives](pages/ideation.html):** Crazy 8s sketches, design alternative comparisons, and Low-Fi Figma prototypes.
 4. **[Technical Implementation](pages/technical.html):** System architecture, High-Fi prototype details, and specific team member contributions.
 5. **[Evaluation & Reflection](pages/evaluation.html):** Alpha testing results, iterative UI refinements, social/ethical impact discussions, and AI usage disclosure.
