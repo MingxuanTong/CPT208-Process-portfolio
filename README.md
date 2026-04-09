@@ -21,6 +21,7 @@ The portfolio is structured to document our complete human-centric design proces
 3. **[Ideation & Alternatives](pages/ideation.html):** Crazy 8s sketches, design alternative comparisons, and Low-Fi Figma prototypes.
 4. **[Technical Implementation](pages/technical.html):** System architecture, High-Fi prototype details, and specific team member contributions.
 5. **[Evaluation & Reflection](pages/evaluation.html):** Alpha testing results, iterative UI refinements, social/ethical impact discussions, and AI usage disclosure.
+6. **[Reference](pages/reference.html):** Academic sources, related products, and AI disclosure.
 
 ## 🛠️ Technologies Used
 
