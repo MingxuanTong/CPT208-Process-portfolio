@@ -411,6 +411,27 @@ h1, h2, h3, h4, h5, h6, .logo {
   font-weight: 600;
 }
 
+.persona-grid {
+  align-items: start;
+}
+
+.persona-sheet {
+  margin: 0;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  border-top: 4px solid var(--primary);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.persona-sheet img {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+
 .comparison-block {
   display: grid;
   grid-template-columns: 1fr 1fr;
