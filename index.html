@@ -10,25 +10,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg:        #0A0E1A;
-    --bg-2:      #0F1422;
-    --surface:   #141A2B;
-    --surface-2: #1B2238;
-    --ink:       #F1F5F9;
-    --ink-2:     #CBD5E1;
-    --muted:     #94A3B8;
-    --dim:       #64748B;
+    --bg:        #FAFBFC;
+    --bg-2:      #F1F5F9;
+    --surface:   #FFFFFF;
+    --surface-2: #F8FAFC;
+    --ink:       #0F172A;
+    --ink-2:     #334155;
+    --muted:     #64748B;
+    --dim:       #94A3B8;
     --brand:     #F97316;
-    --brand-2:   #FB923C;
-    --accent:    #22C55E;
-    --accent-2:  #86EFAC;
-    --danger:    #EF4444;
-    --warn:      #F59E0B;
-    --info:      #38BDF8;
-    --line:      rgba(255,255,255,0.08);
-    --line-2:    rgba(255,255,255,0.14);
-    --glass:     rgba(255,255,255,0.04);
-    --glass-2:   rgba(255,255,255,0.08);
+    --brand-2:   #EA580C;
+    --accent:    #16A34A;
+    --accent-2:  #15803D;
+    --danger:    #DC2626;
+    --warn:      #D97706;
+    --info:      #0284C7;
+    --line:      rgba(15,23,42,0.08);
+    --line-2:    rgba(15,23,42,0.14);
+    --glass:     rgba(15,23,42,0.03);
+    --glass-2:   rgba(15,23,42,0.06);
+    --shadow-sm: 0 1px 2px rgba(15,23,42,0.04), 0 1px 1px rgba(15,23,42,0.03);
+    --shadow-md: 0 8px 20px rgba(15,23,42,0.06), 0 2px 4px rgba(15,23,42,0.03);
+    --shadow-lg: 0 20px 40px rgba(15,23,42,0.10), 0 8px 16px rgba(15,23,42,0.05);
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; scroll-behavior: smooth; }
@@ -36,9 +39,9 @@
     font-family: 'Barlow', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     color: var(--ink);
     background:
-      radial-gradient(1200px 600px at 12% -10%, rgba(249,115,22,0.14), transparent 55%),
-      radial-gradient(1000px 500px at 90% 5%, rgba(34,197,94,0.10), transparent 60%),
-      radial-gradient(800px 600px at 50% 100%, rgba(56,189,248,0.06), transparent 60%),
+      radial-gradient(1200px 600px at 12% -10%, rgba(249,115,22,0.07), transparent 55%),
+      radial-gradient(1000px 500px at 90% 5%, rgba(22,163,74,0.05), transparent 60%),
+      radial-gradient(800px 600px at 50% 100%, rgba(56,189,248,0.03), transparent 60%),
       linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
     background-attachment: fixed;
     min-height: 100vh;
@@ -58,6 +61,10 @@
   h2 { font-weight: 700; }
   .num { font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
   code, pre, .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+  :not(pre) > code {
+    background: var(--surface-2); border: 1px solid var(--line);
+    color: var(--ink); padding: 1px 6px; border-radius: 5px; font-size: 0.88em;
+  }
 
   /* --------- Layout --------- */
   .wrap      { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
@@ -66,8 +73,9 @@
   /* --------- Top nav --------- */
   .nav {
     position: sticky; top: 0; z-index: 50;
-    backdrop-filter: blur(16px);
-    background: rgba(10, 14, 26, 0.72);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    background: rgba(255, 255, 255, 0.78);
     border-bottom: 1px solid var(--line);
   }
   .nav-inner {
@@ -82,7 +90,7 @@
     box-shadow: 0 10px 26px rgba(249,115,22,0.35);
   }
   .logo-mark svg { width: 22px; height: 22px; color: #fff; }
-  .brand-name { font-family: 'Barlow Condensed'; font-weight: 800; font-size: 22px; letter-spacing: 0.02em; }
+  .brand-name { font-family: 'Barlow Condensed'; font-weight: 800; font-size: 22px; letter-spacing: 0.02em; color: var(--ink); }
   .brand-sub  { color: var(--muted); font-size: 12px; margin-top: -2px; letter-spacing: 0.06em; text-transform: uppercase; }
 
   .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
@@ -91,7 +99,7 @@
     font-size: 13px; font-weight: 600; letter-spacing: 0.01em;
     transition: background .18s, color .18s;
   }
-  .nav-links a:hover { background: var(--glass-2); color: #fff; }
+  .nav-links a:hover { background: var(--glass); color: var(--ink); }
   .nav-cta {
     display: inline-flex; align-items: center; gap: 8px;
     height: 38px; padding: 0 14px; border-radius: 10px;
@@ -112,10 +120,10 @@
   .eyebrow {
     display: inline-flex; align-items: center; gap: 10px;
     height: 30px; padding: 0 14px; border-radius: 999px;
-    background: rgba(34,197,94,0.10); border: 1px solid rgba(34,197,94,0.28);
-    color: var(--accent-2); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    background: rgba(22,163,74,0.08); border: 1px solid rgba(22,163,74,0.25);
+    color: #15803D; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
   }
-  .eyebrow .dot { width: 7px; height: 7px; border-radius: 99px; background: var(--accent); box-shadow: 0 0 0 4px rgba(34,197,94,0.18); }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 99px; background: var(--accent); box-shadow: 0 0 0 4px rgba(22,163,74,0.14); }
   .hero h1 {
     font-size: clamp(44px, 6vw, 84px);
     line-height: 0.98;
@@ -127,12 +135,13 @@
   .chip {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 8px 14px; border-radius: 99px;
-    background: var(--glass); border: 1px solid var(--line);
+    background: #FFFFFF; border: 1px solid var(--line);
     color: var(--ink-2); font-size: 13px; font-weight: 600;
+    box-shadow: var(--shadow-sm);
   }
-  .chip.brand { background: rgba(249,115,22,0.10); border-color: rgba(249,115,22,0.3); color: #FED7AA; }
-  .chip.accent { background: rgba(34,197,94,0.10); border-color: rgba(34,197,94,0.3); color: #BBF7D0; }
-  .chip.info { background: rgba(56,189,248,0.10); border-color: rgba(56,189,248,0.3); color: #BAE6FD; }
+  .chip.brand { background: rgba(249,115,22,0.08); border-color: rgba(249,115,22,0.24); color: #9A3412; }
+  .chip.accent { background: rgba(22,163,74,0.08); border-color: rgba(22,163,74,0.24); color: #15803D; }
+  .chip.info { background: rgba(2,132,199,0.08); border-color: rgba(2,132,199,0.24); color: #075985; }
 
   .hero-actions { margin-top: 36px; display: flex; gap: 12px; flex-wrap: wrap; }
   .btn {
@@ -142,21 +151,21 @@
     transition: transform .18s, box-shadow .18s, background .18s, border-color .18s;
     cursor: pointer;
   }
-  .btn-primary { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #fff; box-shadow: 0 10px 26px rgba(249,115,22,0.35); }
-  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 14px 32px rgba(249,115,22,0.45); }
-  .btn-ghost { background: var(--glass); color: #fff; border: 1px solid var(--line-2); }
-  .btn-ghost:hover { background: var(--glass-2); border-color: rgba(255,255,255,0.22); }
+  .btn-primary { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #fff; box-shadow: 0 10px 24px rgba(249,115,22,0.28); }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 14px 30px rgba(249,115,22,0.36); }
+  .btn-ghost { background: #FFFFFF; color: var(--ink); border: 1px solid var(--line-2); box-shadow: var(--shadow-sm); }
+  .btn-ghost:hover { background: var(--surface-2); border-color: rgba(15,23,42,0.22); }
 
   /* Hero phone mock */
   .phone-deck { position: relative; padding: 12px; min-height: 560px; }
   .phone {
     width: 290px; height: 560px; border-radius: 36px;
     background: linear-gradient(180deg, #1B2238, #0F1422);
-    border: 1px solid var(--line-2);
+    border: 1px solid rgba(15,23,42,0.2);
     box-shadow:
-      0 40px 80px -30px rgba(0,0,0,0.7),
-      0 20px 40px -20px rgba(249,115,22,0.15),
-      inset 0 0 0 1px rgba(255,255,255,0.04);
+      0 40px 80px -30px rgba(15,23,42,0.35),
+      0 20px 40px -20px rgba(249,115,22,0.12),
+      inset 0 0 0 1px rgba(255,255,255,0.06);
     padding: 14px;
     position: absolute; top: 0; left: 50%; transform: translateX(-50%) rotate(-3deg);
   }
@@ -197,19 +206,20 @@
   .badge-card {
     position: absolute; right: -20px; top: 60px; transform: rotate(6deg);
     width: 190px; padding: 14px; border-radius: 16px;
-    background: var(--surface-2); border: 1px solid var(--line-2);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+    background: #FFFFFF; border: 1px solid var(--line);
+    box-shadow: var(--shadow-lg);
   }
-  .badge-card h5 { font-family: 'Barlow Condensed'; font-weight: 700; font-size: 16px; color: #fff; margin: 0; }
+  .badge-card h5 { font-family: 'Barlow Condensed'; font-weight: 700; font-size: 16px; color: var(--ink); margin: 0; }
   .badge-card p { margin: 4px 0 0; color: var(--muted); font-size: 11px; line-height: 1.4; }
   .metric-card {
     position: absolute; left: -24px; bottom: 70px; transform: rotate(-5deg);
     width: 190px; padding: 14px; border-radius: 16px;
-    background: linear-gradient(135deg, rgba(34,197,94,0.16), rgba(34,197,94,0.05));
-    border: 1px solid rgba(34,197,94,0.3);
+    background: #FFFFFF;
+    border: 1px solid rgba(22,163,74,0.28);
+    box-shadow: var(--shadow-lg);
   }
-  .metric-card .n { font-family: 'Barlow Condensed'; font-weight: 800; font-size: 30px; color: #fff; }
-  .metric-card .l { color: var(--accent-2); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
+  .metric-card .n { font-family: 'Barlow Condensed'; font-weight: 800; font-size: 30px; color: var(--ink); }
+  .metric-card .l { color: #15803D; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
   @media (max-width: 980px) { .phone-deck { min-height: 620px; } }
 
   /* --------- Sections --------- */
@@ -219,12 +229,12 @@
   .section-tag {
     display: inline-flex; align-items: center; gap: 10px;
     font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--brand-2);
+    color: var(--brand);
   }
   .section-tag::before { content: ''; width: 28px; height: 2px; background: var(--brand); border-radius: 2px; }
   h2.section-title {
     font-size: clamp(34px, 4vw, 56px); line-height: 1.02; margin: 14px 0 12px;
-    color: #fff;
+    color: var(--ink);
   }
   .section-lede { color: var(--ink-2); font-size: 17px; max-width: 720px; }
 
@@ -232,12 +242,13 @@
   .card {
     background: var(--surface); border: 1px solid var(--line);
     border-radius: 20px; padding: 28px;
-    transition: border-color .2s, transform .2s;
+    box-shadow: var(--shadow-sm);
+    transition: border-color .2s, transform .2s, box-shadow .2s;
   }
-  .card:hover { border-color: var(--line-2); }
-  .card.soft { background: var(--glass); }
-  .card h3 { color: #fff; font-size: 24px; }
-  .card h4 { color: #fff; font-size: 18px; font-family: 'Barlow'; font-weight: 700; letter-spacing: 0; }
+  .card:hover { border-color: var(--line-2); box-shadow: var(--shadow-md); }
+  .card.soft { background: var(--surface-2); }
+  .card h3 { color: var(--ink); font-size: 24px; }
+  .card h4 { color: var(--ink); font-size: 18px; font-family: 'Barlow'; font-weight: 700; letter-spacing: 0; }
 
   .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -263,26 +274,28 @@
   @media (max-width: 760px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
   .kpi {
     padding: 18px; border-radius: 16px;
-    background: var(--glass); border: 1px solid var(--line);
+    background: var(--surface); border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
   }
   .kpi .k { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
-  .kpi .v { font-family: 'Barlow Condensed'; font-weight: 800; color: #fff; font-size: 34px; margin-top: 4px; }
+  .kpi .v { font-family: 'Barlow Condensed'; font-weight: 800; color: var(--ink); font-size: 34px; margin-top: 4px; }
 
   /* Papers/Competitors accordion-style table */
   .research-table { display: flex; flex-direction: column; gap: 12px; }
   .rt-row {
     background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
     padding: 20px 24px;
+    box-shadow: var(--shadow-sm);
   }
   .rt-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
-  .rt-idx { font-family: 'Barlow Condensed'; font-weight: 800; font-size: 22px; color: var(--brand-2); width: 28px; }
-  .rt-title { color: #fff; font-weight: 700; font-size: 17px; }
+  .rt-idx { font-family: 'Barlow Condensed'; font-weight: 800; font-size: 22px; color: var(--brand); width: 28px; }
+  .rt-title { color: var(--ink); font-weight: 700; font-size: 17px; }
   .rt-cite { color: var(--muted); font-size: 13px; font-style: italic; }
   .rt-body { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 16px; }
   @media (max-width: 760px) { .rt-body { grid-template-columns: 1fr; } }
   .rt-col h5 { font-family: 'Barlow'; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-2); margin: 0 0 8px; display: flex; align-items: center; gap: 8px; }
-  .rt-col.good h5 { color: var(--accent-2); }
-  .rt-col.bad  h5 { color: #FCA5A5; }
+  .rt-col.good h5 { color: #15803D; }
+  .rt-col.bad  h5 { color: #B91C1C; }
   .rt-col ul { list-style: none; padding: 0; margin: 0; }
   .rt-col ul li { position: relative; padding: 6px 0 6px 22px; font-size: 14px; color: var(--ink-2); }
   .rt-col ul li::before {
@@ -296,27 +309,28 @@
     background: var(--surface); border: 1px solid var(--line);
     border-radius: 22px; padding: 28px; display: flex; flex-direction: column; gap: 16px;
     position: relative; overflow: hidden;
+    box-shadow: var(--shadow-sm);
   }
-  .persona::before { content: ''; position: absolute; inset: 0 auto auto 0; width: 200px; height: 200px; background: radial-gradient(circle, rgba(249,115,22,0.18), transparent 65%); pointer-events: none; }
-  .persona.alt::before { background: radial-gradient(circle, rgba(34,197,94,0.18), transparent 65%); }
+  .persona::before { content: ''; position: absolute; inset: 0 auto auto 0; width: 200px; height: 200px; background: radial-gradient(circle, rgba(249,115,22,0.10), transparent 65%); pointer-events: none; }
+  .persona.alt::before { background: radial-gradient(circle, rgba(22,163,74,0.10), transparent 65%); }
   .persona .p-head { display: flex; gap: 16px; align-items: center; }
   .p-av {
     width: 72px; height: 72px; border-radius: 22px;
     display: inline-flex; align-items: center; justify-content: center;
     font-family: 'Barlow Condensed'; font-weight: 800; font-size: 28px;
-    background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #fff;
-    box-shadow: 0 10px 24px rgba(249,115,22,0.3);
+    background: linear-gradient(135deg, var(--brand), #FB923C); color: #fff;
+    box-shadow: 0 8px 20px rgba(249,115,22,0.28);
   }
-  .persona.alt .p-av { background: linear-gradient(135deg, var(--accent), #16A34A); box-shadow: 0 10px 24px rgba(34,197,94,0.3); }
-  .p-name { font-family: 'Barlow Condensed'; font-weight: 800; font-size: 26px; color: #fff; }
+  .persona.alt .p-av { background: linear-gradient(135deg, var(--accent), #15803D); box-shadow: 0 8px 20px rgba(22,163,74,0.28); }
+  .p-name { font-family: 'Barlow Condensed'; font-weight: 800; font-size: 26px; color: var(--ink); }
   .p-role { color: var(--muted); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
   .p-quote {
     margin: 0; padding: 14px 16px; border-left: 3px solid var(--brand);
-    background: rgba(249,115,22,0.06); border-radius: 0 12px 12px 0;
+    background: rgba(249,115,22,0.05); border-radius: 0 12px 12px 0;
     color: var(--ink); font-size: 15px; font-style: italic;
   }
-  .persona.alt .p-quote { border-left-color: var(--accent); background: rgba(34,197,94,0.06); }
-  .p-block h5 { color: var(--ink-2); font-family: 'Barlow'; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 6px; }
+  .persona.alt .p-quote { border-left-color: var(--accent); background: rgba(22,163,74,0.05); }
+  .p-block h5 { color: var(--muted); font-family: 'Barlow'; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 6px; }
   .p-block p  { margin: 0; color: var(--ink-2); font-size: 14px; }
 
   /* Club operations grid */
@@ -326,19 +340,20 @@
   .ops-card {
     background: var(--surface); border: 1px solid var(--line); border-radius: 20px;
     padding: 24px; position: relative; overflow: hidden;
-    transition: border-color .2s, transform .2s, background .2s;
+    box-shadow: var(--shadow-sm);
+    transition: border-color .2s, transform .2s, box-shadow .2s;
   }
-  .ops-card:hover { border-color: rgba(249,115,22,0.35); transform: translateY(-2px); background: linear-gradient(160deg, rgba(249,115,22,0.05), var(--surface)); }
+  .ops-card:hover { border-color: rgba(249,115,22,0.3); transform: translateY(-2px); box-shadow: var(--shadow-md); }
   .ops-card .ops-icon {
     width: 44px; height: 44px; border-radius: 12px;
     display: inline-flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, rgba(249,115,22,0.16), rgba(34,197,94,0.12));
-    color: #FED7AA; border: 1px solid rgba(249,115,22,0.28);
+    background: linear-gradient(135deg, rgba(249,115,22,0.12), rgba(22,163,74,0.10));
+    color: var(--brand); border: 1px solid rgba(249,115,22,0.25);
     margin-bottom: 14px;
   }
-  .ops-card h4 { color: #fff; font-family: 'Barlow Condensed'; font-weight: 700; font-size: 20px; letter-spacing: -0.01em; margin-bottom: 8px; }
+  .ops-card h4 { color: var(--ink); font-family: 'Barlow Condensed'; font-weight: 700; font-size: 20px; letter-spacing: -0.01em; margin-bottom: 8px; }
   .ops-card p  { color: var(--ink-2); font-size: 14px; margin: 0; line-height: 1.55; }
-  .ops-card p code { background: var(--glass-2); padding: 1px 6px; border-radius: 5px; font-size: 12px; color: #FED7AA; }
+  .ops-card p code { background: rgba(249,115,22,0.10); padding: 1px 6px; border-radius: 5px; font-size: 12px; color: #9A3412; }
   .ops-card .ops-meta {
     margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line);
     font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
@@ -348,15 +363,16 @@
   .journey {
     background: var(--surface); border: 1px solid var(--line); border-radius: 22px;
     padding: 32px; overflow-x: auto;
+    box-shadow: var(--shadow-sm);
   }
   .jm-grid { min-width: 900px; display: grid; grid-template-columns: 160px repeat(5, 1fr); gap: 0; }
   .jm-h, .jm-c { padding: 14px 12px; border-bottom: 1px solid var(--line); }
-  .jm-stage { font-family: 'Barlow Condensed'; font-weight: 700; color: #fff; font-size: 18px; text-align: center; padding: 14px 8px; border-bottom: 2px solid var(--brand); }
-  .jm-label { color: var(--ink-2); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; padding-right: 12px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; align-items: center; }
+  .jm-stage { font-family: 'Barlow Condensed'; font-weight: 700; color: var(--ink); font-size: 18px; text-align: center; padding: 14px 8px; border-bottom: 2px solid var(--brand); }
+  .jm-label { color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; padding-right: 12px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; align-items: center; }
   .jm-c { font-size: 13px; color: var(--ink-2); }
   .jm-c.emoji { text-align: center; font-size: 22px; }
-  .jm-c.pain { color: #FCA5A5; font-weight: 600; }
-  .jm-c.opp  { color: var(--accent-2); font-weight: 600; }
+  .jm-c.pain { color: #B91C1C; font-weight: 600; }
+  .jm-c.opp  { color: #15803D; font-weight: 600; }
   .jm-sparkline { grid-column: 2 / -1; height: 70px; position: relative; padding: 8px 0; }
 
   /* Evidence (photos placeholder) */
@@ -370,20 +386,21 @@
     border: 1px dashed var(--line-2); position: relative; overflow: hidden;
     display: flex; align-items: flex-end; padding: 16px; color: var(--ink-2);
     font-size: 13px;
+    box-shadow: var(--shadow-sm);
   }
   .ev-tile .ev-n {
     position: absolute; top: 12px; left: 12px;
     width: 32px; height: 32px; border-radius: 10px;
     display: inline-flex; align-items: center; justify-content: center;
-    background: rgba(0,0,0,0.4); color: #fff; font-weight: 800; font-family: 'Barlow Condensed'; font-size: 16px;
-    border: 1px solid var(--line-2);
+    background: rgba(15,23,42,0.85); color: #fff; font-weight: 800; font-family: 'Barlow Condensed'; font-size: 16px;
+    border: 1px solid rgba(15,23,42,0.3);
   }
   .ev-tile .ev-tag {
     position: absolute; top: 14px; right: 12px;
     padding: 4px 10px; border-radius: 99px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-    background: rgba(249,115,22,0.16); color: #FED7AA; border: 1px solid rgba(249,115,22,0.4);
+    background: rgba(249,115,22,0.12); color: #9A3412; border: 1px solid rgba(249,115,22,0.3);
   }
-  .ev-tile .ev-tag.green { background: rgba(34,197,94,0.16); color: #BBF7D0; border-color: rgba(34,197,94,0.4); }
+  .ev-tile .ev-tag.green { background: rgba(22,163,74,0.12); color: #15803D; border-color: rgba(22,163,74,0.3); }
 
   /* Crazy 8s */
   .c8 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
@@ -408,16 +425,18 @@
   .alt {
     padding: 24px; border-radius: 18px; background: var(--surface); border: 1px solid var(--line);
     position: relative;
+    box-shadow: var(--shadow-sm);
   }
-  .alt.chosen { border-color: rgba(34,197,94,0.45); background: linear-gradient(180deg, rgba(34,197,94,0.06), var(--surface)); }
+  .alt.chosen { border-color: rgba(22,163,74,0.4); background: linear-gradient(180deg, rgba(22,163,74,0.05), var(--surface)); box-shadow: 0 14px 30px rgba(22,163,74,0.12); }
   .alt-badge {
     position: absolute; top: -12px; left: 20px;
     padding: 6px 12px; border-radius: 99px;
     font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
-    background: var(--surface-2); border: 1px solid var(--line-2); color: var(--ink-2);
+    background: var(--surface); border: 1px solid var(--line-2); color: var(--muted);
+    box-shadow: var(--shadow-sm);
   }
-  .alt.chosen .alt-badge { background: linear-gradient(135deg, var(--accent), #16A34A); color: #fff; border-color: transparent; box-shadow: 0 6px 16px rgba(34,197,94,0.35); }
-  .alt h4 { margin: 10px 0 8px; font-size: 20px; }
+  .alt.chosen .alt-badge { background: linear-gradient(135deg, var(--accent), #15803D); color: #fff; border-color: transparent; box-shadow: 0 6px 16px rgba(22,163,74,0.35); }
+  .alt h4 { margin: 10px 0 8px; font-size: 20px; color: var(--ink); }
   .alt p  { color: var(--ink-2); font-size: 14px; margin: 0; }
   .alt .pros-cons { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
   .alt .pc { display: flex; gap: 10px; font-size: 13px; color: var(--ink-2); align-items: flex-start; }
@@ -425,13 +444,14 @@
   .alt .pc.minus b { color: var(--danger); }
   .alt .pick-line {
     margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line);
-    font-size: 13px; color: var(--accent-2); font-weight: 600;
+    font-size: 13px; color: #15803D; font-weight: 600;
   }
 
   /* Architecture */
   .arch-wrap {
     background: var(--surface); border: 1px solid var(--line); border-radius: 22px;
     padding: 32px; overflow-x: auto;
+    box-shadow: var(--shadow-sm);
   }
   .arch-svg-box { min-width: 880px; }
 
@@ -440,30 +460,32 @@
     width: 100%; border-collapse: separate; border-spacing: 0;
     background: var(--surface); border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
     font-size: 14px;
+    box-shadow: var(--shadow-sm);
   }
   table.contrib th, table.contrib td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
-  table.contrib th { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; background: var(--glass); }
+  table.contrib th { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; background: var(--surface-2); }
   table.contrib tr:last-child td { border-bottom: none; }
-  table.contrib td b { color: #fff; }
+  table.contrib td b { color: var(--ink); }
   .pill-role {
     display: inline-block; padding: 3px 10px; border-radius: 99px;
     font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
     margin-right: 4px; margin-bottom: 4px;
   }
-  .pr-design   { background: rgba(249,115,22,0.12); color: #FED7AA; border: 1px solid rgba(249,115,22,0.3); }
-  .pr-dev      { background: rgba(56,189,248,0.12); color: #BAE6FD; border: 1px solid rgba(56,189,248,0.3); }
-  .pr-research { background: rgba(34,197,94,0.12); color: #BBF7D0; border: 1px solid rgba(34,197,94,0.3); }
-  .pr-content  { background: rgba(167,139,250,0.12); color: #DDD6FE; border: 1px solid rgba(167,139,250,0.3); }
-  .pr-test     { background: rgba(245,158,11,0.14); color: #FCD34D; border: 1px solid rgba(245,158,11,0.3); }
+  .pr-design   { background: rgba(249,115,22,0.10); color: #9A3412; border: 1px solid rgba(249,115,22,0.28); }
+  .pr-dev      { background: rgba(2,132,199,0.10); color: #075985; border: 1px solid rgba(2,132,199,0.28); }
+  .pr-research { background: rgba(22,163,74,0.10); color: #15803D; border: 1px solid rgba(22,163,74,0.28); }
+  .pr-content  { background: rgba(124,58,237,0.10); color: #5B21B6; border: 1px solid rgba(124,58,237,0.28); }
+  .pr-test     { background: rgba(217,119,6,0.12); color: #92400E; border: 1px solid rgba(217,119,6,0.3); }
 
   /* Test quotes */
   .quote-card {
     background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px;
     position: relative;
+    box-shadow: var(--shadow-sm);
   }
   .quote-card::before {
     content: '"'; position: absolute; top: 4px; left: 16px;
-    font-family: 'Barlow Condensed'; font-weight: 800; font-size: 80px; color: rgba(249,115,22,0.35); line-height: 1;
+    font-family: 'Barlow Condensed'; font-weight: 800; font-size: 80px; color: rgba(249,115,22,0.25); line-height: 1;
   }
   .quote-card blockquote { margin: 20px 0 12px; padding: 0 0 0 10px; color: var(--ink); font-size: 15px; font-style: italic; }
   .quote-card .attrib { display: flex; align-items: center; gap: 12px; }
@@ -471,30 +493,31 @@
     width: 42px; height: 42px; border-radius: 12px;
     display: inline-flex; align-items: center; justify-content: center;
     background: var(--surface-2); border: 1px solid var(--line-2);
-    font-family: 'Barlow Condensed'; font-weight: 800; font-size: 16px; color: #fff;
+    font-family: 'Barlow Condensed'; font-weight: 800; font-size: 16px; color: var(--ink);
   }
-  .q-meta .nm { font-weight: 700; color: #fff; font-size: 14px; }
+  .q-meta .nm { font-weight: 700; color: var(--ink); font-size: 14px; }
   .q-meta .rl { color: var(--muted); font-size: 12px; }
   .score-row { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
   .score-row .tag {
     padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700;
-    background: var(--glass); border: 1px solid var(--line); color: var(--ink-2);
+    background: var(--surface-2); border: 1px solid var(--line); color: var(--ink-2);
   }
-  .score-row .tag.ok { background: rgba(34,197,94,0.12); color: #BBF7D0; border-color: rgba(34,197,94,0.3); }
-  .score-row .tag.bad { background: rgba(239,68,68,0.12); color: #FCA5A5; border-color: rgba(239,68,68,0.3); }
+  .score-row .tag.ok { background: rgba(22,163,74,0.10); color: #15803D; border-color: rgba(22,163,74,0.28); }
+  .score-row .tag.bad { background: rgba(220,38,38,0.08); color: #B91C1C; border-color: rgba(220,38,38,0.25); }
 
   /* Before/After */
   .ba-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
   @media (max-width: 900px) { .ba-grid { grid-template-columns: 1fr; } }
   .ba-card {
     background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px;
+    box-shadow: var(--shadow-sm);
   }
-  .ba-card h4 { font-family: 'Barlow Condensed'; font-weight: 700; font-size: 22px; color: #fff; margin-bottom: 6px; }
-  .ba-card .tag-ver { color: var(--brand-2); font-weight: 700; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .ba-card h4 { font-family: 'Barlow Condensed'; font-weight: 700; font-size: 22px; color: var(--ink); margin-bottom: 6px; }
+  .ba-card .tag-ver { color: var(--brand); font-weight: 700; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
   .ba-compare { display: grid; grid-template-columns: 1fr 24px 1fr; gap: 12px; margin: 16px 0; align-items: stretch; }
   .ba-compare .arrow {
     display: flex; align-items: center; justify-content: center;
-    color: var(--brand-2); font-size: 20px;
+    color: var(--brand); font-size: 20px;
   }
   .ba-frame {
     padding: 14px; border-radius: 14px;
@@ -514,20 +537,20 @@
 
   /* AI prompts block */
   .prompt-box {
-    background: #0A0F1E; border: 1px solid var(--line); border-radius: 14px;
-    padding: 16px 18px; font-size: 13px; color: #E2E8F0;
+    background: #F8FAFC; border: 1px solid var(--line); border-radius: 14px;
+    padding: 16px 18px; font-size: 13px; color: #0F172A;
     font-family: 'JetBrains Mono', ui-monospace, monospace; line-height: 1.6;
     white-space: pre-wrap; word-break: break-word;
     margin-top: 10px;
   }
-  .prompt-box .tag { color: var(--brand-2); font-weight: 700; }
-  .prompt-box .comment { color: var(--dim); font-style: italic; }
+  .prompt-box .tag { color: var(--brand); font-weight: 700; }
+  .prompt-box .comment { color: var(--muted); font-style: italic; }
 
   /* Ethics list */
   .ethics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   @media (max-width: 900px) { .ethics { grid-template-columns: 1fr; } }
   .ethics .card h4 { display: flex; align-items: center; gap: 10px; }
-  .et-icon { width: 36px; height: 36px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; background: var(--glass-2); color: var(--brand-2); }
+  .et-icon { width: 36px; height: 36px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; background: rgba(249,115,22,0.10); color: var(--brand); border: 1px solid rgba(249,115,22,0.22); }
 
   /* References */
   .refs { display: flex; flex-direction: column; gap: 10px; }
@@ -535,10 +558,11 @@
     padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
     color: var(--ink-2); font-size: 13.5px; line-height: 1.6; font-family: 'Barlow';
     display: flex; gap: 14px; align-items: flex-start;
+    box-shadow: var(--shadow-sm);
   }
-  .ref .ref-n { color: var(--brand-2); font-weight: 800; font-family: 'Barlow Condensed'; font-size: 18px; flex: none; width: 32px; }
+  .ref .ref-n { color: var(--brand); font-weight: 800; font-family: 'Barlow Condensed'; font-size: 18px; flex: none; width: 32px; }
   .ref i { color: var(--ink); }
-  .ref .tag-kind { display: inline-block; margin-left: 6px; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; background: var(--glass-2); color: var(--brand-2); border: 1px solid var(--line); }
+  .ref .tag-kind { display: inline-block; margin-left: 6px; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(249,115,22,0.10); color: #9A3412; border: 1px solid rgba(249,115,22,0.24); }
 
   /* Footer */
   footer { padding: 56px 0 72px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
@@ -552,7 +576,7 @@
   .sketch .text { font-family: 'Barlow'; font-size: 10px; fill: #475569; }
 
   /* A11y */
-  :focus-visible { outline: 2px solid var(--brand-2); outline-offset: 3px; border-radius: 8px; }
+  :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 8px; }
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; }
   }
@@ -602,9 +626,9 @@
         <h1>Turning <span class="hl">club runs</span> into the easiest healthy habit in your week.</h1>
         <p class="hero-lede">
           RunAPP is a mobile-first web app for running-club communities, deliberately designed for
-          <b style="color:#fff">both sides</b> of the track. Runners get the tightest possible loop —
-          <b style="color:#fff">register → check in → run → reflect</b>. Organizers get a serious
-          <b style="color:#fff">club-operations toolkit</b> — publish with capacity &amp; pace groups, a live
+          <b style="color:var(--ink)">both sides</b> of the track. Runners get the tightest possible loop —
+          <b style="color:var(--ink)">register → check in → run → reflect</b>. Organizers get a serious
+          <b style="color:var(--ink)">club-operations toolkit</b> — publish with capacity &amp; pace groups, a live
           registration/check-in dashboard, manual overrides, role-based governance, and a club-scoped
           monthly leaderboard. No global feeds, no volunteer with a clipboard.
         </p>
@@ -692,7 +716,7 @@
       <h2 class="section-title">Why Active Living, and the gap we found in it.</h2>
       <p class="section-lede">
         Before shipping a single pixel, we spent two weeks on interviews, academic reading, and competitor
-        teardowns. We picked the <b style="color:#fff">Active Living</b> theme because the barrier to
+        teardowns. We picked the <b style="color:var(--ink)">Active Living</b> theme because the barrier to
         consistent adult exercise is almost never willpower — it's <i>logistics, loneliness, and loops that
         break on a rainy Tuesday</i>.
       </p>
@@ -703,9 +727,9 @@
       <article class="card">
         <h3 style="margin-bottom:12px;">The Why — Our Motivation</h3>
         <p style="color:var(--ink-2); font-size:15.5px;">
-          We chose <b style="color:#fff">Active Living</b> because every team member has at some point
+          We chose <b style="color:var(--ink)">Active Living</b> because every team member has at some point
           signed up for a gym, a 10k, or a "new year I'll actually run" pact — and quietly dropped it within
-          six weeks. The WHO reports that <b style="color:#fff">27.5% of adults fall short of recommended
+          six weeks. The WHO reports that <b style="color:var(--ink)">27.5% of adults fall short of recommended
           activity levels</b>, and the strongest mitigating factor in the literature is not another fitness
           tracker but a <i>social commitment device</i>: a small group that notices when you don't show up.
           Running clubs already exist in every city, yet the apps we tried treat them as either
@@ -721,20 +745,20 @@
       <article class="card" style="background: linear-gradient(160deg, rgba(249,115,22,0.06), rgba(34,197,94,0.04));">
         <h3 style="margin-bottom:12px;">Research Plan</h3>
         <ul class="clean">
-          <li><b style="color:#fff">7 user interviews</b> with active runners (3) and lapsed runners (4), 30–45 min each.</li>
-          <li><b style="color:#fff">2 field visits</b> to a Saturday park-run meetup + a weekday track session.</li>
-          <li><b style="color:#fff">5 peer-reviewed papers</b> covering behavior change, social exercise, and mobile HCI.</li>
-          <li><b style="color:#fff">4 commercial teardowns</b> (Strava, Nike Run Club, Keep, JoinClubs).</li>
-          <li><b style="color:#fff">3 usability rounds</b> on Figma low-fi, HTML hi-fi, and the deployed build.</li>
+          <li><b style="color:var(--ink)">7 user interviews</b> with active runners (3) and lapsed runners (4), 30–45 min each.</li>
+          <li><b style="color:var(--ink)">2 field visits</b> to a Saturday park-run meetup + a weekday track session.</li>
+          <li><b style="color:var(--ink)">5 peer-reviewed papers</b> covering behavior change, social exercise, and mobile HCI.</li>
+          <li><b style="color:var(--ink)">4 commercial teardowns</b> (Strava, Nike Run Club, Keep, JoinClubs).</li>
+          <li><b style="color:var(--ink)">3 usability rounds</b> on Figma low-fi, HTML hi-fi, and the deployed build.</li>
         </ul>
       </article>
     </div>
 
-    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:#fff;margin:48px 0 20px;">
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:var(--ink);margin:48px 0 20px;">
       The Gap — 4 Academic Papers
     </h3>
     <p style="color:var(--ink-2);font-size:15px;max-width:780px;margin-bottom:20px;">
-      Each paper is summarized as <b style="color:var(--accent-2)">3 things it gets right</b> and <b style="color:#FCA5A5">3 gaps</b> that shaped RunAPP's design decisions. Full citations appear in §References.
+      Each paper is summarized as <b style="color:#15803D">3 things it gets right</b> and <b style="color:#B91C1C">3 gaps</b> that shaped RunAPP's design decisions. Full citations appear in §References.
     </p>
 
     <div class="research-table" style="margin-bottom: 40px;">
@@ -855,7 +879,7 @@
       </article>
     </div>
 
-    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:#fff;margin:48px 0 20px;">
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:var(--ink);margin:48px 0 20px;">
       The Gap — 4 Commercial Competitors
     </h3>
 
@@ -979,11 +1003,11 @@
 
     <!-- Personas anchor -->
     <div id="personas" style="margin-top:64px;">
-      <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:#fff;margin:0 0 8px;">
+      <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:var(--ink);margin:0 0 8px;">
         Stakeholders & Personas
       </h3>
       <p style="color:var(--ink-2);max-width:760px;margin: 0 0 28px;">
-        RunAPP has a deliberately sharp <b style="color:#fff">two-sided model</b>: casual runners (primary), and the
+        RunAPP has a deliberately sharp <b style="color:var(--ink)">two-sided model</b>: casual runners (primary), and the
         organizer volunteers who keep a club alive (secondary). A third — the parent club owner — shows up
         in governance flows (transfer ownership, co-organizer permissions) but isn't a daily user.
       </p>
@@ -1096,7 +1120,7 @@
 
     <!-- Requirements -->
     <div id="requirements" style="margin-top: 56px;">
-      <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:#fff;margin-bottom:18px;">
+      <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:var(--ink);margin-bottom:18px;">
         Three core requirements the system must meet
       </h3>
       <div class="grid-3">
@@ -1150,7 +1174,7 @@
     <div id="club-ops" style="margin-top: 64px;">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom: 18px;">
         <div>
-          <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:#fff;margin:0 0 6px;">
+          <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:var(--ink);margin:0 0 6px;">
             Spotlight — Professional Club Operations
           </h3>
           <p style="color:var(--ink-2);max-width:720px;margin:0;">
@@ -1220,7 +1244,7 @@
 
     <!-- Evidence of life -->
     <div id="evidence" style="margin-top: 64px;">
-      <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:#fff;margin-bottom:8px;">
+      <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:var(--ink);margin-bottom:8px;">
         Evidence of Life — Field Research
       </h3>
       <p style="color:var(--ink-2); max-width:760px; margin-bottom: 22px;">
@@ -1228,34 +1252,34 @@
         <b style="color:var(--brand-2)">replace the background with your own photo or video thumb</b> when you finalize your portfolio assets.
       </p>
       <div class="evidence">
-        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(249,115,22,0.18), rgba(15,23,42,0.9)); color:#FED7AA;">
+        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(249,115,22,0.14), rgba(255,247,237,0.6)); color:#9A3412;">
           <div class="ev-n">01</div>
           <span class="ev-tag">Interview · café</span>
-          <figcaption><b style="color:#fff">Mia (P2)</b> — 34-min sit-down, coffee shop near her track. Discussed 2-year run history & failed club attempts.</figcaption>
+          <figcaption><b style="color:var(--ink)">Mia (P2)</b> — 34-min sit-down, coffee shop near her track. Discussed 2-year run history & failed club attempts.</figcaption>
         </figure>
-        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(34,197,94,0.18), rgba(15,23,42,0.9)); color:#BBF7D0;">
+        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(22,163,74,0.14), rgba(240,253,244,0.6)); color:#15803D;">
           <div class="ev-n">02</div>
           <span class="ev-tag green">Field · parkrun</span>
-          <figcaption><b style="color:#fff">Saturday parkrun, Century Park</b> — 120 runners, 3 volunteers. Observed paper barcode friction first-hand.</figcaption>
+          <figcaption><b style="color:var(--ink)">Saturday parkrun, Century Park</b> — 120 runners, 3 volunteers. Observed paper barcode friction first-hand.</figcaption>
         </figure>
-        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(56,189,248,0.18), rgba(15,23,42,0.9)); color:#BAE6FD;">
+        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(2,132,199,0.14), rgba(240,249,255,0.6)); color:#075985;">
           <div class="ev-n">03</div>
           <span class="ev-tag">Interview · organizer</span>
-          <figcaption><b style="color:#fff">Dan (O1)</b> — 45-min call with a Co-organizer. Walked through his weekly operational load.</figcaption>
+          <figcaption><b style="color:var(--ink)">Dan (O1)</b> — 45-min call with a Co-organizer. Walked through his weekly operational load.</figcaption>
         </figure>
-        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(167,139,250,0.18), rgba(15,23,42,0.9)); color:#DDD6FE;">
+        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(124,58,237,0.14), rgba(245,243,255,0.6)); color:#5B21B6;">
           <div class="ev-n">04</div>
           <span class="ev-tag">Field · track night</span>
-          <figcaption><b style="color:#fff">Weekday interval session</b> — 40 runners on a wet Thursday. Observed poor group-finding behavior in the dark.</figcaption>
+          <figcaption><b style="color:var(--ink)">Weekday interval session</b> — 40 runners on a wet Thursday. Observed poor group-finding behavior in the dark.</figcaption>
         </figure>
-        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(15,23,42,0.9)); color:#FCA5A5;">
+        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(220,38,38,0.12), rgba(254,242,242,0.6)); color:#B91C1C;">
           <div class="ev-n">05</div>
           <span class="ev-tag">Interview · lapsed</span>
-          <figcaption><b style="color:#fff">Three lapsed runners</b> — 20-min group chat about why each stopped going. "Nobody noticed" came up 3×.</figcaption>
+          <figcaption><b style="color:var(--ink)">Three lapsed runners</b> — 20-min group chat about why each stopped going. "Nobody noticed" came up 3×.</figcaption>
         </figure>
-        <figure class="ev-tile" style="background: repeating-linear-gradient(45deg, #1B2238, #1B2238 10px, #141A2B 10px, #141A2B 20px); color:#94A3B8;">
-          <div class="ev-n" style="background:var(--glass-2)">➕</div>
-          <span class="ev-tag" style="background:var(--glass-2); color:var(--muted); border-color:var(--line-2)">replace</span>
+        <figure class="ev-tile" style="background: repeating-linear-gradient(45deg, #F8FAFC, #F8FAFC 10px, #F1F5F9 10px, #F1F5F9 20px); color:#64748B;">
+          <div class="ev-n" style="background:rgba(15,23,42,0.55)">➕</div>
+          <span class="ev-tag" style="background:rgba(15,23,42,0.06); color:var(--muted); border-color:var(--line-2)">replace</span>
           <figcaption>Drop in your 5th field photo or short video here; keep a consistent 4:3 aspect.</figcaption>
         </figure>
       </div>
@@ -1270,13 +1294,13 @@
       <div class="section-tag">03 · Ideation & Alternatives</div>
       <h2 class="section-title">Eight sketches, three systems, one decision.</h2>
       <p class="section-lede">
-        We ran a classic <b style="color:#fff">Crazy-Eights</b> sprint to break out of our first-idea lock,
+        We ran a classic <b style="color:var(--ink)">Crazy-Eights</b> sprint to break out of our first-idea lock,
         then narrowed to three concrete system patterns and chose one on defensible criteria — not taste.
       </p>
     </div>
 
     <!-- Crazy Eights -->
-    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:26px;color:#fff;margin-bottom:18px;">
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:26px;color:var(--ink);margin-bottom:18px;">
       Crazy Eights — 8 minutes, 8 UI directions
     </h3>
     <p style="color:var(--ink-2); font-size:14px; margin-bottom: 20px;">
@@ -1379,7 +1403,7 @@
 
     <!-- Alternatives -->
     <div style="margin-top: 56px;">
-      <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:26px;color:#fff;margin-bottom:8px;">
+      <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:26px;color:var(--ink);margin-bottom:8px;">
         Design Alternatives — three systems compared
       </h3>
       <p style="color:var(--ink-2); max-width:760px; margin-bottom: 24px;">
@@ -1398,7 +1422,7 @@
             <div class="pc minus"><b>–</b><span>Dead on day 1 without a volunteer present.</span></div>
             <div class="pc minus"><b>–</b><span>Two-app flow (scanner → return) violates R1.</span></div>
           </div>
-          <div class="pick-line" style="color:#FCA5A5;">✗ Killed — violates "one-tap" and requires volunteer logistics small clubs don't have.</div>
+          <div class="pick-line" style="color:#B91C1C;">✗ Killed — violates "one-tap" and requires volunteer logistics small clubs don't have.</div>
         </article>
 
         <article class="alt chosen">
@@ -1425,7 +1449,7 @@
             <div class="pc minus"><b>–</b><span>Breaks for runners who forget to press Start.</span></div>
             <div class="pc minus"><b>–</b><span>No moment of "I'm here" — kills the social ritual that motivates showing up.</span></div>
           </div>
-          <div class="pick-line" style="color:#FCA5A5;">✗ Killed — confirmed in usability round 1: testers wanted an explicit act of arrival.</div>
+          <div class="pick-line" style="color:#B91C1C;">✗ Killed — confirmed in usability round 1: testers wanted an explicit act of arrival.</div>
         </article>
       </div>
     </div>
@@ -1433,7 +1457,7 @@
     <!-- Low-fi Prototype -->
     <div style="margin-top: 56px;" class="grid-2">
       <article class="card" style="background: linear-gradient(160deg, rgba(167,139,250,0.08), rgba(249,115,22,0.04));">
-        <div class="section-tag" style="color:#C4B5FD;">03.3 · Low-fidelity Prototype</div>
+        <div class="section-tag" style="color:#5B21B6;">03.3 · Low-fidelity Prototype</div>
         <h3 style="margin:8px 0 10px;">Figma — clickable low-fi</h3>
         <p style="color:var(--ink-2);font-size:14.5px;">
           Our Figma low-fi prototype covers the 6 critical screens: Discover, Activity Detail (both states),
@@ -1451,12 +1475,12 @@
       <article class="card">
         <h3 style="margin-bottom:8px;">What we tested in low-fi</h3>
         <ul class="clean">
-          <li><b style="color:#fff">Check-in entry point:</b> Discover card vs. Activity detail vs. Running tab.</li>
-          <li><b style="color:#fff">Activity route entry:</b> full-width bar vs. top-right square vs. modal sheet.</li>
-          <li><b style="color:#fff">Group selection:</b> dropdown vs. single-select chip row.</li>
-          <li><b style="color:#fff">Post-run reflection:</b> mandatory sheet vs. optional toast.</li>
-          <li><b style="color:#fff">Cohort view:</b> always-on strip vs. tap-to-expand.</li>
-          <li><b style="color:#fff">Leaderboard scope:</b> global vs. club-monthly mileage.</li>
+          <li><b style="color:var(--ink)">Check-in entry point:</b> Discover card vs. Activity detail vs. Running tab.</li>
+          <li><b style="color:var(--ink)">Activity route entry:</b> full-width bar vs. top-right square vs. modal sheet.</li>
+          <li><b style="color:var(--ink)">Group selection:</b> dropdown vs. single-select chip row.</li>
+          <li><b style="color:var(--ink)">Post-run reflection:</b> mandatory sheet vs. optional toast.</li>
+          <li><b style="color:var(--ink)">Cohort view:</b> always-on strip vs. tap-to-expand.</li>
+          <li><b style="color:var(--ink)">Leaderboard scope:</b> global vs. club-monthly mileage.</li>
         </ul>
       </article>
     </div>
@@ -1476,7 +1500,7 @@
     </div>
 
     <!-- Architecture diagram -->
-    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:26px;color:#fff;margin-bottom:16px;">
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:26px;color:var(--ink);margin-bottom:16px;">
       System Architecture
     </h3>
     <div class="arch-wrap">
@@ -1493,16 +1517,16 @@
               <stop offset="0%" stop-color="#38BDF8"/><stop offset="100%" stop-color="#0EA5E9"/>
             </linearGradient>
             <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M0,0 L10,5 L0,10 Z" fill="#94A3B8"/>
+              <path d="M0,0 L10,5 L0,10 Z" fill="#64748B"/>
             </marker>
           </defs>
           <style>
             .ar-text { font-family: 'Barlow'; font-weight: 600; font-size: 13px; fill: #fff; }
-            .ar-sub  { font-family: 'Barlow'; font-weight: 500; font-size: 11px; fill: rgba(255,255,255,0.75); }
-            .ar-edge { stroke: #94A3B8; stroke-width: 1.5; fill: none; }
-            .ar-edge-dashed { stroke: #94A3B8; stroke-width: 1.5; fill: none; stroke-dasharray: 4 4; }
-            .ar-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: #CBD5E1; }
-            .ar-lane-label { font-family: 'Barlow Condensed'; font-weight: 700; font-size: 14px; letter-spacing: 0.1em; fill: #94A3B8; text-transform: uppercase; }
+            .ar-sub  { font-family: 'Barlow'; font-weight: 500; font-size: 11px; fill: rgba(255,255,255,0.9); }
+            .ar-edge { stroke: #64748B; stroke-width: 1.5; fill: none; }
+            .ar-edge-dashed { stroke: #64748B; stroke-width: 1.5; fill: none; stroke-dasharray: 4 4; }
+            .ar-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: #475569; }
+            .ar-lane-label { font-family: 'Barlow Condensed'; font-weight: 700; font-size: 14px; letter-spacing: 0.1em; fill: #64748B; text-transform: uppercase; }
           </style>
 
           <!-- Swim lanes -->
@@ -1610,19 +1634,19 @@
       <article class="card">
         <h3 style="margin-bottom:10px;">Tech stack at a glance</h3>
         <ul class="clean green">
-          <li><b style="color:#fff">Frontend:</b> HTML5, CSS3 (custom-properties design tokens), vanilla JavaScript — no build step required.</li>
-          <li><b style="color:#fff">Fonts:</b> Barlow + Barlow Condensed (Google Fonts); Font Awesome 6 for icons.</li>
-          <li><b style="color:#fff">Screens:</b> 18 HTML files sharing <code>styles/common.css</code>, framed at 393 × 852.</li>
-          <li><b style="color:#fff">Deployment:</b> GitHub Pages from <code>main</code>; Zero runtime cost.</li>
-          <li><b style="color:#fff">Validation logic:</b> Haversine for 50 m geofence; time-window comparator; GPS-confidence fallback sheet.</li>
-          <li><b style="color:#fff">Demo data:</b> Hand-seeded JSON for 2 clubs, 6 activities, 1 runner profile.</li>
+          <li><b style="color:var(--ink)">Frontend:</b> HTML5, CSS3 (custom-properties design tokens), vanilla JavaScript — no build step required.</li>
+          <li><b style="color:var(--ink)">Fonts:</b> Barlow + Barlow Condensed (Google Fonts); Font Awesome 6 for icons.</li>
+          <li><b style="color:var(--ink)">Screens:</b> 18 HTML files sharing <code>styles/common.css</code>, framed at 393 × 852.</li>
+          <li><b style="color:var(--ink)">Deployment:</b> GitHub Pages from <code>main</code>; Zero runtime cost.</li>
+          <li><b style="color:var(--ink)">Validation logic:</b> Haversine for 50 m geofence; time-window comparator; GPS-confidence fallback sheet.</li>
+          <li><b style="color:var(--ink)">Demo data:</b> Hand-seeded JSON for 2 clubs, 6 activities, 1 runner profile.</li>
         </ul>
       </article>
     </div>
 
     <!-- Contributions -->
     <div style="margin-top: 48px;">
-      <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:26px;color:#fff;margin-bottom:14px;">
+      <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:26px;color:var(--ink);margin-bottom:14px;">
         Individual Contributions
       </h3>
       <p style="color:var(--ink-2); font-size: 14px; margin-bottom: 16px;">
@@ -1696,7 +1720,7 @@
     </div>
 
     <!-- Usability testing -->
-    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:26px;color:#fff;margin-bottom:14px;">
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:26px;color:var(--ink);margin-bottom:14px;">
       Usability Testing — 3 Alpha testers
     </h3>
     <p style="color:var(--ink-2);font-size:14.5px;max-width:780px;margin-bottom: 22px;">
@@ -1795,7 +1819,7 @@
           </div>
         </div>
         <div class="ba-note">
-          <b style="color:#fff">Why:</b> Tester 2 and organizer Dan both independently raised trust concerns.
+          <b style="color:var(--ink)">Why:</b> Tester 2 and organizer Dan both independently raised trust concerns.
           Removing the knob made the system simpler <i>and</i> fairer.
         </div>
       </article>
@@ -1828,7 +1852,7 @@
           </div>
         </div>
         <div class="ba-note">
-          <b style="color:#fff">Why:</b> Tester 1 tried to check in on detail and was confused when nothing happened after returning to Discover. Consolidating removed the ambiguity.
+          <b style="color:var(--ink)">Why:</b> Tester 1 tried to check in on detail and was confused when nothing happened after returning to Discover. Consolidating removed the ambiguity.
         </div>
       </article>
 
@@ -1860,7 +1884,7 @@
           </div>
         </div>
         <div class="ba-note">
-          <b style="color:#fff">Why:</b> Tester 1 and Tester 2 both tried to use the route bar as a second
+          <b style="color:var(--ink)">Why:</b> Tester 1 and Tester 2 both tried to use the route bar as a second
           check-in affordance — reinforcing that check-in belongs on Discover. Collapsing the entry also
           gave the map back its full canvas.
         </div>
@@ -1894,7 +1918,7 @@
           </div>
         </div>
         <div class="ba-note">
-          <b style="color:#fff">Why:</b> Tester 2 said "I don't trust that these are the same list." They weren't. Now they are.
+          <b style="color:var(--ink)">Why:</b> Tester 2 said "I don't trust that these are the same list." They weren't. Now they are.
         </div>
       </article>
     </div>
@@ -1902,7 +1926,7 @@
     <!-- Final reflection -->
     <div style="margin-top: 56px;" class="grid-2">
       <article class="card" style="background: linear-gradient(160deg, rgba(56,189,248,0.06), rgba(167,139,250,0.04));">
-        <div class="section-tag" style="color:#BAE6FD;">05.3 · Final Reflection</div>
+        <div class="section-tag" style="color:#075985;">05.3 · Final Reflection</div>
         <h3 style="margin:8px 0 10px;">Social &amp; ethical implications</h3>
         <p style="color:var(--ink-2);font-size:14.5px;">
           RunAPP is built around a presence signal — <i>I was here at this time</i>. That is a powerful
@@ -1922,11 +1946,11 @@
       <article class="card">
         <h3 style="margin-bottom:10px;">What we'd do next</h3>
         <ul class="clean">
-          <li><b style="color:#fff">Offline-first recording:</b> a service worker to actually survive subway tunnels.</li>
-          <li><b style="color:#fff">Accessibility audit:</b> dynamic type, VoiceOver labels on the map check-in surface, larger tap targets on group chips.</li>
-          <li><b style="color:#fff">Organizer analytics:</b> honest "who is drifting away" nudge without surveillance creep.</li>
-          <li><b style="color:#fff">i18n:</b> Simplified Chinese + English day one; date/time formatting is already tz-aware.</li>
-          <li><b style="color:#fff">Trust controls:</b> let users opt out of appearing in the cohort strip without losing check-in.</li>
+          <li><b style="color:var(--ink)">Offline-first recording:</b> a service worker to actually survive subway tunnels.</li>
+          <li><b style="color:var(--ink)">Accessibility audit:</b> dynamic type, VoiceOver labels on the map check-in surface, larger tap targets on group chips.</li>
+          <li><b style="color:var(--ink)">Organizer analytics:</b> honest "who is drifting away" nudge without surveillance creep.</li>
+          <li><b style="color:var(--ink)">i18n:</b> Simplified Chinese + English day one; date/time formatting is already tz-aware.</li>
+          <li><b style="color:var(--ink)">Trust controls:</b> let users opt out of appearing in the cohort strip without losing check-in.</li>
         </ul>
       </article>
     </div>
@@ -1950,25 +1974,25 @@
       <article class="card">
         <h3 style="margin-bottom:8px;">Where AI helped (and where it didn't)</h3>
         <ul class="clean">
-          <li><b style="color:#fff">Helped:</b> generating repetitive CSS scaffolds, long-form English PRD prose, SVG architecture diagrams, sketch placeholders.</li>
-          <li><b style="color:#fff">Helped:</b> catching edge cases in the check-in state matrix we missed.</li>
-          <li><b style="color:#fff">Didn't replace:</b> user interviews, field visits, the Crazy-Eights session, usability scoring.</li>
-          <li><b style="color:#fff">Didn't replace:</b> deciding what to kill (Option A, Option C) — that needed human testers.</li>
+          <li><b style="color:var(--ink)">Helped:</b> generating repetitive CSS scaffolds, long-form English PRD prose, SVG architecture diagrams, sketch placeholders.</li>
+          <li><b style="color:var(--ink)">Helped:</b> catching edge cases in the check-in state matrix we missed.</li>
+          <li><b style="color:var(--ink)">Didn't replace:</b> user interviews, field visits, the Crazy-Eights session, usability scoring.</li>
+          <li><b style="color:var(--ink)">Didn't replace:</b> deciding what to kill (Option A, Option C) — that needed human testers.</li>
         </ul>
       </article>
       <article class="card">
         <h3 style="margin-bottom:8px;">Validation workflow</h3>
         <ul class="clean green">
-          <li>Every AI-generated screen was <b style="color:#fff">manually diffed</b> against the PRD clause it was supposed to implement.</li>
-          <li>Usability sessions were run on <b style="color:#fff">deployed</b> builds, not AI-generated mockups, so the signal came from real user behavior.</li>
-          <li>All copy that went into a user-facing surface was <b style="color:#fff">read aloud</b> by a teammate — AI tends to over-explain; we trimmed aggressively.</li>
-          <li>AI suggestions that affected logic (geofence, time window) were <b style="color:#fff">paired with a written unit trace</b> before we accepted them.</li>
+          <li>Every AI-generated screen was <b style="color:var(--ink)">manually diffed</b> against the PRD clause it was supposed to implement.</li>
+          <li>Usability sessions were run on <b style="color:var(--ink)">deployed</b> builds, not AI-generated mockups, so the signal came from real user behavior.</li>
+          <li>All copy that went into a user-facing surface was <b style="color:var(--ink)">read aloud</b> by a teammate — AI tends to over-explain; we trimmed aggressively.</li>
+          <li>AI suggestions that affected logic (geofence, time window) were <b style="color:var(--ink)">paired with a written unit trace</b> before we accepted them.</li>
           <li>Nothing was pushed to <code>main</code> without at least one human approver.</li>
         </ul>
       </article>
     </div>
 
-    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:24px;color:#fff;margin: 8px 0 12px;">
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:24px;color:var(--ink);margin: 8px 0 12px;">
       Example prompts used for core logic
     </h3>
 
@@ -2001,7 +2025,7 @@ State names should match my PRD: Checked in, Window-not-yet-open, Window-open-be
     </div>
 
     <!-- Ethics -->
-    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:24px;color:#fff;margin: 40px 0 12px;">
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:24px;color:var(--ink);margin: 40px 0 12px;">
       Ethical considerations around AI-generated code
     </h3>
     <div class="ethics">
@@ -2064,7 +2088,7 @@ State names should match my PRD: Checked in, Window-not-yet-open, Window-open-be
       </p>
     </div>
 
-    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:22px;color:#fff;margin-bottom:14px;">Academic — peer-reviewed</h3>
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:22px;color:var(--ink);margin-bottom:14px;">Academic — peer-reviewed</h3>
     <div class="refs" style="margin-bottom: 28px;">
       <div class="ref">
         <div class="ref-n">P1</div>
@@ -2088,7 +2112,7 @@ State names should match my PRD: Checked in, Window-not-yet-open, Window-open-be
       </div>
     </div>
 
-    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:22px;color:#fff;margin-bottom:14px;">Commercial — competitive analysis</h3>
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:22px;color:var(--ink);margin-bottom:14px;">Commercial — competitive analysis</h3>
     <div class="refs" style="margin-bottom: 28px;">
       <div class="ref">
         <div class="ref-n">C1</div>
@@ -2108,7 +2132,7 @@ State names should match my PRD: Checked in, Window-not-yet-open, Window-open-be
       </div>
     </div>
 
-    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:22px;color:#fff;margin-bottom:14px;">AI tools — mandatory disclosure</h3>
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:22px;color:var(--ink);margin-bottom:14px;">AI tools — mandatory disclosure</h3>
     <div class="refs">
       <div class="ref">
         <div class="ref-n">A1</div>
@@ -2154,7 +2178,7 @@ State names should match my PRD: Checked in, Window-not-yet-open, Window-open-be
         <span class="logo-mark" style="width:32px;height:32px;border-radius:10px;">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:16px;height:16px;"><path d="M13.5 5.5a2 2 0 11-.001-3.999A2 2 0 0113.5 5.5zm-4 14.7l1.1-4.9 2.3 2.2v6h2v-7.5l-2.3-2.2.6-3c1.3 1.7 3.3 2.8 5.6 2.8v-2c-2 0-3.7-1-4.6-2.5l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.2L6.3 8.5v5h2v-3.7l1.8-.8-1.6 8 -4.9-1L3.2 18l7 1.2z"/></svg>
         </span>
-        <b style="color:#fff;font-family:'Barlow Condensed';font-size:18px;letter-spacing:0.04em;">RUNAPP</b>
+        <b style="color:var(--ink);font-family:'Barlow Condensed';font-size:18px;letter-spacing:0.04em;">RUNAPP</b>
         <span>· Portfolio v1.0 · Active Living</span>
       </div>
       <div style="margin-top:8px; color: var(--dim);">Built by Team RunAPP · Spring 2026 · Single-page portfolio, deployable on GitHub Pages.</div>
