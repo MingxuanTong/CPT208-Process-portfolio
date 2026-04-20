@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>RunAPP — Design Portfolio · Active Living</title>
-<meta name="description" content="A running-club mobile web app designed to convert casual movement into a social, low-friction habit. Team portfolio covering research, user requirements, ideation, technical build, and iterative refinement." />
+<title>RunLink — Design Portfolio · Active Living</title>
+<meta name="description" content="RunLink — a club-scoped mobile web app with map-based check-in, organizer routes overlaid on the Running map (Leaflet + OSM), and post-run reflections. Portfolio: research, requirements, ideation, Supabase-backed technical build, evaluation." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -168,6 +168,7 @@
       inset 0 0 0 1px rgba(255,255,255,0.06);
     padding: 14px;
     position: absolute; top: 0; left: 50%; transform: translateX(-50%) rotate(-3deg);
+    z-index: 1;
   }
   .phone::before {
     content: ''; position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
@@ -198,6 +199,7 @@
     position: absolute; bottom: 10px; left: 10px; right: 10px; height: 56px;
     border-radius: 20px; background: #0F172A; color: #fff;
     display: grid; grid-template-columns: repeat(4, 1fr); align-items: center; justify-items: center;
+    font-family: 'Barlow Condensed', 'Barlow', system-ui, sans-serif;
     font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
   }
   .pm-tabs span { opacity: 0.6; }
@@ -208,6 +210,7 @@
     width: 190px; padding: 14px; border-radius: 16px;
     background: #FFFFFF; border: 1px solid var(--line);
     box-shadow: var(--shadow-lg);
+    z-index: 2;
   }
   .badge-card h5 { font-family: 'Barlow Condensed'; font-weight: 700; font-size: 16px; color: var(--ink); margin: 0; }
   .badge-card p { margin: 4px 0 0; color: var(--muted); font-size: 11px; line-height: 1.4; }
@@ -217,6 +220,7 @@
     background: #FFFFFF;
     border: 1px solid rgba(22,163,74,0.28);
     box-shadow: var(--shadow-lg);
+    z-index: 3;
   }
   .metric-card .n { font-family: 'Barlow Condensed'; font-weight: 800; font-size: 30px; color: var(--ink); }
   .metric-card .l { color: #15803D; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
@@ -592,7 +596,7 @@
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 5.5a2 2 0 11-.001-3.999A2 2 0 0113.5 5.5zm-4 14.7l1.1-4.9 2.3 2.2v6h2v-7.5l-2.3-2.2.6-3c1.3 1.7 3.3 2.8 5.6 2.8v-2c-2 0-3.7-1-4.6-2.5l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.2L6.3 8.5v5h2v-3.7l1.8-.8-1.6 8 -4.9-1L3.2 18l7 1.2z"/></svg>
       </span>
       <div>
-        <div class="brand-name">RunAPP</div>
+        <div class="brand-name">RunLink</div>
         <div class="brand-sub">Active Living · Portfolio</div>
       </div>
     </a>
@@ -625,18 +629,20 @@
         <span class="eyebrow"><span class="dot"></span>Design Theme · Active Living</span>
         <h1>Turning <span class="hl">club runs</span> into the easiest healthy habit in your week.</h1>
         <p class="hero-lede">
-          RunAPP is a mobile-first web app for running-club communities, deliberately designed for
-          <b style="color:var(--ink)">both sides</b> of the track. Runners get the tightest possible loop —
-          <b style="color:var(--ink)">register → check in → run → reflect</b>. Organizers get a serious
-          <b style="color:var(--ink)">club-operations toolkit</b> — publish with capacity &amp; pace groups, a live
-          registration/check-in dashboard, manual overrides, role-based governance, and a club-scoped
-          monthly leaderboard. No global feeds, no volunteer with a clipboard.
+          <b style="color:var(--ink)">RunLink</b> is a club-scoped mobile web app: runners
+          <b style="color:var(--ink)">prove attendance with a location-based map check-in</b> (Haversine · fixed 50&nbsp;m),
+          follow the <b style="color:var(--ink)">organizer’s route overlaid on the full-screen Running map</b> (Leaflet,
+          OpenStreetMap tiles, GeoJSON polyline), then leave
+          <b style="color:var(--ink)">lightweight club-only reflections</b> (emoji + note) on the activity — never a global
+          social feed. Organizers publish activities, upload GPX/route data, watch a live registration/check-in
+          dashboard, and rely on <b style="color:var(--ink)">Supabase</b> (Postgres + Row Level Security) for real data
+          behind the static front end.
         </p>
         <div class="hero-meta">
           <span class="chip brand">Active Living</span>
-          <span class="chip accent">Two-sided · Runner + Organizer</span>
-          <span class="chip info">Mobile web · PWA-ready</span>
-          <span class="chip">8 PRD iterations (v2.3 → v2.8)</span>
+          <span class="chip accent">Check-in · Route on map · Reflections</span>
+          <span class="chip info">Vanilla ES modules · Supabase backend</span>
+          <span class="chip">Leaflet · OSM · GeoJSON routes</span>
         </div>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#live-url">
@@ -648,10 +654,10 @@
           </a>
         </div>
         <div class="kpi-row">
-          <div class="kpi"><div class="k">Hi-fi screens</div><div class="v">18</div></div>
-          <div class="kpi"><div class="k">Organizer tools</div><div class="v">6</div></div>
+          <div class="kpi"><div class="k">Core loop pillars</div><div class="v">3</div></div>
+          <div class="kpi"><div class="k">Check-in radius</div><div class="v">50m</div></div>
           <div class="kpi"><div class="k">Usability sessions</div><div class="v">3</div></div>
-          <div class="kpi"><div class="k">PRD iterations</div><div class="v">6</div></div>
+          <div class="kpi"><div class="k">Data layer</div><div class="v">PG</div></div>
         </div>
       </div>
 
@@ -749,7 +755,7 @@
           <li><b style="color:var(--ink)">2 field visits</b> to a Saturday park-run meetup + a weekday track session.</li>
           <li><b style="color:var(--ink)">5 peer-reviewed papers</b> covering behavior change, social exercise, and mobile HCI.</li>
           <li><b style="color:var(--ink)">4 commercial teardowns</b> (Strava, Nike Run Club, Keep, JoinClubs).</li>
-          <li><b style="color:var(--ink)">3 usability rounds</b> on Figma low-fi, HTML hi-fi, and the deployed build.</li>
+          <li><b style="color:var(--ink)">3 usability rounds</b> on Figma low-fi, early RunLink build, and the deployed Supabase-backed app.</li>
         </ul>
       </article>
     </div>
@@ -758,7 +764,7 @@
       The Gap — 4 Academic Papers
     </h3>
     <p style="color:var(--ink-2);font-size:15px;max-width:780px;margin-bottom:20px;">
-      Each paper is summarized as <b style="color:#15803D">3 things it gets right</b> and <b style="color:#B91C1C">3 gaps</b> that shaped RunAPP's design decisions. Full citations appear in §References.
+      Each paper is summarized as <b style="color:#15803D">3 things it gets right</b> and <b style="color:#B91C1C">3 gaps</b> that shaped RunLink's design decisions. Full citations appear in §References.
     </p>
 
     <div class="research-table" style="margin-bottom: 40px;">
@@ -1007,58 +1013,68 @@
         Stakeholders & Personas
       </h3>
       <p style="color:var(--ink-2);max-width:760px;margin: 0 0 28px;">
-        RunAPP has a deliberately sharp <b style="color:var(--ink)">two-sided model</b>: casual runners (primary), and the
-        organizer volunteers who keep a club alive (secondary). A third — the parent club owner — shows up
-        in governance flows (transfer ownership, co-organizer permissions) but isn't a daily user.
+        RunLink has a deliberately sharp <b style="color:var(--ink)">two-sided model</b>: the beginner runner
+        looking for a low-stakes way into a club (primary, ~70% of the market), and the club organizer keeping
+        weekends running (secondary, the ~10–15% power-user tail). A third — the parent club <i>owner</i> —
+        shows up in governance flows (transfer ownership, co-organizer roles, club deletion) in RunLink’s
+        Community tab, but isn't a daily-driver persona.
       </p>
       <div class="grid-2">
-        <!-- Primary -->
+        <!-- Primary · Tom -->
         <article class="persona">
           <div class="p-head">
-            <div class="p-av">MC</div>
+            <div class="p-av">TM</div>
             <div>
-              <div class="p-role">Primary Persona · Runner</div>
-              <div class="p-name">Mia Chen, 28</div>
-              <div style="color:var(--muted);font-size:13px;">Product designer · Shanghai · 3.5 km weekly average</div>
+              <div class="p-role">Primary Persona · Runner · Market 70% · Typical</div>
+              <div class="p-name">Tom, 20</div>
+              <div style="color:var(--muted);font-size:13px;">Undergraduate · Suzhou, CN · &lt;1 year running · ~7:30 / km</div>
             </div>
           </div>
-          <blockquote class="p-quote">"I want to run with people, not be coached by an app. Just tell me where to go and notice when I'm there."</blockquote>
+          <blockquote class="p-quote">"I want a running app that helps me join the right activity, find my way easily, and run without feeling lost or embarrassed."</blockquote>
+          <div class="p-block">
+            <h5>Background</h5>
+            <p>A 20-year-old student who started running to relieve academic stress. Solo runs feel repetitive and hard to sustain; beginner-friendly clubs feel intimidating to join cold. Wants a low-pressure way to discover, register, check in, and follow a route — all from one map.</p>
+          </div>
           <div class="p-block">
             <h5>Goals</h5>
-            <p>Run 2× per week consistently. Not set a PB. Build a casual habit she can maintain through winter.</p>
+            <p>Join suitable activities easily (discover + pick a pace group + register + check in with minimal pressure). Run with confidence on a single full-screen map. Build a weekly habit through club participation and light social interaction.</p>
           </div>
           <div class="p-block">
             <h5>Frustrations</h5>
-            <p>Telegram group mutes herself after the 20th "Tomorrow 7 AM?" message. Forgets registration deadlines. Hates elite-pace leaderboards.</p>
+            <p>Can't tell which events are genuinely beginner-friendly or whether his 7:30/km will keep up. Arriving at the wrong spot or missing check-in is stressful. Repetitive solo routes are easy to drop — "nobody noticed anyway."</p>
           </div>
           <div class="p-block">
-            <h5>Tech & Context</h5>
-            <p>iPhone 14. Uses mobile web over apps. Runs in varying weather, often with low-signal urban GPS.</p>
+            <h5>Motivation &amp; Tech</h5>
+            <p><b>Top drivers:</b> habit-building · social connection · route confidence.  <b>Low:</b> competitive performance.  Mobile web on iPhone; urban GPS is often low-confidence between buildings — <b>needs</b> one-tap check-in, visible pace targets on every card, and the organizer's route drawn onto the map he's already looking at.</p>
           </div>
         </article>
 
-        <!-- Secondary -->
+        <!-- Secondary · Hanqin Wan -->
         <article class="persona alt">
           <div class="p-head">
-            <div class="p-av">DW</div>
+            <div class="p-av">HW</div>
             <div>
-              <div class="p-role">Secondary Persona · Organizer</div>
-              <div class="p-name">Dan Wu, 42</div>
-              <div style="color:var(--muted);font-size:13px;">Engineer · Part-time Co-organizer · 18 activities run</div>
+              <div class="p-role">Secondary Persona · Organizer · Market 10–15% · Power User</div>
+              <div class="p-name">Hanqin Wan, 31</div>
+              <div style="color:var(--muted);font-size:13px;">PM by day · Club owner · Shanghai · ~60 members · weekly 10 k</div>
             </div>
           </div>
-          <blockquote class="p-quote">"I don't want to play bouncer. Just tell me who showed up, who didn't, and who needs a nudge."</blockquote>
+          <blockquote class="p-quote">"Running this club is supposed to be about running with people I love — not re-typing the same form and chasing folks for a check-in code every Saturday morning."</blockquote>
+          <div class="p-block">
+            <h5>Background</h5>
+            <p>Founded a public club along the Huangpu riverfront 3 years ago. Weekly 10 k Saturday morning + occasional trail run. Runs the club on top of a full-time PM job, so operational efficiency, safe delegation and data-driven decisions matter as much as choosing a good route.</p>
+          </div>
           <div class="p-block">
             <h5>Goals</h5>
-            <p>Publish an activity in under 2 minutes. See a clean dashboard post-run. Keep regulars coming back; grow slowly.</p>
+            <p>Publish an activity in under 2 min by reusing a proven structure. Run the event, not the queue. Grow the club with evidence (monthly mileage, attendance, late ratio). Safely delegate to a trusted helper without handing over the club itself.</p>
           </div>
           <div class="p-block">
             <h5>Frustrations</h5>
-            <p>Spends Saturday mornings manually ticking names. Gets messages from runners with "weird GPS" he can't verify or dispute.</p>
+            <p>Refilling the same form every week. Scan-code queues and "weird GPS" disputes he can't verify or settle. Has no built-in month-over-month view to justify schedule or route changes. No safe way to let a helper publish when he travels.</p>
           </div>
           <div class="p-block">
-            <h5>Tech & Context</h5>
-            <p>Android + laptop on Sundays. Needs late check-in, manual check-in, and clear "self-confirmed" audit trail.</p>
+            <h5>Motivation &amp; Tech</h5>
+            <p><b>Top drivers:</b> community growth · operational efficiency · data-driven insight.  <b>Low:</b> personal PBs.  Android on the ground, laptop on Sundays. <b>Needs</b> a structured publish form, zero-approval registration gated by capacity, a three-layer check-in safety net (auto · self-confirmed · organizer-manual), and a bounded <i>Co-organizer</i> role.</p>
           </div>
         </article>
       </div>
@@ -1073,48 +1089,121 @@
       <div class="section-tag">02 · User Requirements</div>
       <h2 class="section-title">From lived friction to three non-negotiable features.</h2>
       <p class="section-lede">
-        We mapped Mia's current Saturday experience stage-by-stage, highlighted the points at which she
-        silently gives up, and distilled that into a short list of "if this isn't true, we haven't shipped."
+        We mapped Tom's Saturday stage-by-stage — and on the other side of the platform, Hanqin's weekly
+        organizer workflow — then highlighted the points each one silently gives up, and distilled that
+        into a short list of "if this isn't true, we haven't shipped."
       </p>
     </div>
 
-    <!-- Journey map -->
+    <!-- Runner journey · Tom -->
     <div class="journey">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:0 0 20px;">
+        <div>
+          <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:22px;color:var(--ink);margin:0 0 4px;">
+            Runner journey — Tom's Saturday <span style="color:var(--brand);">(primary)</span>
+          </h3>
+          <p style="color:var(--muted);font-size:13px;margin:0;">Five stages, one mobile web app, one full-screen map.</p>
+        </div>
+        <span class="chip brand">Primary persona: Tom · Beginner Runner</span>
+      </div>
       <div class="jm-grid">
         <div class="jm-label"></div>
         <div class="jm-stage">1 · Discover</div>
-        <div class="jm-stage">2 · Sign up</div>
-        <div class="jm-stage">3 · Saturday morning</div>
-        <div class="jm-stage">4 · Running</div>
-        <div class="jm-stage">5 · After</div>
+        <div class="jm-stage">2 · Register</div>
+        <div class="jm-stage">3 · Arrive &amp; check in</div>
+        <div class="jm-stage">4 · Run</div>
+        <div class="jm-stage">5 · Reflect</div>
 
         <div class="jm-label">Doing</div>
-        <div class="jm-c">Hears about a club from friend; opens Telegram group.</div>
-        <div class="jm-c">Scrolls pinned messages, tries to reply "+1" in chat.</div>
-        <div class="jm-c">Wakes up, panics about directions, opens 3 maps apps.</div>
-        <div class="jm-c">Arrives, can't find pace group, runs alone.</div>
-        <div class="jm-c">Logs run in Strava. Nobody knows she came.</div>
+        <div class="jm-c">Browses Discover &amp; Nearby clubs; opens an activity detail to read pace groups, times, &amp; seats.</div>
+        <div class="jm-c">Single-selects one <code>group_options</code> entry, taps <b>Register</b> — no approval queue.</div>
+        <div class="jm-c">At the meetup, opens Discover → My registrations and taps <b>Map check-in</b>.</div>
+        <div class="jm-c">Opens Running tab; Leaflet map + organizer <code>route_geojson</code> overlay; optional activity link via route square; taps <b>START</b>.</div>
+        <div class="jm-c">Taps <b>End</b>, returns to Start run, opens Activity detail → Reflections, leaves an emoji + a short note.</div>
 
         <div class="jm-label">Feeling</div>
-        <div class="jm-c emoji">😐</div>
-        <div class="jm-c emoji">😕</div>
+        <div class="jm-c emoji">🤔</div>
+        <div class="jm-c emoji">🙂</div>
         <div class="jm-c emoji">😰</div>
-        <div class="jm-c emoji">😔</div>
-        <div class="jm-c emoji">😶</div>
+        <div class="jm-c emoji">😤</div>
+        <div class="jm-c emoji">😊</div>
+
+        <div class="jm-label">Thinking</div>
+        <div class="jm-c">"Can I actually keep up with this pace group?"</div>
+        <div class="jm-c">"If Saturday rains, can I back out without guilt?"</div>
+        <div class="jm-c">"Did that tap count? Am I already late?"</div>
+        <div class="jm-c">"Is the lead pack already half a km ahead?"</div>
+        <div class="jm-c">"Did anyone even notice I showed up today?"</div>
 
         <div class="jm-label">Pain points</div>
-        <div class="jm-c pain">Unclear if this club fits her pace; no profile.</div>
-        <div class="jm-c pain">Registration is a chat message — easy to miss.</div>
-        <div class="jm-c pain">Meetup time/place buried in a week-old thread.</div>
+        <div class="jm-c pain">Activity cards hide pace &amp; per-group caps.</div>
+        <div class="jm-c pain">Missed deadlines; no clean way to cancel.</div>
+        <div class="jm-c pain">Paper codes, GPS dropouts, queues between buildings.</div>
         <div class="jm-c pain">Doesn't know the course; gets lost at the first fork.</div>
-        <div class="jm-c pain">Effort evaporates — no shared closure.</div>
+        <div class="jm-c pain">Effort evaporates — no shared closure with the group.</div>
 
         <div class="jm-label">Opportunities</div>
-        <div class="jm-c opp">Show club avatar + pace groups up-front on Discover.</div>
-        <div class="jm-c opp">One-tap register with group single-select.</div>
-        <div class="jm-c opp">Pinned <b>Map check-in</b> card with live window countdown.</div>
-        <div class="jm-c opp"><b>Activity route drawn on the running map</b> + same-group cohort strip.</div>
-        <div class="jm-c opp">Reflections + emoji, club-scoped, never a global feed.</div>
+        <div class="jm-c opp"><code>group_options</code> with target pace &amp; per-group capacity on every card.</div>
+        <div class="jm-c opp">One-tap register; cancel until <code>start_time</code> to free the seat.</div>
+        <div class="jm-c opp">Single-tap <b>Map check-in</b>: time window + 50 m geofence + GPS fallback dialog.</div>
+        <div class="jm-c opp"><b>Club route overlaid on the Running map</b> (OSM basemap · GeoJSON) + realtime club toasts.</div>
+        <div class="jm-c opp">≤ 200-char reflection + 1 emoji per activity — club-scoped, never a global feed.</div>
+      </div>
+    </div>
+
+    <!-- Organizer journey · Hanqin Wan -->
+    <div class="journey" style="margin-top: 24px;">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:0 0 20px;">
+        <div>
+          <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:22px;color:var(--ink);margin:0 0 4px;">
+            Organizer workflow — Hanqin's weekly loop <span style="color:var(--accent);">(secondary)</span>
+          </h3>
+          <p style="color:var(--muted);font-size:13px;margin:0;">Publish → manage → run the event → review — the same five stages, organizer-side.</p>
+        </div>
+        <span class="chip accent">Secondary persona: Hanqin Wan · Owner / Co-organizer</span>
+      </div>
+      <div class="jm-grid">
+        <div class="jm-label"></div>
+        <div class="jm-stage">1 · Plan &amp; publish</div>
+        <div class="jm-stage">2 · Registration</div>
+        <div class="jm-stage">3 · On-site check-in</div>
+        <div class="jm-stage">4 · During activity</div>
+        <div class="jm-stage">5 · Review</div>
+
+        <div class="jm-label">Doing</div>
+        <div class="jm-c">Fills Publish form: <code>start / end</code>, check-in window, meetup lat/lng, GPX route, <code>group_options</code>, optional caps.</div>
+        <div class="jm-c">Watches sign-ups on the dashboard; approves nothing (zero-approval). Cancellations self-release seats.</div>
+        <div class="jm-c">Arrives early; most runners auto-check-in; GPS-fail rows come in as <i>Self-confirmed</i>.</div>
+        <div class="jm-c">Leads the run while the dashboard updates <b>Late</b> and <b>Cancelled</b> counts in real time.</div>
+        <div class="jm-c">Opens Data dashboard + Monthly leaderboard + Reflections — plans next week's route and timing.</div>
+
+        <div class="jm-label">Feeling</div>
+        <div class="jm-c emoji">😑</div>
+        <div class="jm-c emoji">🙂</div>
+        <div class="jm-c emoji">😓</div>
+        <div class="jm-c emoji">😌</div>
+        <div class="jm-c emoji">📊</div>
+
+        <div class="jm-label">Thinking</div>
+        <div class="jm-c">"Why am I refilling every field from scratch again?"</div>
+        <div class="jm-c">"Do we still have room in the 5:30 group?"</div>
+        <div class="jm-c">"Who's the person whose GPS 'always fails'?"</div>
+        <div class="jm-c">"Did anyone drop out mid-way? Will I even know?"</div>
+        <div class="jm-c">"Is attendance actually trending up? Prove it."</div>
+
+        <div class="jm-label">Pain points</div>
+        <div class="jm-c pain">Retyping every field every week; no template reuse.</div>
+        <div class="jm-c pain">Approval queues + DM'd cancellations to chase.</div>
+        <div class="jm-c pain">Manual sign-ins + disputes over "weird GPS".</div>
+        <div class="jm-c pain">No live view of who actually ran vs. only showed up.</div>
+        <div class="jm-c pain">No month-over-month data — decisions run on gut.</div>
+
+        <div class="jm-label">Opportunities</div>
+        <div class="jm-c opp">Activity carries <code>template_name</code>; structured form; fixed 50 m geofence — one less knob.</div>
+        <div class="jm-c opp">Zero-approval + <code>capacity_total</code> / <code>capacity_per_group</code> + self-cancel releases the seat.</div>
+        <div class="jm-c opp">Auto <b>Map check-in</b> + <i>Confirm you're at the meetup</i> fallback + <i>Mark as checked in</i>.</div>
+        <div class="jm-c opp">Dashboard: signups · check-ins · <b>Late</b> · <b>Cancelled</b> · audit-tagged method chips.</div>
+        <div class="jm-c opp">Monthly mileage leaderboard + aggregated Reflections per activity.</div>
       </div>
     </div>
 
@@ -1136,7 +1225,7 @@
             card on Discover → My registrations. No form, no scanner, no second screen. The system silently
             auto-acquires GPS, validates the time window, and enforces a fixed 50 m geofence.
           </p>
-          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">Maps to PRD §3.3, §4.1a</div>
+          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">RunLink: <code>geofence.js</code> · activity detail check-in</div>
         </article>
         <article class="card">
           <div style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;">
@@ -1146,12 +1235,12 @@
             <h4>R2 — Activity route on the running map</h4>
           </div>
           <p style="color:var(--ink-2);font-size:14.5px;">
-            Once checked in, the organizer's uploaded route must render <b>directly on the full-screen map</b>
-            of the Running tab — selected via the top-right square. Free-run ("none") stays available too, but
-            a registered + checked-in runner should never be lost at a fork. The route choice is <b>locked
-            during Recording</b> so stats and course can't drift.
+            After check-in, the organizer’s uploaded GPX/KML is stored as <code>route_geojson</code> and rendered with
+            <b>Leaflet</b> on the Running tab’s full-bleed map — entry is the <b>top-right route square</b>, which opens a
+            picker for checked-in activities. Free-run (no linked activity) stays available. While a session is
+            recording, the linked route stays fixed so distance and course don’t drift apart.
           </p>
-          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">Maps to PRD §2.4, §4.3</div>
+          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">RunLink: <code>map.js</code> · <code>views.js</code> Running tab</div>
         </article>
         <article class="card">
           <div style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;">
@@ -1161,11 +1250,12 @@
             <h4>R3 — Club-scoped reflection</h4>
           </div>
           <p style="color:var(--ink-2);font-size:14.5px;">
-            Checked-in runners can leave a ≤200-char reflection and one emoji (from a fixed 7-set) per activity.
-            Visible only on that activity's detail page — <b>never</b> a global feed, never auto-posted to
-            album. Ambient, group-scoped encouragement.
+            Checked-in runners react with a preset emoji and an optional short note on the <b>activity detail</b> page;
+            others see a chronological reflection feed for that activity only. Nothing is published to a global
+            or cross-club feed — scope stays inside the club’s activity. (Posting is gated until the runner has
+            checked in from Discover → My registrations.)
           </p>
-          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">Maps to PRD §3.4a, §4.2</div>
+          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">RunLink: <code>reflections</code> table · RLS · <code>views.js</code></div>
         </article>
       </div>
     </div>
@@ -1178,11 +1268,12 @@
             Spotlight — Professional Club Operations
           </h3>
           <p style="color:var(--ink-2);max-width:720px;margin:0;">
-            Beyond the runner loop, RunAPP ships a serious organizer-facing toolkit. Taken together, the
-            six features below are what make it a <i>club tool</i> rather than yet another activity tracker.
+            Beyond the core runner loop (<b>check-in → route on map → reflect</b>), RunLink ships organizer tooling backed by
+            <b>real Postgres data</b> and RLS — not hand-seeded JSON. The six capabilities below mirror what the shipped app does
+            today.
           </p>
         </div>
-        <span class="chip brand">Secondary persona: Dan Wu · Co-organizer</span>
+        <span class="chip brand">Secondary persona: Hanqin Wan · Owner / Co-organizer</span>
       </div>
 
       <div class="ops-grid">
@@ -1192,7 +1283,7 @@
           </div>
           <h4>Publish activity in ≈ 2 min</h4>
           <p>Schedule with start / end + check-in window, upload a GPX/KML route, set per-group pace options with optional per-group capacity, and an optional total capacity. Helper copy enforces the 50 m geofence rule — one less knob to misconfigure.</p>
-          <div class="ops-meta">PRD §4.7</div>
+          <div class="ops-meta"><code>views.js</code> publish · <code>api.js</code> · route → GeoJSON</div>
         </article>
 
         <article class="ops-card">
@@ -1201,7 +1292,7 @@
           </div>
           <h4>Live data dashboard</h4>
           <p>Per-activity counts: registrations (<code>n / capacity_total</code> when capped), check-ins, <b>Late</b>, and <b>Cancelled</b>. Per-group breakdown when per-group caps are set. Every check-in row is audit-tagged <code>gps_verified</code>, <code>manual_confirmed</code>, or <code>organizer_manual</code>.</p>
-          <div class="ops-meta">PRD §4.8</div>
+          <div class="ops-meta"><code>views.js</code> dashboard · organizer-only</div>
         </article>
 
         <article class="ops-card">
@@ -1209,8 +1300,8 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 7-7"/><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12z"/></svg>
           </div>
           <h4>Manual mark check-in</h4>
-          <p>For runners whose GPS failed inside the window, organizers can tap <i>Mark as checked in</i> on a Not-checked-in row. The action closes after <code>check_in_end</code>. Runner-side "Confirm you're at the meetup" fallback surfaces as a separate <i>Self-confirmed</i> chip — no disputes.</p>
-          <div class="ops-meta">PRD §3.3 · §4.8</div>
+          <p>For runners whose GPS failed inside the window, organizers can tap <i>Mark in</i> on a not-checked-in row. Runner-side “Confirm you’re at the meetup” when accuracy is poor is logged for organizer review.</p>
+          <div class="ops-meta"><code>api.manualCheckIn</code> · check-in methods</div>
         </article>
 
         <article class="ops-card">
@@ -1218,8 +1309,8 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M17 11a3 3 0 100-6 3 3 0 000 6z"/><path d="M3 21v-2a6 6 0 016-6 6 6 0 016 6v2M17 14a5 5 0 015 5v2"/></svg>
           </div>
           <h4>Role-based governance</h4>
-          <p>Exactly one <b>Owner</b> per club. Any number of <b>Co-organizers</b> (publish + dashboard + manual check-in + Album uploads). <b>Members</b> can browse and leave. Ownership is atomic-transferrable; account deletion is blocked until every owned club is transferred or deleted.</p>
-          <div class="ops-meta">PRD §3.1 · §3.0 · §4.6a</div>
+          <p>Exactly one <b>Owner</b> per club. Any number of <b>Co-organizers</b> (publish + dashboard + manual check-in + album). <b>Members</b> browse and join. Ownership can be transferred; destructive actions stay owner-gated.</p>
+          <div class="ops-meta"><code>club_memberships</code> · roles in <code>api.js</code></div>
         </article>
 
         <article class="ops-card">
@@ -1227,17 +1318,17 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21V7l4-4 4 4v14"/><path d="M3 21h18M8 11h8M8 15h8"/></svg>
           </div>
           <h4>Club-scoped monthly leaderboard</h4>
-          <p>Current-month km ranking of the <i>current club's</i> members only — never global, never lifetime. Ties broken by checked-in activity count, then by earliest first run. Resets on the 1st in the club's home-base timezone; a "Last month" archive toggle preserves history.</p>
-          <div class="ops-meta">PRD §3.6 · §4.4</div>
+          <p>Current-month distance ranking for the <i>active club</i> only — gold / silver / bronze-style ranks and tier badges, not a global Strava-style board.</p>
+          <div class="ops-meta"><code>v_monthly_mileage</code> · Community tab</div>
         </article>
 
         <article class="ops-card">
           <div class="ops-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="4"/><circle cx="15" cy="10" r="3"/><circle cx="19" cy="13" r="2"/><path d="M2 20c0-3 3-5 6-5s6 2 6 5M14 20c0-2 2-4 4-4s4 2 4 4"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
           </div>
-          <h4>Same-group cohort strip</h4>
-          <p>During <i>Recording</i> of an activity-linked session, a read-only strip surfaces the avatars of other checked-in runners in the <i>same</i> pace group. Tap to expand into a small roster. No friend graph, no DMs — just "you're not alone out here" context.</p>
-          <div class="ops-meta">PRD §4.3</div>
+          <h4>Realtime club awareness</h4>
+          <p>Supabase <b>Realtime</b> subscription: when someone registers for an activity you can see, a toast fires (“Someone just joined…”). Reinforces club presence without exposing live coordinates or a public feed.</p>
+          <div class="ops-meta"><code>postgres_changes</code> · <code>app.js</code></div>
         </article>
       </div>
     </div>
@@ -1255,7 +1346,7 @@
         <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(249,115,22,0.14), rgba(255,247,237,0.6)); color:#9A3412;">
           <div class="ev-n">01</div>
           <span class="ev-tag">Interview · café</span>
-          <figcaption><b style="color:var(--ink)">Mia (P2)</b> — 34-min sit-down, coffee shop near her track. Discussed 2-year run history & failed club attempts.</figcaption>
+          <figcaption><b style="color:var(--ink)">Tom (P2)</b> — 34-min sit-down, campus café in Suzhou. Discussed 10-month run history &amp; first-time club anxiety.</figcaption>
         </figure>
         <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(22,163,74,0.14), rgba(240,253,244,0.6)); color:#15803D;">
           <div class="ev-n">02</div>
@@ -1265,7 +1356,7 @@
         <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(2,132,199,0.14), rgba(240,249,255,0.6)); color:#075985;">
           <div class="ev-n">03</div>
           <span class="ev-tag">Interview · organizer</span>
-          <figcaption><b style="color:var(--ink)">Dan (O1)</b> — 45-min call with a Co-organizer. Walked through his weekly operational load.</figcaption>
+          <figcaption><b style="color:var(--ink)">Hanqin (O1)</b> — 45-min call with a club owner. Walked through his weekly publish / check-in / review load.</figcaption>
         </figure>
         <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(124,58,237,0.14), rgba(245,243,255,0.6)); color:#5B21B6;">
           <div class="ev-n">04</div>
@@ -1435,7 +1526,7 @@
             <div class="pc"><b>+</b><span>Fallback + audit trail (gps_verified / manual_confirmed / organizer_manual).</span></div>
             <div class="pc minus"><b>–</b><span>Requires location permission the first time.</span></div>
           </div>
-          <div class="pick-line">✓ Chosen — cleared usability with all 3 testers; visibly reduced organizer load in interviews with Dan.</div>
+          <div class="pick-line">✓ Chosen — cleared usability with all 3 testers; visibly reduced organizer load in interviews.</div>
         </article>
 
         <article class="alt">
@@ -1494,8 +1585,9 @@
       <div class="section-tag">04 · Technical Implementation</div>
       <h2 class="section-title">A boringly reliable mobile web app with an auditable data path.</h2>
       <p class="section-lede">
-        We picked a plain HTML / CSS / vanilla-JS hi-fi prototype deployed on GitHub Pages over a heavier
-        SPA stack — the goal was credible visual fidelity and zero deployment anxiety, not runtime drama.
+        RunLink is a <b>hash-routed single-page app</b> (HTML/CSS + vanilla ES modules, no bundler) talking to
+        <b>Supabase</b> for auth, Postgres, Row Level Security, and Realtime. Static files can sit on GitHub Pages,
+        Vercel, or Netlify; only the Supabase URL and anon key ship to the client.
       </p>
     </div>
 
@@ -1505,7 +1597,7 @@
     </h3>
     <div class="arch-wrap">
       <div class="arch-svg-box">
-        <svg viewBox="0 0 960 440" width="100%" aria-label="RunAPP system architecture diagram">
+        <svg viewBox="0 0 960 440" width="100%" aria-label="RunLink system architecture diagram">
           <defs>
             <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
               <stop offset="0%" stop-color="#F97316"/><stop offset="100%" stop-color="#FB923C"/>
@@ -1533,8 +1625,8 @@
           <line x1="0" y1="95"  x2="960" y2="95"  class="ar-edge-dashed"/>
           <line x1="0" y1="255" x2="960" y2="255" class="ar-edge-dashed"/>
           <text x="10" y="25"  class="ar-lane-label">Client · Mobile Web</text>
-          <text x="10" y="115" class="ar-lane-label">App Layer · GitHub Pages (static)</text>
-          <text x="10" y="275" class="ar-lane-label">Data &amp; Sensors (demo / mock)</text>
+          <text x="10" y="115" class="ar-lane-label">App layer · ES modules (no bundler)</text>
+          <text x="10" y="275" class="ar-lane-label">Supabase · Postgres · RLS · Realtime</text>
 
           <!-- Client -->
           <rect x="40"  y="40" width="160" height="44" rx="12" fill="url(#g1)"/>
@@ -1549,14 +1641,14 @@
           <rect x="40"  y="140" width="200" height="90" rx="14" fill="url(#g3)"/>
           <text x="140" y="170" class="ar-text" text-anchor="middle">UI Layer</text>
           <text x="140" y="188" class="ar-sub"  text-anchor="middle">HTML + CSS + vanilla JS</text>
-          <text x="140" y="204" class="ar-sub"  text-anchor="middle">393 px mobile frame · 18 screens</text>
+          <text x="140" y="204" class="ar-sub"  text-anchor="middle">Mobile-first CSS · tab shell</text>
           <text x="140" y="220" class="ar-sub"  text-anchor="middle">Prefers-reduced-motion · A11y</text>
 
           <rect x="280" y="140" width="200" height="90" rx="14" fill="url(#g3)"/>
           <text x="380" y="170" class="ar-text" text-anchor="middle">State &amp; Routing</text>
           <text x="380" y="188" class="ar-sub"  text-anchor="middle">Hash routing across screens</text>
-          <text x="380" y="204" class="ar-sub"  text-anchor="middle">Session store (Remember me · 90d)</text>
-          <text x="380" y="220" class="ar-sub"  text-anchor="middle">Activity / Registration lifecycle FSM</text>
+          <text x="380" y="204" class="ar-sub"  text-anchor="middle">JWT via Supabase Auth</text>
+          <text x="380" y="220" class="ar-sub"  text-anchor="middle">Activity / registration state in views</text>
 
           <rect x="520" y="140" width="200" height="90" rx="14" fill="url(#g3)"/>
           <text x="620" y="170" class="ar-text" text-anchor="middle">Validation Engine</text>
@@ -1566,16 +1658,16 @@
 
           <rect x="760" y="140" width="170" height="90" rx="14" fill="url(#g3)"/>
           <text x="845" y="170" class="ar-text" text-anchor="middle">Deployment</text>
-          <text x="845" y="188" class="ar-sub"  text-anchor="middle">GitHub Pages</text>
-          <text x="845" y="204" class="ar-sub"  text-anchor="middle">Static CDN · HTTPS</text>
-          <text x="845" y="220" class="ar-sub"  text-anchor="middle">CI on push to main</text>
+          <text x="845" y="188" class="ar-sub"  text-anchor="middle">GitHub Pages / Vercel</text>
+          <text x="845" y="204" class="ar-sub"  text-anchor="middle">Static assets · HTTPS</text>
+          <text x="845" y="220" class="ar-sub"  text-anchor="middle">Env: Supabase URL + anon key</text>
 
           <!-- Data layer -->
           <rect x="40"  y="300" width="180" height="90" rx="14" fill="url(#g2)"/>
-          <text x="130" y="328" class="ar-text" text-anchor="middle">Demo Data Store</text>
-          <text x="130" y="346" class="ar-sub"  text-anchor="middle">JSON seed · clubs · activities</text>
-          <text x="130" y="362" class="ar-sub"  text-anchor="middle">registrations · runs · reflections</text>
-          <text x="130" y="378" class="ar-sub"  text-anchor="middle">UTC-stored · local render</text>
+          <text x="130" y="328" class="ar-text" text-anchor="middle">Postgres (Supabase)</text>
+          <text x="130" y="346" class="ar-sub"  text-anchor="middle">clubs · activities · registrations</text>
+          <text x="130" y="362" class="ar-sub"  text-anchor="middle">reflections · runs · memberships</text>
+          <text x="130" y="378" class="ar-sub"  text-anchor="middle">RLS on every table</text>
 
           <rect x="260" y="300" width="180" height="90" rx="14" fill="url(#g2)"/>
           <text x="350" y="328" class="ar-text" text-anchor="middle">Geolocation API</text>
@@ -1584,16 +1676,16 @@
           <text x="350" y="378" class="ar-sub"  text-anchor="middle">fallback on deny / &gt; 8 s timeout</text>
 
           <rect x="480" y="300" width="180" height="90" rx="14" fill="url(#g2)"/>
-          <text x="570" y="328" class="ar-text" text-anchor="middle">Map Tile (mocked)</text>
-          <text x="570" y="346" class="ar-sub"  text-anchor="middle">Static preview image</text>
-          <text x="570" y="362" class="ar-sub"  text-anchor="middle">Route polyline overlay</text>
-          <text x="570" y="378" class="ar-sub"  text-anchor="middle">50 m radius visual</text>
+          <text x="570" y="328" class="ar-text" text-anchor="middle">Leaflet · OSM tiles</text>
+          <text x="570" y="346" class="ar-sub"  text-anchor="middle">Meetup preview + Running tab</text>
+          <text x="570" y="362" class="ar-sub"  text-anchor="middle">GeoJSON route overlay</text>
+          <text x="570" y="378" class="ar-sub"  text-anchor="middle">50 m geofence ring</text>
 
           <rect x="700" y="300" width="230" height="90" rx="14" fill="url(#g2)"/>
-          <text x="815" y="328" class="ar-text" text-anchor="middle">Analytics / Telemetry (mock)</text>
-          <text x="815" y="346" class="ar-sub"  text-anchor="middle">check_in_method · late flag</text>
-          <text x="815" y="362" class="ar-sub"  text-anchor="middle">Registration lifecycle events</text>
-          <text x="815" y="378" class="ar-sub"  text-anchor="middle">Monthly leaderboard aggregation</text>
+          <text x="815" y="328" class="ar-text" text-anchor="middle">Supabase Realtime</text>
+          <text x="815" y="346" class="ar-sub"  text-anchor="middle">postgres_changes subscriptions</text>
+          <text x="815" y="362" class="ar-sub"  text-anchor="middle">Registration toasts · presence</text>
+          <text x="815" y="378" class="ar-sub"  text-anchor="middle">Leaderboard via SQL view</text>
 
           <!-- Edges -->
           <path class="ar-edge" d="M120,84 C120,110 120,120 140,140" marker-end="url(#arrow)"/>
@@ -1620,26 +1712,27 @@
         <div class="section-tag">04.2 · High-Fi Prototype — Live</div>
         <h3 style="margin:8px 0 10px;">Try the deployed hi-fi build</h3>
         <p style="color:var(--ink-2); font-size: 14.5px;">
-          Hosted on GitHub Pages as a static site; open on mobile or set DevTools to a 393 × 852 iPhone 15 Pro
-          frame. All screens are wired with realistic demo data.
+          Serve the <code>RunLink/</code> folder over HTTP (or deploy the static output). Sign in with email or the
+          one-tap demo account from the README. The same build hits a real Supabase project: registrations, check-ins,
+          reflections, and runs persist under RLS.
         </p>
         <div style="margin-top:16px; display:flex; gap:10px; flex-wrap: wrap;">
-          <a class="btn btn-primary" href="../runapp-prototype/index.html" target="_blank" rel="noopener">
-            Open High-Fi Prototype
+          <a class="btn btn-primary" href="../RunLink/index.html" target="_blank" rel="noopener">
+            Open RunLink (local path)
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
           </a>
-          <span class="chip info">When published: https://&lt;org&gt;.github.io/runapp</span>
+          <span class="chip info">Configure <code>scripts/supabase.js</code> for your project URL + anon key</span>
         </div>
       </article>
       <article class="card">
         <h3 style="margin-bottom:10px;">Tech stack at a glance</h3>
         <ul class="clean green">
-          <li><b style="color:var(--ink)">Frontend:</b> HTML5, CSS3 (custom-properties design tokens), vanilla JavaScript — no build step required.</li>
-          <li><b style="color:var(--ink)">Fonts:</b> Barlow + Barlow Condensed (Google Fonts); Font Awesome 6 for icons.</li>
-          <li><b style="color:var(--ink)">Screens:</b> 18 HTML files sharing <code>styles/common.css</code>, framed at 393 × 852.</li>
-          <li><b style="color:var(--ink)">Deployment:</b> GitHub Pages from <code>main</code>; Zero runtime cost.</li>
-          <li><b style="color:var(--ink)">Validation logic:</b> Haversine for 50 m geofence; time-window comparator; GPS-confidence fallback sheet.</li>
-          <li><b style="color:var(--ink)">Demo data:</b> Hand-seeded JSON for 2 clubs, 6 activities, 1 runner profile.</li>
+          <li><b style="color:var(--ink)">Frontend:</b> SPA shell (<code>index.html</code>), <code>styles/app.css</code>, ES modules in <code>scripts/</code> — no bundler.</li>
+          <li><b style="color:var(--ink)">Routing:</b> <code>app.js</code> hash router + <code>views.js</code> render functions.</li>
+          <li><b style="color:var(--ink)">Backend:</b> Supabase Auth + Postgres; <code>api.js</code> typed data access; every table protected by RLS.</li>
+          <li><b style="color:var(--ink)">Maps:</b> Leaflet + OSM (or CARTO dark) tiles; <code>map.js</code> <code>addRouteGeoJson</code> for club routes on the Running tab.</li>
+          <li><b style="color:var(--ink)">Check-in:</b> <code>geofence.js</code> Haversine · default 50 m; GPS fallback + organizer manual mark.</li>
+          <li><b style="color:var(--ink)">Realtime:</b> Supabase <code>postgres_changes</code> for registration toasts; optional CI deploy to GitHub Pages / Vercel.</li>
         </ul>
       </article>
     </div>
@@ -1670,7 +1763,7 @@
               <span class="pill-role pr-content">Content</span>
               <span class="pill-role pr-design">UX</span>
             </td>
-            <td>Owned the PRD (v2.3 → v2.8). Ran 4 of 7 user interviews. Drafted personas, journey map, motivation statement. Coordinated weekly sync.</td>
+            <td>Owned product spec &amp; RunLink README alignment. Ran 4 of 7 user interviews. Drafted personas, journey map, motivation statement. Coordinated weekly sync.</td>
             <td><b>28%</b></td>
           </tr>
           <tr>
@@ -1688,7 +1781,7 @@
               <span class="pill-role pr-dev">Frontend Dev</span>
               <span class="pill-role pr-dev">Deployment</span>
             </td>
-            <td>Implemented the 18 HTML screens, shared CSS, GPS-validation demo logic, GitHub Pages deploy. Wrote the architecture diagram.</td>
+            <td>Implemented RunLink SPA views, <code>api.js</code> / geofence / map modules, Supabase integration, deploy. Co-authored architecture diagram.</td>
             <td><b>25%</b></td>
           </tr>
           <tr>
@@ -1734,7 +1827,7 @@
         <div class="attrib">
           <div class="q-av">T1</div>
           <div class="q-meta">
-            <div class="nm">Tester 1 · Mia-profile runner</div>
+            <div class="nm">Tester 1 · Tom-profile runner</div>
             <div class="rl">5/5 tasks · 4m 12s · SUS 84</div>
           </div>
         </div>
@@ -1783,17 +1876,17 @@
   <div class="wrap">
     <div class="section-head">
       <div class="section-tag">05.2 · Iterative Refinement</div>
-      <h2 class="section-title">Before → After · tied to real PRD versions</h2>
+      <h2 class="section-title">Before → After · usability-driven iterations</h2>
       <p class="section-lede">
-        Every iteration below corresponds to a real changelog entry in our PRD (v2.4 → v2.8). We ship
-        version-stamped evidence rather than vague "we polished the design" claims.
+        These snapshots come from our research and usability rounds as we tightened RunLink — the same product
+        story you can run in the repo today (hash router, Supabase, Leaflet route overlay).
       </p>
     </div>
 
     <div class="ba-grid">
       <!-- Iteration 1: check-in radius -->
       <article class="ba-card">
-        <div class="tag-ver">Iteration 1 · PRD v2.7</div>
+        <div class="tag-ver">Iteration 1 · Fairness</div>
         <h4>Check-in radius: configurable → fixed 50 m</h4>
         <div class="ba-compare">
           <div class="ba-frame before">
@@ -1819,14 +1912,14 @@
           </div>
         </div>
         <div class="ba-note">
-          <b style="color:var(--ink)">Why:</b> Tester 2 and organizer Dan both independently raised trust concerns.
+          <b style="color:var(--ink)">Why:</b> Tester 2 and an organizer tester both raised trust concerns.
           Removing the knob made the system simpler <i>and</i> fairer.
         </div>
       </article>
 
       <!-- Iteration 2: activity detail check-in removed -->
       <article class="ba-card">
-        <div class="tag-ver">Iteration 2 · PRD v2.5</div>
+        <div class="tag-ver">Iteration 2 · Single check-in surface</div>
         <h4>Activity detail: informational only — no check-in</h4>
         <div class="ba-compare">
           <div class="ba-frame before">
@@ -1858,7 +1951,7 @@
 
       <!-- Iteration 3: activity route entry -->
       <article class="ba-card">
-        <div class="tag-ver">Iteration 3 · PRD v2.4 → v2.5</div>
+        <div class="tag-ver">Iteration 3 · Running map · route UI</div>
         <h4>Activity route entry: full bar → top-right square only</h4>
         <div class="ba-compare">
           <div class="ba-frame before">
@@ -1892,7 +1985,7 @@
 
       <!-- Iteration 4: unified My activities page -->
       <article class="ba-card">
-        <div class="tag-ver">Iteration 4 · PRD v2.6</div>
+        <div class="tag-ver">Iteration 4 · My activities unity</div>
         <h4>Two histories merged → one "My activities" page</h4>
         <div class="ba-compare">
           <div class="ba-frame before">
@@ -1929,7 +2022,7 @@
         <div class="section-tag" style="color:#075985;">05.3 · Final Reflection</div>
         <h3 style="margin:8px 0 10px;">Social &amp; ethical implications</h3>
         <p style="color:var(--ink-2);font-size:14.5px;">
-          RunAPP is built around a presence signal — <i>I was here at this time</i>. That is a powerful
+          RunLink is built around a presence signal — <i>I was here at this time</i>. That is a powerful
           piece of personal data, especially for women, queer users, and people in locations where gathering
           is politicized. We deliberately chose to keep the check-in surface club-scoped and never to build a
           global "who's running now" feed. A club leader has no right to a member's live coordinates. We also
@@ -1937,7 +2030,7 @@
           ranking can make a newcomer feel unwelcome.
         </p>
         <p style="color:var(--ink-2);font-size:14.5px;margin-top:10px;">
-          The honest limit of our design: we assumed a well-functioning club exists. RunAPP doesn't solve the
+          The honest limit of our design: we assumed a well-functioning club exists. RunLink doesn't solve the
           cold-start problem — if the nearest club is 40 km away, we can't conjure one. That is acceptable
           for our scope, but future work should consider lightweight "pop-up" clubs for underserved areas
           before this becomes yet another tool that benefits only runners in dense, wealthy cities.
@@ -1950,7 +2043,7 @@
           <li><b style="color:var(--ink)">Accessibility audit:</b> dynamic type, VoiceOver labels on the map check-in surface, larger tap targets on group chips.</li>
           <li><b style="color:var(--ink)">Organizer analytics:</b> honest "who is drifting away" nudge without surveillance creep.</li>
           <li><b style="color:var(--ink)">i18n:</b> Simplified Chinese + English day one; date/time formatting is already tz-aware.</li>
-          <li><b style="color:var(--ink)">Trust controls:</b> let users opt out of appearing in the cohort strip without losing check-in.</li>
+          <li><b style="color:var(--ink)">Trust controls:</b> finer-grained visibility defaults for club roster and leaderboards.</li>
         </ul>
       </article>
     </div>
@@ -1974,7 +2067,7 @@
       <article class="card">
         <h3 style="margin-bottom:8px;">Where AI helped (and where it didn't)</h3>
         <ul class="clean">
-          <li><b style="color:var(--ink)">Helped:</b> generating repetitive CSS scaffolds, long-form English PRD prose, SVG architecture diagrams, sketch placeholders.</li>
+          <li><b style="color:var(--ink)">Helped:</b> generating repetitive CSS scaffolds, RunLink README and SQL-adjacent prose, SVG architecture diagrams, sketch placeholders.</li>
           <li><b style="color:var(--ink)">Helped:</b> catching edge cases in the check-in state matrix we missed.</li>
           <li><b style="color:var(--ink)">Didn't replace:</b> user interviews, field visits, the Crazy-Eights session, usability scoring.</li>
           <li><b style="color:var(--ink)">Didn't replace:</b> deciding what to kill (Option A, Option C) — that needed human testers.</li>
@@ -1983,7 +2076,7 @@
       <article class="card">
         <h3 style="margin-bottom:8px;">Validation workflow</h3>
         <ul class="clean green">
-          <li>Every AI-generated screen was <b style="color:var(--ink)">manually diffed</b> against the PRD clause it was supposed to implement.</li>
+          <li>Every AI-generated module was <b style="color:var(--ink)">manually diffed</b> against the behaviour described in our spec and in <code>RunLink/README.md</code>.</li>
           <li>Usability sessions were run on <b style="color:var(--ink)">deployed</b> builds, not AI-generated mockups, so the signal came from real user behavior.</li>
           <li>All copy that went into a user-facing surface was <b style="color:var(--ink)">read aloud</b> by a teammate — AI tends to over-explain; we trimmed aggressively.</li>
           <li>AI suggestions that affected logic (geofence, time window) were <b style="color:var(--ink)">paired with a written unit trace</b> before we accepted them.</li>
@@ -2005,7 +2098,7 @@
   - disabled / enabled
   - style (primary-green, primary-amber, ghost, etc.)
   - the exact condition as a boolean expression
-State names should match my PRD: Checked in, Window-not-yet-open, Window-open-before-start, Window-open-after-start (late grace), Window-closed, Cancelled.</div>
+State names should align with RunLink: activity lifecycle (<code>open</code> / <code>registered</code> / <code>checked_in</code> / <code>past</code> / <code>cancelled</code>) plus the check-in window relative to <b>now</b>.</div>
       </div>
       <div class="card soft">
         <h4 style="color:var(--brand-2);">Prompt 2 — Haversine geofence</h4>
@@ -2138,7 +2231,7 @@ State names should match my PRD: Checked in, Window-not-yet-open, Window-open-be
         <div class="ref-n">A1</div>
         <div>
           Anthropic. (2026). <i>Claude (Claude Opus 4.7).</i> Large language model. Accessed 2026-04-15 – 2026-04-19 via Cursor IDE. <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener">anthropic.com/claude</a>.
-          <br><span style="color:var(--muted);"><b>Purpose:</b> drafting PRD prose, generating repetitive CSS / HTML scaffolds for the hi-fi prototype, generating this portfolio page, prompt-assisted writing of the check-in state matrix and Haversine geofence helper.</span>
+          <br><span style="color:var(--muted);"><b>Purpose:</b> RunLink README and UI copy, repetitive CSS / HTML / JS scaffolds, this portfolio page, check-in state matrix and Haversine geofence helper.</span>
           <span class="tag-kind">AI Tool</span>
         </div>
       </div>
@@ -2178,15 +2271,15 @@ State names should match my PRD: Checked in, Window-not-yet-open, Window-open-be
         <span class="logo-mark" style="width:32px;height:32px;border-radius:10px;">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:16px;height:16px;"><path d="M13.5 5.5a2 2 0 11-.001-3.999A2 2 0 0113.5 5.5zm-4 14.7l1.1-4.9 2.3 2.2v6h2v-7.5l-2.3-2.2.6-3c1.3 1.7 3.3 2.8 5.6 2.8v-2c-2 0-3.7-1-4.6-2.5l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.2L6.3 8.5v5h2v-3.7l1.8-.8-1.6 8 -4.9-1L3.2 18l7 1.2z"/></svg>
         </span>
-        <b style="color:var(--ink);font-family:'Barlow Condensed';font-size:18px;letter-spacing:0.04em;">RUNAPP</b>
+        <b style="color:var(--ink);font-family:'Barlow Condensed';font-size:18px;letter-spacing:0.04em;">RUNLINK</b>
         <span>· Portfolio v1.0 · Active Living</span>
       </div>
-      <div style="margin-top:8px; color: var(--dim);">Built by Team RunAPP · Spring 2026 · Single-page portfolio, deployable on GitHub Pages.</div>
+      <div style="margin-top:8px; color: var(--dim);">Built by Team RunLink · Spring 2026 · Single-page portfolio, deployable on GitHub Pages.</div>
     </div>
     <div style="display:flex; gap:14px; flex-wrap:wrap; align-items:center;">
       <a class="chip" href="#top">Back to top</a>
-      <a class="chip" href="../runapp-prototype/index.html">High-fi prototype</a>
-      <a class="chip" href="../PRD.en.md">Full PRD (v2.8)</a>
+      <a class="chip" href="../RunLink/index.html">RunLink app</a>
+      <a class="chip" href="../RunLink/README.md">RunLink README</a>
     </div>
   </div>
 </footer>
