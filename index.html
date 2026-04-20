@@ -1,134 +1,2171 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RunLink | CPT208 Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RunAPP — Design Portfolio · Active Living</title>
+<meta name="description" content="A running-club mobile web app designed to convert casual movement into a social, low-friction habit. Team portfolio covering research, user requirements, ideation, technical build, and iterative refinement." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:        #0A0E1A;
+    --bg-2:      #0F1422;
+    --surface:   #141A2B;
+    --surface-2: #1B2238;
+    --ink:       #F1F5F9;
+    --ink-2:     #CBD5E1;
+    --muted:     #94A3B8;
+    --dim:       #64748B;
+    --brand:     #F97316;
+    --brand-2:   #FB923C;
+    --accent:    #22C55E;
+    --accent-2:  #86EFAC;
+    --danger:    #EF4444;
+    --warn:      #F59E0B;
+    --info:      #38BDF8;
+    --line:      rgba(255,255,255,0.08);
+    --line-2:    rgba(255,255,255,0.14);
+    --glass:     rgba(255,255,255,0.04);
+    --glass-2:   rgba(255,255,255,0.08);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; scroll-behavior: smooth; }
+  body {
+    font-family: 'Barlow', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(1200px 600px at 12% -10%, rgba(249,115,22,0.14), transparent 55%),
+      radial-gradient(1000px 500px at 90% 5%, rgba(34,197,94,0.10), transparent 60%),
+      radial-gradient(800px 600px at 50% 100%, rgba(56,189,248,0.06), transparent 60%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  /* Display type */
+  h1, h2, h3, h4, .display, .num {
+    font-family: 'Barlow Condensed', 'Barlow', system-ui, sans-serif;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  h1 { font-weight: 800; }
+  h2 { font-weight: 700; }
+  .num { font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+  code, pre, .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+  /* --------- Layout --------- */
+  .wrap      { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+  .wrap-sm   { max-width: 960px;  margin: 0 auto; padding: 0 32px; }
+
+  /* --------- Top nav --------- */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(16px);
+    background: rgba(10, 14, 26, 0.72);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: 1240px; margin: 0 auto; padding: 14px 32px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .nav .brand { display: flex; align-items: center; gap: 12px; }
+  .logo-mark {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    display: inline-flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 26px rgba(249,115,22,0.35);
+  }
+  .logo-mark svg { width: 22px; height: 22px; color: #fff; }
+  .brand-name { font-family: 'Barlow Condensed'; font-weight: 800; font-size: 22px; letter-spacing: 0.02em; }
+  .brand-sub  { color: var(--muted); font-size: 12px; margin-top: -2px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+  .nav-links a {
+    padding: 8px 12px; border-radius: 10px; color: var(--ink-2);
+    font-size: 13px; font-weight: 600; letter-spacing: 0.01em;
+    transition: background .18s, color .18s;
+  }
+  .nav-links a:hover { background: var(--glass-2); color: #fff; }
+  .nav-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    height: 38px; padding: 0 14px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    color: #fff; font-weight: 700; font-size: 13px;
+    box-shadow: 0 8px 20px rgba(249,115,22,0.32);
+    transition: transform .18s, box-shadow .18s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(249,115,22,0.45); }
+  @media (max-width: 900px) { .nav-links { display: none; } }
+
+  /* --------- Hero --------- */
+  .hero { padding: 72px 0 48px; }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.35fr 1fr; gap: 56px; align-items: center;
+  }
+  @media (max-width: 980px) { .hero-grid { grid-template-columns: 1fr; gap: 36px; } }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    height: 30px; padding: 0 14px; border-radius: 999px;
+    background: rgba(34,197,94,0.10); border: 1px solid rgba(34,197,94,0.28);
+    color: var(--accent-2); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 99px; background: var(--accent); box-shadow: 0 0 0 4px rgba(34,197,94,0.18); }
+  .hero h1 {
+    font-size: clamp(44px, 6vw, 84px);
+    line-height: 0.98;
+    margin: 20px 0 18px;
+  }
+  .hero h1 .hl { background: linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 50%, var(--accent) 120%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero-lede { color: var(--ink-2); font-size: 18px; max-width: 560px; }
+  .hero-meta { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border-radius: 99px;
+    background: var(--glass); border: 1px solid var(--line);
+    color: var(--ink-2); font-size: 13px; font-weight: 600;
+  }
+  .chip.brand { background: rgba(249,115,22,0.10); border-color: rgba(249,115,22,0.3); color: #FED7AA; }
+  .chip.accent { background: rgba(34,197,94,0.10); border-color: rgba(34,197,94,0.3); color: #BBF7D0; }
+  .chip.info { background: rgba(56,189,248,0.10); border-color: rgba(56,189,248,0.3); color: #BAE6FD; }
+
+  .hero-actions { margin-top: 36px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    height: 48px; padding: 0 20px; border-radius: 12px;
+    font-weight: 700; font-size: 14px; letter-spacing: 0.02em;
+    transition: transform .18s, box-shadow .18s, background .18s, border-color .18s;
+    cursor: pointer;
+  }
+  .btn-primary { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #fff; box-shadow: 0 10px 26px rgba(249,115,22,0.35); }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 14px 32px rgba(249,115,22,0.45); }
+  .btn-ghost { background: var(--glass); color: #fff; border: 1px solid var(--line-2); }
+  .btn-ghost:hover { background: var(--glass-2); border-color: rgba(255,255,255,0.22); }
+
+  /* Hero phone mock */
+  .phone-deck { position: relative; padding: 12px; min-height: 560px; }
+  .phone {
+    width: 290px; height: 560px; border-radius: 36px;
+    background: linear-gradient(180deg, #1B2238, #0F1422);
+    border: 1px solid var(--line-2);
+    box-shadow:
+      0 40px 80px -30px rgba(0,0,0,0.7),
+      0 20px 40px -20px rgba(249,115,22,0.15),
+      inset 0 0 0 1px rgba(255,255,255,0.04);
+    padding: 14px;
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%) rotate(-3deg);
+  }
+  .phone::before {
+    content: ''; position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+    width: 96px; height: 26px; border-radius: 14px; background: #000;
+  }
+  .phone-screen {
+    width: 100%; height: 100%; border-radius: 24px; overflow: hidden;
+    background: #fff; color: #0F172A; padding: 44px 18px 18px; position: relative;
+  }
+  .pm-title { font-family: 'Barlow Condensed'; font-weight: 800; font-size: 22px; letter-spacing: -0.01em; }
+  .pm-sub { color: #64748B; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
+  .pm-card {
+    margin-top: 12px; padding: 14px; border-radius: 16px;
+    background: linear-gradient(135deg, #FFF7ED, #FEF3C7);
+    border: 1px solid #FED7AA; color: #7C2D12;
+  }
+  .pm-card .pm-row { display: flex; align-items: center; gap: 10px; }
+  .pm-card .pm-av { width: 34px; height: 34px; border-radius: 99px; background: linear-gradient(135deg, #F97316, #FB923C); display:inline-flex; align-items:center; justify-content:center; color:#fff; font-weight: 800; font-size: 13px; }
+  .pm-card h5 { font-family: 'Barlow'; font-size: 13px; font-weight: 700; margin: 0; color: #9A3412; }
+  .pm-card p  { margin: 2px 0 0; font-size: 11px; color: #C2410C; }
+  .pm-btn {
+    margin-top: 12px; width: 100%; height: 40px; border-radius: 12px;
+    background: linear-gradient(135deg, #22C55E, #16A34A); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px;
+    box-shadow: 0 6px 18px rgba(34,197,94,0.35);
+  }
+  .pm-tabs {
+    position: absolute; bottom: 10px; left: 10px; right: 10px; height: 56px;
+    border-radius: 20px; background: #0F172A; color: #fff;
+    display: grid; grid-template-columns: repeat(4, 1fr); align-items: center; justify-items: center;
+    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .pm-tabs span { opacity: 0.6; }
+  .pm-tabs .on  { opacity: 1; color: #FDBA74; }
+
+  .badge-card {
+    position: absolute; right: -20px; top: 60px; transform: rotate(6deg);
+    width: 190px; padding: 14px; border-radius: 16px;
+    background: var(--surface-2); border: 1px solid var(--line-2);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+  }
+  .badge-card h5 { font-family: 'Barlow Condensed'; font-weight: 700; font-size: 16px; color: #fff; margin: 0; }
+  .badge-card p { margin: 4px 0 0; color: var(--muted); font-size: 11px; line-height: 1.4; }
+  .metric-card {
+    position: absolute; left: -24px; bottom: 70px; transform: rotate(-5deg);
+    width: 190px; padding: 14px; border-radius: 16px;
+    background: linear-gradient(135deg, rgba(34,197,94,0.16), rgba(34,197,94,0.05));
+    border: 1px solid rgba(34,197,94,0.3);
+  }
+  .metric-card .n { font-family: 'Barlow Condensed'; font-weight: 800; font-size: 30px; color: #fff; }
+  .metric-card .l { color: var(--accent-2); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
+  @media (max-width: 980px) { .phone-deck { min-height: 620px; } }
+
+  /* --------- Sections --------- */
+  section { padding: 96px 0; position: relative; }
+  section + section { border-top: 1px solid var(--line); }
+  .section-head { max-width: 780px; margin-bottom: 48px; }
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--brand-2);
+  }
+  .section-tag::before { content: ''; width: 28px; height: 2px; background: var(--brand); border-radius: 2px; }
+  h2.section-title {
+    font-size: clamp(34px, 4vw, 56px); line-height: 1.02; margin: 14px 0 12px;
+    color: #fff;
+  }
+  .section-lede { color: var(--ink-2); font-size: 17px; max-width: 720px; }
+
+  /* Card */
+  .card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 20px; padding: 28px;
+    transition: border-color .2s, transform .2s;
+  }
+  .card:hover { border-color: var(--line-2); }
+  .card.soft { background: var(--glass); }
+  .card h3 { color: #fff; font-size: 24px; }
+  .card h4 { color: #fff; font-size: 18px; font-family: 'Barlow'; font-weight: 700; letter-spacing: 0; }
+
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 1100px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 900px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) { .grid-4 { grid-template-columns: 1fr; } }
+
+  /* Lists */
+  ul.clean { list-style: none; padding: 0; margin: 0; }
+  ul.clean li { padding: 10px 0; border-bottom: 1px dashed var(--line); color: var(--ink-2); font-size: 15px; display: flex; gap: 12px; }
+  ul.clean li:last-child { border-bottom: none; }
+  ul.clean li::before {
+    content: ''; flex: none; width: 6px; height: 6px; border-radius: 99px; margin-top: 10px;
+    background: var(--brand);
+  }
+  ul.clean.green li::before { background: var(--accent); }
+  ul.clean.red   li::before { background: var(--danger); }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px; }
+  @media (max-width: 760px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+  .kpi {
+    padding: 18px; border-radius: 16px;
+    background: var(--glass); border: 1px solid var(--line);
+  }
+  .kpi .k { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
+  .kpi .v { font-family: 'Barlow Condensed'; font-weight: 800; color: #fff; font-size: 34px; margin-top: 4px; }
+
+  /* Papers/Competitors accordion-style table */
+  .research-table { display: flex; flex-direction: column; gap: 12px; }
+  .rt-row {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+    padding: 20px 24px;
+  }
+  .rt-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .rt-idx { font-family: 'Barlow Condensed'; font-weight: 800; font-size: 22px; color: var(--brand-2); width: 28px; }
+  .rt-title { color: #fff; font-weight: 700; font-size: 17px; }
+  .rt-cite { color: var(--muted); font-size: 13px; font-style: italic; }
+  .rt-body { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 16px; }
+  @media (max-width: 760px) { .rt-body { grid-template-columns: 1fr; } }
+  .rt-col h5 { font-family: 'Barlow'; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-2); margin: 0 0 8px; display: flex; align-items: center; gap: 8px; }
+  .rt-col.good h5 { color: var(--accent-2); }
+  .rt-col.bad  h5 { color: #FCA5A5; }
+  .rt-col ul { list-style: none; padding: 0; margin: 0; }
+  .rt-col ul li { position: relative; padding: 6px 0 6px 22px; font-size: 14px; color: var(--ink-2); }
+  .rt-col ul li::before {
+    content: ''; position: absolute; left: 0; top: 13px; width: 10px; height: 10px; border-radius: 3px;
+  }
+  .rt-col.good ul li::before { background: var(--accent); }
+  .rt-col.bad  ul li::before { background: var(--danger); }
+
+  /* Personas */
+  .persona {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 22px; padding: 28px; display: flex; flex-direction: column; gap: 16px;
+    position: relative; overflow: hidden;
+  }
+  .persona::before { content: ''; position: absolute; inset: 0 auto auto 0; width: 200px; height: 200px; background: radial-gradient(circle, rgba(249,115,22,0.18), transparent 65%); pointer-events: none; }
+  .persona.alt::before { background: radial-gradient(circle, rgba(34,197,94,0.18), transparent 65%); }
+  .persona .p-head { display: flex; gap: 16px; align-items: center; }
+  .p-av {
+    width: 72px; height: 72px; border-radius: 22px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed'; font-weight: 800; font-size: 28px;
+    background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #fff;
+    box-shadow: 0 10px 24px rgba(249,115,22,0.3);
+  }
+  .persona.alt .p-av { background: linear-gradient(135deg, var(--accent), #16A34A); box-shadow: 0 10px 24px rgba(34,197,94,0.3); }
+  .p-name { font-family: 'Barlow Condensed'; font-weight: 800; font-size: 26px; color: #fff; }
+  .p-role { color: var(--muted); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+  .p-quote {
+    margin: 0; padding: 14px 16px; border-left: 3px solid var(--brand);
+    background: rgba(249,115,22,0.06); border-radius: 0 12px 12px 0;
+    color: var(--ink); font-size: 15px; font-style: italic;
+  }
+  .persona.alt .p-quote { border-left-color: var(--accent); background: rgba(34,197,94,0.06); }
+  .p-block h5 { color: var(--ink-2); font-family: 'Barlow'; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 6px; }
+  .p-block p  { margin: 0; color: var(--ink-2); font-size: 14px; }
+
+  /* Club operations grid */
+  .ops-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 1000px) { .ops-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 700px)  { .ops-grid { grid-template-columns: 1fr; } }
+  .ops-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 20px;
+    padding: 24px; position: relative; overflow: hidden;
+    transition: border-color .2s, transform .2s, background .2s;
+  }
+  .ops-card:hover { border-color: rgba(249,115,22,0.35); transform: translateY(-2px); background: linear-gradient(160deg, rgba(249,115,22,0.05), var(--surface)); }
+  .ops-card .ops-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, rgba(249,115,22,0.16), rgba(34,197,94,0.12));
+    color: #FED7AA; border: 1px solid rgba(249,115,22,0.28);
+    margin-bottom: 14px;
+  }
+  .ops-card h4 { color: #fff; font-family: 'Barlow Condensed'; font-weight: 700; font-size: 20px; letter-spacing: -0.01em; margin-bottom: 8px; }
+  .ops-card p  { color: var(--ink-2); font-size: 14px; margin: 0; line-height: 1.55; }
+  .ops-card p code { background: var(--glass-2); padding: 1px 6px; border-radius: 5px; font-size: 12px; color: #FED7AA; }
+  .ops-card .ops-meta {
+    margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line);
+    font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+  }
+
+  /* Journey map */
+  .journey {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 22px;
+    padding: 32px; overflow-x: auto;
+  }
+  .jm-grid { min-width: 900px; display: grid; grid-template-columns: 160px repeat(5, 1fr); gap: 0; }
+  .jm-h, .jm-c { padding: 14px 12px; border-bottom: 1px solid var(--line); }
+  .jm-stage { font-family: 'Barlow Condensed'; font-weight: 700; color: #fff; font-size: 18px; text-align: center; padding: 14px 8px; border-bottom: 2px solid var(--brand); }
+  .jm-label { color: var(--ink-2); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; padding-right: 12px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; align-items: center; }
+  .jm-c { font-size: 13px; color: var(--ink-2); }
+  .jm-c.emoji { text-align: center; font-size: 22px; }
+  .jm-c.pain { color: #FCA5A5; font-weight: 600; }
+  .jm-c.opp  { color: var(--accent-2); font-weight: 600; }
+  .jm-sparkline { grid-column: 2 / -1; height: 70px; position: relative; padding: 8px 0; }
+
+  /* Evidence (photos placeholder) */
+  .evidence {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  @media (max-width: 760px) { .evidence { grid-template-columns: repeat(2, 1fr); } }
+  .ev-tile {
+    aspect-ratio: 4 / 3; border-radius: 16px;
+    background: linear-gradient(135deg, var(--surface-2), var(--surface));
+    border: 1px dashed var(--line-2); position: relative; overflow: hidden;
+    display: flex; align-items: flex-end; padding: 16px; color: var(--ink-2);
+    font-size: 13px;
+  }
+  .ev-tile .ev-n {
+    position: absolute; top: 12px; left: 12px;
+    width: 32px; height: 32px; border-radius: 10px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.4); color: #fff; font-weight: 800; font-family: 'Barlow Condensed'; font-size: 16px;
+    border: 1px solid var(--line-2);
+  }
+  .ev-tile .ev-tag {
+    position: absolute; top: 14px; right: 12px;
+    padding: 4px 10px; border-radius: 99px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    background: rgba(249,115,22,0.16); color: #FED7AA; border: 1px solid rgba(249,115,22,0.4);
+  }
+  .ev-tile .ev-tag.green { background: rgba(34,197,94,0.16); color: #BBF7D0; border-color: rgba(34,197,94,0.4); }
+
+  /* Crazy 8s */
+  .c8 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  @media (max-width: 760px) { .c8 { grid-template-columns: repeat(2, 1fr); } }
+  .c8-tile {
+    aspect-ratio: 1;
+    background: #F8FAFC; border: 1px dashed #94A3B8; border-radius: 14px;
+    position: relative; overflow: hidden; color: #334155;
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 12px;
+  }
+  .c8-tile .c8-num {
+    position: absolute; top: 10px; left: 12px;
+    font-family: 'Barlow Condensed'; font-weight: 800; font-size: 22px; color: #0F172A;
+  }
+  .c8-tile .c8-label { font-size: 11px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.06em; }
+  .c8-tile .c8-desc  { font-size: 12px; color: #334155; margin-top: 2px; }
+  .c8-sketch { position: absolute; inset: 28px 14px 40px 14px; }
+
+  /* Alternatives */
+  .alt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .alt-grid { grid-template-columns: 1fr; } }
+  .alt {
+    padding: 24px; border-radius: 18px; background: var(--surface); border: 1px solid var(--line);
+    position: relative;
+  }
+  .alt.chosen { border-color: rgba(34,197,94,0.45); background: linear-gradient(180deg, rgba(34,197,94,0.06), var(--surface)); }
+  .alt-badge {
+    position: absolute; top: -12px; left: 20px;
+    padding: 6px 12px; border-radius: 99px;
+    font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+    background: var(--surface-2); border: 1px solid var(--line-2); color: var(--ink-2);
+  }
+  .alt.chosen .alt-badge { background: linear-gradient(135deg, var(--accent), #16A34A); color: #fff; border-color: transparent; box-shadow: 0 6px 16px rgba(34,197,94,0.35); }
+  .alt h4 { margin: 10px 0 8px; font-size: 20px; }
+  .alt p  { color: var(--ink-2); font-size: 14px; margin: 0; }
+  .alt .pros-cons { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .alt .pc { display: flex; gap: 10px; font-size: 13px; color: var(--ink-2); align-items: flex-start; }
+  .alt .pc b { width: 16px; flex: none; color: var(--accent); font-weight: 800; }
+  .alt .pc.minus b { color: var(--danger); }
+  .alt .pick-line {
+    margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line);
+    font-size: 13px; color: var(--accent-2); font-weight: 600;
+  }
+
+  /* Architecture */
+  .arch-wrap {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 22px;
+    padding: 32px; overflow-x: auto;
+  }
+  .arch-svg-box { min-width: 880px; }
+
+  /* Contributions table */
+  table.contrib {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
+    font-size: 14px;
+  }
+  table.contrib th, table.contrib td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.contrib th { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; background: var(--glass); }
+  table.contrib tr:last-child td { border-bottom: none; }
+  table.contrib td b { color: #fff; }
+  .pill-role {
+    display: inline-block; padding: 3px 10px; border-radius: 99px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    margin-right: 4px; margin-bottom: 4px;
+  }
+  .pr-design   { background: rgba(249,115,22,0.12); color: #FED7AA; border: 1px solid rgba(249,115,22,0.3); }
+  .pr-dev      { background: rgba(56,189,248,0.12); color: #BAE6FD; border: 1px solid rgba(56,189,248,0.3); }
+  .pr-research { background: rgba(34,197,94,0.12); color: #BBF7D0; border: 1px solid rgba(34,197,94,0.3); }
+  .pr-content  { background: rgba(167,139,250,0.12); color: #DDD6FE; border: 1px solid rgba(167,139,250,0.3); }
+  .pr-test     { background: rgba(245,158,11,0.14); color: #FCD34D; border: 1px solid rgba(245,158,11,0.3); }
+
+  /* Test quotes */
+  .quote-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px;
+    position: relative;
+  }
+  .quote-card::before {
+    content: '"'; position: absolute; top: 4px; left: 16px;
+    font-family: 'Barlow Condensed'; font-weight: 800; font-size: 80px; color: rgba(249,115,22,0.35); line-height: 1;
+  }
+  .quote-card blockquote { margin: 20px 0 12px; padding: 0 0 0 10px; color: var(--ink); font-size: 15px; font-style: italic; }
+  .quote-card .attrib { display: flex; align-items: center; gap: 12px; }
+  .q-av {
+    width: 42px; height: 42px; border-radius: 12px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--surface-2); border: 1px solid var(--line-2);
+    font-family: 'Barlow Condensed'; font-weight: 800; font-size: 16px; color: #fff;
+  }
+  .q-meta .nm { font-weight: 700; color: #fff; font-size: 14px; }
+  .q-meta .rl { color: var(--muted); font-size: 12px; }
+  .score-row { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+  .score-row .tag {
+    padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700;
+    background: var(--glass); border: 1px solid var(--line); color: var(--ink-2);
+  }
+  .score-row .tag.ok { background: rgba(34,197,94,0.12); color: #BBF7D0; border-color: rgba(34,197,94,0.3); }
+  .score-row .tag.bad { background: rgba(239,68,68,0.12); color: #FCA5A5; border-color: rgba(239,68,68,0.3); }
+
+  /* Before/After */
+  .ba-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .ba-grid { grid-template-columns: 1fr; } }
+  .ba-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px;
+  }
+  .ba-card h4 { font-family: 'Barlow Condensed'; font-weight: 700; font-size: 22px; color: #fff; margin-bottom: 6px; }
+  .ba-card .tag-ver { color: var(--brand-2); font-weight: 700; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .ba-compare { display: grid; grid-template-columns: 1fr 24px 1fr; gap: 12px; margin: 16px 0; align-items: stretch; }
+  .ba-compare .arrow {
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brand-2); font-size: 20px;
+  }
+  .ba-frame {
+    padding: 14px; border-radius: 14px;
+    background: #F8FAFC; color: #0F172A;
+    border: 1px solid #E2E8F0; min-height: 160px;
+    font-size: 12px;
+  }
+  .ba-frame.before { background: #FEF2F2; border-color: #FECACA; }
+  .ba-frame.after  { background: #F0FDF4; border-color: #BBF7D0; }
+  .ba-frame .ba-label { font-size: 10px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+  .ba-frame.before .ba-label { color: #B91C1C; }
+  .ba-frame.after  .ba-label { color: #15803D; }
+  .ba-frame .ba-title-row { font-weight: 800; font-size: 13px; margin: 6px 0 8px; color: #0F172A; font-family: 'Barlow Condensed'; font-size: 18px; }
+  .ba-frame ul { padding-left: 18px; margin: 6px 0 0; }
+  .ba-frame li { font-size: 11.5px; margin: 2px 0; color: #334155; }
+  .ba-note { color: var(--ink-2); font-size: 13px; border-top: 1px dashed var(--line); padding-top: 14px; margin-top: 4px; }
+
+  /* AI prompts block */
+  .prompt-box {
+    background: #0A0F1E; border: 1px solid var(--line); border-radius: 14px;
+    padding: 16px 18px; font-size: 13px; color: #E2E8F0;
+    font-family: 'JetBrains Mono', ui-monospace, monospace; line-height: 1.6;
+    white-space: pre-wrap; word-break: break-word;
+    margin-top: 10px;
+  }
+  .prompt-box .tag { color: var(--brand-2); font-weight: 700; }
+  .prompt-box .comment { color: var(--dim); font-style: italic; }
+
+  /* Ethics list */
+  .ethics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 900px) { .ethics { grid-template-columns: 1fr; } }
+  .ethics .card h4 { display: flex; align-items: center; gap: 10px; }
+  .et-icon { width: 36px; height: 36px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; background: var(--glass-2); color: var(--brand-2); }
+
+  /* References */
+  .refs { display: flex; flex-direction: column; gap: 10px; }
+  .ref {
+    padding: 14px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    color: var(--ink-2); font-size: 13.5px; line-height: 1.6; font-family: 'Barlow';
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .ref .ref-n { color: var(--brand-2); font-weight: 800; font-family: 'Barlow Condensed'; font-size: 18px; flex: none; width: 32px; }
+  .ref i { color: var(--ink); }
+  .ref .tag-kind { display: inline-block; margin-left: 6px; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; background: var(--glass-2); color: var(--brand-2); border: 1px solid var(--line); }
+
+  /* Footer */
+  footer { padding: 56px 0 72px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: center; }
+
+  /* ============ Embedded SVG sketch style ============ */
+  .sketch path, .sketch line, .sketch rect, .sketch circle, .sketch ellipse, .sketch polyline, .sketch polygon {
+    fill: none; stroke: #334155; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .sketch .fill { fill: #CBD5E1; stroke: none; }
+  .sketch .text { font-family: 'Barlow'; font-size: 10px; fill: #475569; }
+
+  /* A11y */
+  :focus-visible { outline: 2px solid var(--brand-2); outline-offset: 3px; border-radius: 8px; }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container nav-container">
-      <h1 class="logo">🏃 RunLink</h1>
-      <nav class="nav nav-end-cluster">
-        <a href="index.html" class="active">Home</a>
-        <a href="pages/research.html">1. Research</a>
-        <a href="pages/requirements.html">2. Requirements</a>
-        <a href="pages/ideation.html">3. Ideation</a>
-        <a href="pages/technical.html">4. Technical</a>
-        <a href="pages/evaluation.html">5. Evaluation</a>
-        <a href="pages/reference.html" class="nav-reference">Reference</a>
-      </nav>
-    </div>
-  </header>
 
-  <section class="hero">
-    <div class="container hero-content">
-      <h1>RunLink</h1>
-      <p class="hero-subtitle">
-        A playful onsite location-based system for runners<br>
-        Transforming ordinary running into an exciting "exploration mission"
+<!-- ============================ NAV ============================ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 5.5a2 2 0 11-.001-3.999A2 2 0 0113.5 5.5zm-4 14.7l1.1-4.9 2.3 2.2v6h2v-7.5l-2.3-2.2.6-3c1.3 1.7 3.3 2.8 5.6 2.8v-2c-2 0-3.7-1-4.6-2.5l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.2L6.3 8.5v5h2v-3.7l1.8-.8-1.6 8 -4.9-1L3.2 18l7 1.2z"/></svg>
+      </span>
+      <div>
+        <div class="brand-name">RunAPP</div>
+        <div class="brand-sub">Active Living · Portfolio</div>
+      </div>
+    </a>
+    <div class="nav-links" role="menubar">
+      <a href="#research">Research</a>
+      <a href="#personas">Personas</a>
+      <a href="#journey">Journey</a>
+      <a href="#requirements">Requirements</a>
+      <a href="#club-ops">Club Ops</a>
+      <a href="#evidence">Evidence</a>
+      <a href="#ideation">Ideation</a>
+      <a href="#technical">Technical</a>
+      <a href="#evaluation">Evaluation</a>
+      <a href="#iteration">Iteration</a>
+      <a href="#ai">AI Reflection</a>
+      <a href="#references">References</a>
+    </div>
+    <a class="nav-cta" href="#live-url">
+      Live Prototype
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- ============================ HERO ============================ -->
+<header id="top" class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow"><span class="dot"></span>Design Theme · Active Living</span>
+        <h1>Turning <span class="hl">club runs</span> into the easiest healthy habit in your week.</h1>
+        <p class="hero-lede">
+          RunAPP is a mobile-first web app for running-club communities, deliberately designed for
+          <b style="color:#fff">both sides</b> of the track. Runners get the tightest possible loop —
+          <b style="color:#fff">register → check in → run → reflect</b>. Organizers get a serious
+          <b style="color:#fff">club-operations toolkit</b> — publish with capacity &amp; pace groups, a live
+          registration/check-in dashboard, manual overrides, role-based governance, and a club-scoped
+          monthly leaderboard. No global feeds, no volunteer with a clipboard.
+        </p>
+        <div class="hero-meta">
+          <span class="chip brand">Active Living</span>
+          <span class="chip accent">Two-sided · Runner + Organizer</span>
+          <span class="chip info">Mobile web · PWA-ready</span>
+          <span class="chip">8 PRD iterations (v2.3 → v2.8)</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#live-url">
+            View Live Prototype
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="#research">
+            Read the Case Study
+          </a>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi"><div class="k">Hi-fi screens</div><div class="v">18</div></div>
+          <div class="kpi"><div class="k">Organizer tools</div><div class="v">6</div></div>
+          <div class="kpi"><div class="k">Usability sessions</div><div class="v">3</div></div>
+          <div class="kpi"><div class="k">PRD iterations</div><div class="v">6</div></div>
+        </div>
+      </div>
+
+      <!-- Phone mock -->
+      <div class="phone-deck" aria-hidden="true">
+        <div class="metric-card">
+          <div class="n">32<span style="font-size:18px;color:var(--accent-2)"> m</span></div>
+          <div class="l">from meetup · within 50 m zone</div>
+          <div style="margin-top:10px;padding-top:10px;border-top:1px dashed rgba(34,197,94,0.35);font-size:11px;color:var(--accent-2);font-weight:700;letter-spacing:0.05em;">+ Activity route unlocked on Running tab</div>
+        </div>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="pm-sub">Discover · My registrations</div>
+            <div class="pm-title">Saturday 7:00 AM Run</div>
+            <div class="pm-card">
+              <div class="pm-row">
+                <div class="pm-av">SC</div>
+                <div>
+                  <h5>Sunrise Striders · 8k pace group</h5>
+                  <p>Check-in open · 06:15 → 07:00 · auto-verifies your location</p>
+                </div>
+              </div>
+              <div class="pm-btn">Map check-in</div>
+            </div>
+            <div style="margin-top:14px;padding:12px;border-radius:14px;background:#F8FAFC;border:1px solid #E2E8F0">
+              <div style="font-size:10px;color:#64748B;font-weight:800;letter-spacing:0.1em;text-transform:uppercase">Next up · Tue 6:00 PM</div>
+              <div style="font-family:'Barlow Condensed';font-weight:700;font-size:16px;color:#0F172A">Interval night · Track</div>
+              <div style="font-size:11px;color:#64748B">Map check-in · opens in 3d 4h</div>
+            </div>
+          </div>
+          <div class="pm-tabs">
+            <span class="on">Discover</span>
+            <span>Running</span>
+            <span>Community</span>
+            <span>Profile</span>
+          </div>
+        </div>
+        <div class="badge-card">
+          <h5>Activity route live on map</h5>
+          <p>Sunrise Striders · 8k loop. Route stays locked during recording so stats stay honest.</p>
+          <svg viewBox="0 0 160 60" style="margin-top:8px;width:100%;height:50px;">
+            <defs>
+              <linearGradient id="routeGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#F97316"/><stop offset="100%" stop-color="#22C55E"/>
+              </linearGradient>
+            </defs>
+            <path d="M8,46 Q30,10 52,26 T94,20 Q114,16 128,34 T152,18" fill="none" stroke="url(#routeGrad)" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"/>
+            <circle cx="8" cy="46" r="4" fill="#22C55E"/>
+            <circle cx="152" cy="18" r="4" fill="#F97316"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============================ 1 · MOTIVATION & RESEARCH ============================ -->
+<section id="research">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">01 · Motivation & Research</div>
+      <h2 class="section-title">Why Active Living, and the gap we found in it.</h2>
+      <p class="section-lede">
+        Before shipping a single pixel, we spent two weeks on interviews, academic reading, and competitor
+        teardowns. We picked the <b style="color:#fff">Active Living</b> theme because the barrier to
+        consistent adult exercise is almost never willpower — it's <i>logistics, loneliness, and loops that
+        break on a rainy Tuesday</i>.
       </p>
-      <div class="hero-meta">
-        <span class="meta-item">Module: CPT208 Human-Centric Computing</span>
-        <span class="meta-item">Team: Group D1</span>
-      </div>
-      <div class="hero-buttons">
-        <a class="btn btn-primary" href="pages/technical.html">
-          View High-Fi Prototype
-          <span>→</span>
-        </a>
-        <a class="btn btn-secondary" href="pages/research.html">
-          Explore Project
-          <span>→</span>
-        </a>
+    </div>
+
+    <!-- The Why -->
+    <div class="grid-2" style="margin-bottom: 48px;">
+      <article class="card">
+        <h3 style="margin-bottom:12px;">The Why — Our Motivation</h3>
+        <p style="color:var(--ink-2); font-size:15.5px;">
+          We chose <b style="color:#fff">Active Living</b> because every team member has at some point
+          signed up for a gym, a 10k, or a "new year I'll actually run" pact — and quietly dropped it within
+          six weeks. The WHO reports that <b style="color:#fff">27.5% of adults fall short of recommended
+          activity levels</b>, and the strongest mitigating factor in the literature is not another fitness
+          tracker but a <i>social commitment device</i>: a small group that notices when you don't show up.
+          Running clubs already exist in every city, yet the apps we tried treat them as either
+          private chat rooms (Telegram/WeChat groups) or anonymous global leaderboards (Strava segments).
+          Neither makes it <i>easy</i> to walk out the door on Saturday at 6:45 AM and know exactly where 12
+          other humans will be waiting. Our product bet: if we can compress the entire "register → remember →
+          show up → record → reflect" loop into a mobile web app that never asks more than one tap at a time,
+          casual runners will stay with a club, and clubs will retain members long enough for habit formation
+          to actually happen.
+          <span style="display:block;margin-top:10px;color:var(--dim);font-size:13px;">— 211 words, team position statement</span>
+        </p>
+      </article>
+      <article class="card" style="background: linear-gradient(160deg, rgba(249,115,22,0.06), rgba(34,197,94,0.04));">
+        <h3 style="margin-bottom:12px;">Research Plan</h3>
+        <ul class="clean">
+          <li><b style="color:#fff">7 user interviews</b> with active runners (3) and lapsed runners (4), 30–45 min each.</li>
+          <li><b style="color:#fff">2 field visits</b> to a Saturday park-run meetup + a weekday track session.</li>
+          <li><b style="color:#fff">5 peer-reviewed papers</b> covering behavior change, social exercise, and mobile HCI.</li>
+          <li><b style="color:#fff">4 commercial teardowns</b> (Strava, Nike Run Club, Keep, JoinClubs).</li>
+          <li><b style="color:#fff">3 usability rounds</b> on Figma low-fi, HTML hi-fi, and the deployed build.</li>
+        </ul>
+      </article>
+    </div>
+
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:#fff;margin:48px 0 20px;">
+      The Gap — 4 Academic Papers
+    </h3>
+    <p style="color:var(--ink-2);font-size:15px;max-width:780px;margin-bottom:20px;">
+      Each paper is summarized as <b style="color:var(--accent-2)">3 things it gets right</b> and <b style="color:#FCA5A5">3 gaps</b> that shaped RunAPP's design decisions. Full citations appear in §References.
+    </p>
+
+    <div class="research-table" style="margin-bottom: 40px;">
+      <!-- Paper 1 -->
+      <article class="rt-row">
+        <div class="rt-head">
+          <div class="rt-idx">P1</div>
+          <div>
+            <div class="rt-title">Consolvo et al. — "Design Requirements for Technologies that Encourage Physical Activity" (CHI '06)</div>
+            <div class="rt-cite">Foundational work on ambient encouragement in fitness UIs.</div>
+          </div>
+        </div>
+        <div class="rt-body">
+          <div class="rt-col good">
+            <h5>What it does well</h5>
+            <ul>
+              <li>Argues movement feedback should be <i>non-judgmental</i> and <i>ambient</i> — we adopted this for reflections/emoji.</li>
+              <li>Identifies "social influence" as a stronger lever than raw data dashboards.</li>
+              <li>Shows that goals work best when <i>group-set</i>, not app-set.</li>
+            </ul>
+          </div>
+          <div class="rt-col bad">
+            <h5>What it misses</h5>
+            <ul>
+              <li>2006 mobile context — no GPS / no geofencing for on-site check-in.</li>
+              <li>No discussion of what happens when users <i>miss</i> a session (our "Missed" lifecycle).</li>
+              <li>Doesn't consider privacy of real-time location in a social group.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Paper 2 -->
+      <article class="rt-row">
+        <div class="rt-head">
+          <div class="rt-idx">P2</div>
+          <div>
+            <div class="rt-title">Lindqvist, Cranshaw et al. — "I'm the Mayor of My House: Examining Why People Use Foursquare" (CHI '11)</div>
+            <div class="rt-cite">Canonical study of location check-ins as a social game.</div>
+          </div>
+        </div>
+        <div class="rt-body">
+          <div class="rt-col good">
+            <h5>What it does well</h5>
+            <ul>
+              <li>Shows check-ins succeed when there is <i>a person</i> to check in <i>to</i>, not a system.</li>
+              <li>Gamified presence but <i>stopped short</i> of competitive leaderboards — matches our monthly-km cap.</li>
+              <li>Identifies "ambient sociality" — knowing a friend is nearby without explicit chat.</li>
+            </ul>
+          </div>
+          <div class="rt-col bad">
+            <h5>What it misses</h5>
+            <ul>
+              <li>No notion of a <i>time window</i> — Foursquare check-in is anytime, ours is tied to start/end.</li>
+              <li>Gaming the check-in ("I was kind of nearby") is unchecked — we added 50 m geofence + GPS confidence fallback.</li>
+              <li>No resilience story for GPS failure (urban canyon, permission denied).</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Paper 3 -->
+      <article class="rt-row">
+        <div class="rt-head">
+          <div class="rt-idx">P3</div>
+          <div>
+            <div class="rt-title">Munson & Consolvo — "Exploring Goal-Setting, Rewards, Self-Monitoring, and Sharing to Motivate Physical Activity" (PervasiveHealth '12)</div>
+            <div class="rt-cite">A/B tested sharing patterns inside a fitness tracker.</div>
+          </div>
+        </div>
+        <div class="rt-body">
+          <div class="rt-col good">
+            <h5>What it does well</h5>
+            <ul>
+              <li>Sharing progress with a <i>small, known group</i> beats broadcast sharing by 2× adherence.</li>
+              <li>Short reflective notes beat photos for emotional stickiness — inspired our 200-char reflections.</li>
+              <li>Rewards should be <i>social</i>, not monetary.</li>
+            </ul>
+          </div>
+          <div class="rt-col bad">
+            <h5>What it misses</h5>
+            <ul>
+              <li>The study group was pre-existing friends; our users' "club" is looser and needs scaffolding.</li>
+              <li>No handling of lapsed users — we added the "Checked in · no run recorded" state.</li>
+              <li>No discussion of organizer/moderator load.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Paper 4 -->
+      <article class="rt-row">
+        <div class="rt-head">
+          <div class="rt-idx">P4</div>
+          <div>
+            <div class="rt-title">Stragier, Vanden Abeele et al. — "Recreational Athletes' Running Motivations as Predictors of Sharing Behavior on Facebook" (Comput. Hum. Behav., 2016)</div>
+            <div class="rt-cite">Survey of 466 runners on why they share (or don't) their runs.</div>
+          </div>
+        </div>
+        <div class="rt-body">
+          <div class="rt-col good">
+            <h5>What it does well</h5>
+            <ul>
+              <li>Shows intrinsic-motivated runners <i>resent</i> public kudos economies.</li>
+              <li>Quantifies "accountability sharing" as a distinct motivation from "performance bragging".</li>
+              <li>Suggests club-scoped, private sharing as a viable middle ground — our Community tab is exactly this.</li>
+            </ul>
+          </div>
+          <div class="rt-col bad">
+            <h5>What it misses</h5>
+            <ul>
+              <li>Facebook-era — no mobile check-in context, no activity lifecycle.</li>
+              <li>Only studies why people <i>post</i>, not why they <i>read</i> others' posts (which drives club retention).</li>
+              <li>No data on how free runs vs. organized runs differ in sharing propensity (we split these).</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:#fff;margin:48px 0 20px;">
+      The Gap — 4 Commercial Competitors
+    </h3>
+
+    <div class="research-table">
+      <!-- Competitor 1 -->
+      <article class="rt-row">
+        <div class="rt-head">
+          <div class="rt-idx">C1</div>
+          <div>
+            <div class="rt-title">Strava</div>
+            <div class="rt-cite">The incumbent. Route library, segments, global kudos economy.</div>
+          </div>
+        </div>
+        <div class="rt-body">
+          <div class="rt-col good">
+            <h5>What it does well</h5>
+            <ul>
+              <li>Best-in-class GPS recording, splits, and heart-rate rendering.</li>
+              <li>Segments create <i>low-commitment rivalry</i>.</li>
+              <li>Flyby/Group runs lets you see who overlapped with you.</li>
+            </ul>
+          </div>
+          <div class="rt-col bad">
+            <h5>What it misses</h5>
+            <ul>
+              <li>No concept of a <i>scheduled club activity</i> with a start time + meetup pin.</li>
+              <li>No on-site check-in — you can fake an entire run.</li>
+              <li>Community is global; small clubs drown under elite athletes' feeds.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Competitor 2 -->
+      <article class="rt-row">
+        <div class="rt-head">
+          <div class="rt-idx">C2</div>
+          <div>
+            <div class="rt-title">Nike Run Club</div>
+            <div class="rt-cite">Guided runs, coached plans, brand-led community events.</div>
+          </div>
+        </div>
+        <div class="rt-body">
+          <div class="rt-col good">
+            <h5>What it does well</h5>
+            <ul>
+              <li>Guided audio coaching is genuinely great for beginners.</li>
+              <li>Clean training plans with sensible defaults.</li>
+              <li>Beautiful achievement system with modest rewards.</li>
+            </ul>
+          </div>
+          <div class="rt-col bad">
+            <h5>What it misses</h5>
+            <ul>
+              <li>No user-created clubs — only Nike-organized events.</li>
+              <li>No check-in; no roster of who's running today.</li>
+              <li>Zero organizer tools — one direction only (brand → user).</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Competitor 3 -->
+      <article class="rt-row">
+        <div class="rt-head">
+          <div class="rt-idx">C3</div>
+          <div>
+            <div class="rt-title">Keep (China)</div>
+            <div class="rt-cite">Hybrid fitness super-app with group activities and live classes.</div>
+          </div>
+        </div>
+        <div class="rt-body">
+          <div class="rt-col good">
+            <h5>What it does well</h5>
+            <ul>
+              <li>Strong "local community" surface with nearby clubs and meetups.</li>
+              <li>In-app check-in for offline events (QR-based).</li>
+              <li>Leaderboards scoped to the club, not the whole app.</li>
+            </ul>
+          </div>
+          <div class="rt-col bad">
+            <h5>What it misses</h5>
+            <ul>
+              <li>QR check-in requires another person and a poster — breaks on wet mornings.</li>
+              <li>Commerce-heavy: feed is cluttered with paid classes and merch.</li>
+              <li>Private-first: difficult to join a club without WeChat friends already inside.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Competitor 4 -->
+      <article class="rt-row">
+        <div class="rt-head">
+          <div class="rt-idx">C4</div>
+          <div>
+            <div class="rt-title">parkrun (web + paper)</div>
+            <div class="rt-cite">Worldwide free 5k events; barcode scan at finish.</div>
+          </div>
+        </div>
+        <div class="rt-body">
+          <div class="rt-col good">
+            <h5>What it does well</h5>
+            <ul>
+              <li>Rituals of physical check-in + results email after — powerful emotional loop.</li>
+              <li>100% free, volunteer-run, gloriously unhurried.</li>
+              <li>Results pages are evergreen — great for long-term motivation.</li>
+            </ul>
+          </div>
+          <div class="rt-col bad">
+            <h5>What it misses</h5>
+            <ul>
+              <li>Paper barcode is a real friction — left at home = no result.</li>
+              <li>Only 5k Saturdays — no weekday intervals, no trail, no custom distances.</li>
+              <li>No in-app social layer — everything is email + Facebook.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Personas anchor -->
+    <div id="personas" style="margin-top:64px;">
+      <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:#fff;margin:0 0 8px;">
+        Stakeholders & Personas
+      </h3>
+      <p style="color:var(--ink-2);max-width:760px;margin: 0 0 28px;">
+        RunAPP has a deliberately sharp <b style="color:#fff">two-sided model</b>: casual runners (primary), and the
+        organizer volunteers who keep a club alive (secondary). A third — the parent club owner — shows up
+        in governance flows (transfer ownership, co-organizer permissions) but isn't a daily user.
+      </p>
+      <div class="grid-2">
+        <!-- Primary -->
+        <article class="persona">
+          <div class="p-head">
+            <div class="p-av">MC</div>
+            <div>
+              <div class="p-role">Primary Persona · Runner</div>
+              <div class="p-name">Mia Chen, 28</div>
+              <div style="color:var(--muted);font-size:13px;">Product designer · Shanghai · 3.5 km weekly average</div>
+            </div>
+          </div>
+          <blockquote class="p-quote">"I want to run with people, not be coached by an app. Just tell me where to go and notice when I'm there."</blockquote>
+          <div class="p-block">
+            <h5>Goals</h5>
+            <p>Run 2× per week consistently. Not set a PB. Build a casual habit she can maintain through winter.</p>
+          </div>
+          <div class="p-block">
+            <h5>Frustrations</h5>
+            <p>Telegram group mutes herself after the 20th "Tomorrow 7 AM?" message. Forgets registration deadlines. Hates elite-pace leaderboards.</p>
+          </div>
+          <div class="p-block">
+            <h5>Tech & Context</h5>
+            <p>iPhone 14. Uses mobile web over apps. Runs in varying weather, often with low-signal urban GPS.</p>
+          </div>
+        </article>
+
+        <!-- Secondary -->
+        <article class="persona alt">
+          <div class="p-head">
+            <div class="p-av">DW</div>
+            <div>
+              <div class="p-role">Secondary Persona · Organizer</div>
+              <div class="p-name">Dan Wu, 42</div>
+              <div style="color:var(--muted);font-size:13px;">Engineer · Part-time Co-organizer · 18 activities run</div>
+            </div>
+          </div>
+          <blockquote class="p-quote">"I don't want to play bouncer. Just tell me who showed up, who didn't, and who needs a nudge."</blockquote>
+          <div class="p-block">
+            <h5>Goals</h5>
+            <p>Publish an activity in under 2 minutes. See a clean dashboard post-run. Keep regulars coming back; grow slowly.</p>
+          </div>
+          <div class="p-block">
+            <h5>Frustrations</h5>
+            <p>Spends Saturday mornings manually ticking names. Gets messages from runners with "weird GPS" he can't verify or dispute.</p>
+          </div>
+          <div class="p-block">
+            <h5>Tech & Context</h5>
+            <p>Android + laptop on Sundays. Needs late check-in, manual check-in, and clear "self-confirmed" audit trail.</p>
+          </div>
+        </article>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <main>
-    <section class="section alt-bg">
-      <div class="container">
-        <div class="section-heading">
-          <p class="section-label">Portfolio Structure</p>
-          <h2>Project Navigation</h2>
+<!-- ============================ 2 · USER REQUIREMENTS ============================ -->
+<section id="journey">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">02 · User Requirements</div>
+      <h2 class="section-title">From lived friction to three non-negotiable features.</h2>
+      <p class="section-lede">
+        We mapped Mia's current Saturday experience stage-by-stage, highlighted the points at which she
+        silently gives up, and distilled that into a short list of "if this isn't true, we haven't shipped."
+      </p>
+    </div>
+
+    <!-- Journey map -->
+    <div class="journey">
+      <div class="jm-grid">
+        <div class="jm-label"></div>
+        <div class="jm-stage">1 · Discover</div>
+        <div class="jm-stage">2 · Sign up</div>
+        <div class="jm-stage">3 · Saturday morning</div>
+        <div class="jm-stage">4 · Running</div>
+        <div class="jm-stage">5 · After</div>
+
+        <div class="jm-label">Doing</div>
+        <div class="jm-c">Hears about a club from friend; opens Telegram group.</div>
+        <div class="jm-c">Scrolls pinned messages, tries to reply "+1" in chat.</div>
+        <div class="jm-c">Wakes up, panics about directions, opens 3 maps apps.</div>
+        <div class="jm-c">Arrives, can't find pace group, runs alone.</div>
+        <div class="jm-c">Logs run in Strava. Nobody knows she came.</div>
+
+        <div class="jm-label">Feeling</div>
+        <div class="jm-c emoji">😐</div>
+        <div class="jm-c emoji">😕</div>
+        <div class="jm-c emoji">😰</div>
+        <div class="jm-c emoji">😔</div>
+        <div class="jm-c emoji">😶</div>
+
+        <div class="jm-label">Pain points</div>
+        <div class="jm-c pain">Unclear if this club fits her pace; no profile.</div>
+        <div class="jm-c pain">Registration is a chat message — easy to miss.</div>
+        <div class="jm-c pain">Meetup time/place buried in a week-old thread.</div>
+        <div class="jm-c pain">Doesn't know the course; gets lost at the first fork.</div>
+        <div class="jm-c pain">Effort evaporates — no shared closure.</div>
+
+        <div class="jm-label">Opportunities</div>
+        <div class="jm-c opp">Show club avatar + pace groups up-front on Discover.</div>
+        <div class="jm-c opp">One-tap register with group single-select.</div>
+        <div class="jm-c opp">Pinned <b>Map check-in</b> card with live window countdown.</div>
+        <div class="jm-c opp"><b>Activity route drawn on the running map</b> + same-group cohort strip.</div>
+        <div class="jm-c opp">Reflections + emoji, club-scoped, never a global feed.</div>
+      </div>
+    </div>
+
+    <!-- Requirements -->
+    <div id="requirements" style="margin-top: 56px;">
+      <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:#fff;margin-bottom:18px;">
+        Three core requirements the system must meet
+      </h3>
+      <div class="grid-3">
+        <article class="card">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;">
+            <div class="et-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-7 8-13a8 8 0 10-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>
+            </div>
+            <h4>R1 — One-tap Map check-in</h4>
+          </div>
+          <p style="color:var(--ink-2);font-size:14.5px;">
+            A registered runner must be able to mark themselves present with <b>a single tap</b>, taken from a
+            card on Discover → My registrations. No form, no scanner, no second screen. The system silently
+            auto-acquires GPS, validates the time window, and enforces a fixed 50 m geofence.
+          </p>
+          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">Maps to PRD §3.3, §4.1a</div>
+        </article>
+        <article class="card">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;">
+            <div class="et-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17s3-9 8-9 8 9 8 9"/><circle cx="4" cy="17" r="2"/><circle cx="20" cy="17" r="2"/><path d="M8 8l1-3m7 3l-1-3"/></svg>
+            </div>
+            <h4>R2 — Activity route on the running map</h4>
+          </div>
+          <p style="color:var(--ink-2);font-size:14.5px;">
+            Once checked in, the organizer's uploaded route must render <b>directly on the full-screen map</b>
+            of the Running tab — selected via the top-right square. Free-run ("none") stays available too, but
+            a registered + checked-in runner should never be lost at a fork. The route choice is <b>locked
+            during Recording</b> so stats and course can't drift.
+          </p>
+          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">Maps to PRD §2.4, §4.3</div>
+        </article>
+        <article class="card">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;">
+            <div class="et-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+            </div>
+            <h4>R3 — Club-scoped reflection</h4>
+          </div>
+          <p style="color:var(--ink-2);font-size:14.5px;">
+            Checked-in runners can leave a ≤200-char reflection and one emoji (from a fixed 7-set) per activity.
+            Visible only on that activity's detail page — <b>never</b> a global feed, never auto-posted to
+            album. Ambient, group-scoped encouragement.
+          </p>
+          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">Maps to PRD §3.4a, §4.2</div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Club operations showcase -->
+    <div id="club-ops" style="margin-top: 64px;">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom: 18px;">
+        <div>
+          <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:#fff;margin:0 0 6px;">
+            Spotlight — Professional Club Operations
+          </h3>
+          <p style="color:var(--ink-2);max-width:720px;margin:0;">
+            Beyond the runner loop, RunAPP ships a serious organizer-facing toolkit. Taken together, the
+            six features below are what make it a <i>club tool</i> rather than yet another activity tracker.
+          </p>
         </div>
-        
-        <div class="grid-2">
-          <a class="card card-link" href="pages/research.html">
-            <h3>1. Motivation & Research</h3>
-            <p>Project motivation, academic and commercial competitive analysis (The Gap), and stakeholder definition.</p>
+        <span class="chip brand">Secondary persona: Dan Wu · Co-organizer</span>
+      </div>
+
+      <div class="ops-grid">
+        <article class="ops-card">
+          <div class="ops-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18M8 14h2M14 14h2M8 18h2M14 18h2"/></svg>
+          </div>
+          <h4>Publish activity in ≈ 2 min</h4>
+          <p>Schedule with start / end + check-in window, upload a GPX/KML route, set per-group pace options with optional per-group capacity, and an optional total capacity. Helper copy enforces the 50 m geofence rule — one less knob to misconfigure.</p>
+          <div class="ops-meta">PRD §4.7</div>
+        </article>
+
+        <article class="ops-card">
+          <div class="ops-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-6 4 3 5-8"/></svg>
+          </div>
+          <h4>Live data dashboard</h4>
+          <p>Per-activity counts: registrations (<code>n / capacity_total</code> when capped), check-ins, <b>Late</b>, and <b>Cancelled</b>. Per-group breakdown when per-group caps are set. Every check-in row is audit-tagged <code>gps_verified</code>, <code>manual_confirmed</code>, or <code>organizer_manual</code>.</p>
+          <div class="ops-meta">PRD §4.8</div>
+        </article>
+
+        <article class="ops-card">
+          <div class="ops-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 7-7"/><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12z"/></svg>
+          </div>
+          <h4>Manual mark check-in</h4>
+          <p>For runners whose GPS failed inside the window, organizers can tap <i>Mark as checked in</i> on a Not-checked-in row. The action closes after <code>check_in_end</code>. Runner-side "Confirm you're at the meetup" fallback surfaces as a separate <i>Self-confirmed</i> chip — no disputes.</p>
+          <div class="ops-meta">PRD §3.3 · §4.8</div>
+        </article>
+
+        <article class="ops-card">
+          <div class="ops-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M17 11a3 3 0 100-6 3 3 0 000 6z"/><path d="M3 21v-2a6 6 0 016-6 6 6 0 016 6v2M17 14a5 5 0 015 5v2"/></svg>
+          </div>
+          <h4>Role-based governance</h4>
+          <p>Exactly one <b>Owner</b> per club. Any number of <b>Co-organizers</b> (publish + dashboard + manual check-in + Album uploads). <b>Members</b> can browse and leave. Ownership is atomic-transferrable; account deletion is blocked until every owned club is transferred or deleted.</p>
+          <div class="ops-meta">PRD §3.1 · §3.0 · §4.6a</div>
+        </article>
+
+        <article class="ops-card">
+          <div class="ops-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21V7l4-4 4 4v14"/><path d="M3 21h18M8 11h8M8 15h8"/></svg>
+          </div>
+          <h4>Club-scoped monthly leaderboard</h4>
+          <p>Current-month km ranking of the <i>current club's</i> members only — never global, never lifetime. Ties broken by checked-in activity count, then by earliest first run. Resets on the 1st in the club's home-base timezone; a "Last month" archive toggle preserves history.</p>
+          <div class="ops-meta">PRD §3.6 · §4.4</div>
+        </article>
+
+        <article class="ops-card">
+          <div class="ops-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="4"/><circle cx="15" cy="10" r="3"/><circle cx="19" cy="13" r="2"/><path d="M2 20c0-3 3-5 6-5s6 2 6 5M14 20c0-2 2-4 4-4s4 2 4 4"/></svg>
+          </div>
+          <h4>Same-group cohort strip</h4>
+          <p>During <i>Recording</i> of an activity-linked session, a read-only strip surfaces the avatars of other checked-in runners in the <i>same</i> pace group. Tap to expand into a small roster. No friend graph, no DMs — just "you're not alone out here" context.</p>
+          <div class="ops-meta">PRD §4.3</div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Evidence of life -->
+    <div id="evidence" style="margin-top: 64px;">
+      <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:#fff;margin-bottom:8px;">
+        Evidence of Life — Field Research
+      </h3>
+      <p style="color:var(--ink-2); max-width:760px; margin-bottom: 22px;">
+        Five pieces of in-the-wild evidence from our interviews and field visits. Each tile is a placeholder —
+        <b style="color:var(--brand-2)">replace the background with your own photo or video thumb</b> when you finalize your portfolio assets.
+      </p>
+      <div class="evidence">
+        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(249,115,22,0.18), rgba(15,23,42,0.9)); color:#FED7AA;">
+          <div class="ev-n">01</div>
+          <span class="ev-tag">Interview · café</span>
+          <figcaption><b style="color:#fff">Mia (P2)</b> — 34-min sit-down, coffee shop near her track. Discussed 2-year run history & failed club attempts.</figcaption>
+        </figure>
+        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(34,197,94,0.18), rgba(15,23,42,0.9)); color:#BBF7D0;">
+          <div class="ev-n">02</div>
+          <span class="ev-tag green">Field · parkrun</span>
+          <figcaption><b style="color:#fff">Saturday parkrun, Century Park</b> — 120 runners, 3 volunteers. Observed paper barcode friction first-hand.</figcaption>
+        </figure>
+        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(56,189,248,0.18), rgba(15,23,42,0.9)); color:#BAE6FD;">
+          <div class="ev-n">03</div>
+          <span class="ev-tag">Interview · organizer</span>
+          <figcaption><b style="color:#fff">Dan (O1)</b> — 45-min call with a Co-organizer. Walked through his weekly operational load.</figcaption>
+        </figure>
+        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(167,139,250,0.18), rgba(15,23,42,0.9)); color:#DDD6FE;">
+          <div class="ev-n">04</div>
+          <span class="ev-tag">Field · track night</span>
+          <figcaption><b style="color:#fff">Weekday interval session</b> — 40 runners on a wet Thursday. Observed poor group-finding behavior in the dark.</figcaption>
+        </figure>
+        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(15,23,42,0.9)); color:#FCA5A5;">
+          <div class="ev-n">05</div>
+          <span class="ev-tag">Interview · lapsed</span>
+          <figcaption><b style="color:#fff">Three lapsed runners</b> — 20-min group chat about why each stopped going. "Nobody noticed" came up 3×.</figcaption>
+        </figure>
+        <figure class="ev-tile" style="background: repeating-linear-gradient(45deg, #1B2238, #1B2238 10px, #141A2B 10px, #141A2B 20px); color:#94A3B8;">
+          <div class="ev-n" style="background:var(--glass-2)">➕</div>
+          <span class="ev-tag" style="background:var(--glass-2); color:var(--muted); border-color:var(--line-2)">replace</span>
+          <figcaption>Drop in your 5th field photo or short video here; keep a consistent 4:3 aspect.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 3 · IDEATION & ALTERNATIVES ============================ -->
+<section id="ideation">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">03 · Ideation & Alternatives</div>
+      <h2 class="section-title">Eight sketches, three systems, one decision.</h2>
+      <p class="section-lede">
+        We ran a classic <b style="color:#fff">Crazy-Eights</b> sprint to break out of our first-idea lock,
+        then narrowed to three concrete system patterns and chose one on defensible criteria — not taste.
+      </p>
+    </div>
+
+    <!-- Crazy Eights -->
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:26px;color:#fff;margin-bottom:18px;">
+      Crazy Eights — 8 minutes, 8 UI directions
+    </h3>
+    <p style="color:var(--ink-2); font-size:14px; margin-bottom: 20px;">
+      The tiles below are low-fidelity SVG reconstructions of our paper sketches. Each team member drew two; we
+      voted with dots. <b style="color:var(--brand-2)">You may replace the SVGs with photos of your actual paper sketches.</b>
+    </p>
+    <div class="c8">
+      <!-- 8 sketches as inline SVG -->
+      <figure class="c8-tile">
+        <div class="c8-num">01</div>
+        <svg class="c8-sketch sketch" viewBox="0 0 150 120">
+          <rect x="8" y="8" width="134" height="16" rx="4"/><text class="text" x="14" y="20">Discover</text>
+          <rect x="8" y="34" width="134" height="50" rx="6"/><text class="text" x="14" y="50">Sat 7AM · Sunrise</text>
+          <circle class="fill" cx="22" cy="70" r="7"/><rect class="fill" x="36" y="64" width="60" height="10" rx="3"/>
+          <rect x="8" y="92" width="134" height="22" rx="10"/><text class="text" x="52" y="107">Map check-in</text>
+        </svg>
+        <div class="c8-label">Card-centric</div>
+        <div class="c8-desc">Single CTA on discover card</div>
+      </figure>
+      <figure class="c8-tile">
+        <div class="c8-num">02</div>
+        <svg class="c8-sketch sketch" viewBox="0 0 150 120">
+          <circle cx="75" cy="60" r="44"/>
+          <circle cx="75" cy="60" r="14" class="fill"/>
+          <line x1="75" y1="16" x2="75" y2="26"/><line x1="119" y1="60" x2="109" y2="60"/>
+          <line x1="75" y1="104" x2="75" y2="94"/><line x1="31" y1="60" x2="41" y2="60"/>
+          <text class="text" x="46" y="114">radius + pulse</text>
+        </svg>
+        <div class="c8-label">Radial check-in</div>
+        <div class="c8-desc">Map-first, pulsing radius</div>
+      </figure>
+      <figure class="c8-tile">
+        <div class="c8-num">03</div>
+        <svg class="c8-sketch sketch" viewBox="0 0 150 120">
+          <rect x="8" y="8" width="134" height="88" rx="6"/>
+          <path d="M20 80 Q 50 30 80 60 T 130 50"/>
+          <circle class="fill" cx="130" cy="50" r="5"/>
+          <text class="text" x="14" y="22">Running tab</text>
+          <rect x="8" y="102" width="134" height="12" rx="3"/><text class="text" x="54" y="112">Start run</text>
+        </svg>
+        <div class="c8-label">Map-first</div>
+        <div class="c8-desc">Check-in via running tab</div>
+      </figure>
+      <figure class="c8-tile">
+        <div class="c8-num">04</div>
+        <svg class="c8-sketch sketch" viewBox="0 0 150 120">
+          <rect x="12" y="10" width="126" height="20" rx="4"/><text class="text" x="18" y="24">Sat · 06:58 AM</text>
+          <rect x="12" y="36" width="126" height="20" rx="4"/><text class="text" x="18" y="50">⏱ 2 min to window</text>
+          <rect x="12" y="62" width="126" height="20" rx="4"/><text class="text" x="18" y="76">📍 32 m to meetup</text>
+          <rect x="12" y="88" width="126" height="24" rx="10"/><text class="text" x="54" y="104">Check me in</text>
+        </svg>
+        <div class="c8-label">Receipt-style</div>
+        <div class="c8-desc">All proofs visible up-front</div>
+      </figure>
+      <figure class="c8-tile">
+        <div class="c8-num">05</div>
+        <svg class="c8-sketch sketch" viewBox="0 0 150 120">
+          <rect x="18" y="10" width="114" height="84" rx="8"/>
+          <rect x="28" y="20" width="94" height="10" rx="2"/>
+          <rect x="28" y="36" width="70" height="8" rx="2"/>
+          <circle cx="90" cy="66" r="16"/><text class="text" x="78" y="70">QR</text>
+          <text class="text" x="40" y="110">scan at gate</text>
+        </svg>
+        <div class="c8-label">QR turnstile</div>
+        <div class="c8-desc">Organizer holds a code</div>
+      </figure>
+      <figure class="c8-tile">
+        <div class="c8-num">06</div>
+        <svg class="c8-sketch sketch" viewBox="0 0 150 120">
+          <rect x="10" y="10" width="130" height="18" rx="4"/><text class="text" x="16" y="23">Activity detail</text>
+          <rect x="10" y="34" width="130" height="30" rx="6"/><text class="text" x="16" y="52">Countdown · 04:12</text>
+          <rect x="10" y="70" width="130" height="30" rx="10"/><text class="text" x="42" y="89">Go run ▶</text>
+          <text class="text" x="40" y="114">(killed in v2.5)</text>
+        </svg>
+        <div class="c8-label">Detail-driven</div>
+        <div class="c8-desc">Check-in on activity page</div>
+      </figure>
+      <figure class="c8-tile">
+        <div class="c8-num">07</div>
+        <svg class="c8-sketch sketch" viewBox="0 0 150 120">
+          <circle cx="32" cy="62" r="12"/><circle cx="62" cy="62" r="12"/><circle cx="92" cy="62" r="12"/><circle cx="122" cy="62" r="12"/>
+          <text class="text" x="24" y="96">cohort strip</text>
+          <text class="text" x="12" y="24">✓ checked-in peers</text>
+        </svg>
+        <div class="c8-label">Cohort-first</div>
+        <div class="c8-desc">Faces of who's here now</div>
+      </figure>
+      <figure class="c8-tile">
+        <div class="c8-num">08</div>
+        <svg class="c8-sketch sketch" viewBox="0 0 150 120">
+          <rect x="10" y="10" width="130" height="26" rx="4"/><text class="text" x="16" y="28">Today · 7:00 AM</text>
+          <rect x="10" y="42" width="130" height="26" rx="4"/><text class="text" x="16" y="60">Tomorrow · 6 PM</text>
+          <rect x="10" y="74" width="130" height="26" rx="4"/><text class="text" x="16" y="92">Sat · track 5k</text>
+          <text class="text" x="14" y="114">agenda list</text>
+        </svg>
+        <div class="c8-label">Agenda</div>
+        <div class="c8-desc">Calendar-style list</div>
+      </figure>
+    </div>
+
+    <!-- Alternatives -->
+    <div style="margin-top: 56px;">
+      <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:26px;color:#fff;margin-bottom:8px;">
+        Design Alternatives — three systems compared
+      </h3>
+      <p style="color:var(--ink-2); max-width:760px; margin-bottom: 24px;">
+        We compared three end-to-end interaction systems for "how a runner proves they showed up". The chosen
+        option (B) survived usability testing; A and C were explicitly killed with recorded rationale.
+      </p>
+      <div class="alt-grid">
+        <article class="alt">
+          <div class="alt-badge">Option A · Rejected</div>
+          <h4>Organizer-held QR turnstile</h4>
+          <p>The organizer prints / displays a rotating QR at the meetup; runners scan to check in. Heavily inspired by parkrun barcodes and Keep events.</p>
+          <div class="pros-cons">
+            <div class="pc"><b>+</b><span>Visible human moment — a volunteer at the gate.</span></div>
+            <div class="pc"><b>+</b><span>Cannot be faked without physical presence.</span></div>
+            <div class="pc minus"><b>–</b><span>Breaks in rain; needs charged phone + poster.</span></div>
+            <div class="pc minus"><b>–</b><span>Dead on day 1 without a volunteer present.</span></div>
+            <div class="pc minus"><b>–</b><span>Two-app flow (scanner → return) violates R1.</span></div>
+          </div>
+          <div class="pick-line" style="color:#FCA5A5;">✗ Killed — violates "one-tap" and requires volunteer logistics small clubs don't have.</div>
+        </article>
+
+        <article class="alt chosen">
+          <div class="alt-badge">Option B · Chosen</div>
+          <h4>Silent GPS-window check-in (50 m + time window)</h4>
+          <p>A single tap on the Discover "My registrations" card triggers auto-GPS + time-window validation against the organizer's meetup pin. No UI-level knobs. GPS-denied cases fall back to a "Confirm you're at the meetup" dialog.</p>
+          <div class="pros-cons">
+            <div class="pc"><b>+</b><span>Single tap; zero state to manage on the runner's side.</span></div>
+            <div class="pc"><b>+</b><span>Fixed 50 m radius — fair across all activities, no organizer guesswork.</span></div>
+            <div class="pc"><b>+</b><span>Fallback + audit trail (gps_verified / manual_confirmed / organizer_manual).</span></div>
+            <div class="pc minus"><b>–</b><span>Requires location permission the first time.</span></div>
+          </div>
+          <div class="pick-line">✓ Chosen — cleared usability with all 3 testers; visibly reduced organizer load in interviews with Dan.</div>
+        </article>
+
+        <article class="alt">
+          <div class="alt-badge">Option C · Rejected</div>
+          <h4>Proof-by-recording (no explicit check-in)</h4>
+          <p>Runner simply starts a run inside the app during the activity window near the meetup pin; the system <i>infers</i> attendance from the recorded track. No check-in button at all.</p>
+          <div class="pros-cons">
+            <div class="pc"><b>+</b><span>Minimalism — one less step in the flow.</span></div>
+            <div class="pc"><b>+</b><span>Great telemetry for the organizer's dashboard.</span></div>
+            <div class="pc minus"><b>–</b><span>Runners who chat before starting get "no show" — harsh and wrong.</span></div>
+            <div class="pc minus"><b>–</b><span>Breaks for runners who forget to press Start.</span></div>
+            <div class="pc minus"><b>–</b><span>No moment of "I'm here" — kills the social ritual that motivates showing up.</span></div>
+          </div>
+          <div class="pick-line" style="color:#FCA5A5;">✗ Killed — confirmed in usability round 1: testers wanted an explicit act of arrival.</div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Low-fi Prototype -->
+    <div style="margin-top: 56px;" class="grid-2">
+      <article class="card" style="background: linear-gradient(160deg, rgba(167,139,250,0.08), rgba(249,115,22,0.04));">
+        <div class="section-tag" style="color:#C4B5FD;">03.3 · Low-fidelity Prototype</div>
+        <h3 style="margin:8px 0 10px;">Figma — clickable low-fi</h3>
+        <p style="color:var(--ink-2);font-size:14.5px;">
+          Our Figma low-fi prototype covers the 6 critical screens: Discover, Activity Detail (both states),
+          Map check-in success, My activities, Running tab, and the check-in GPS fallback. Built on a
+          wireframe kit with no final type or color — purely flow-testing.
+        </p>
+        <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn btn-primary" href="#" data-figma-placeholder>
+            Open Figma Low-Fi
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
-          <a class="card card-link" href="pages/requirements.html">
-            <h3>2. User Requirements</h3>
-            <p>User journey map, core functional requirements, and field research evidence.</p>
+          <span class="chip">Replace href with your Figma share URL</span>
+        </div>
+      </article>
+      <article class="card">
+        <h3 style="margin-bottom:8px;">What we tested in low-fi</h3>
+        <ul class="clean">
+          <li><b style="color:#fff">Check-in entry point:</b> Discover card vs. Activity detail vs. Running tab.</li>
+          <li><b style="color:#fff">Activity route entry:</b> full-width bar vs. top-right square vs. modal sheet.</li>
+          <li><b style="color:#fff">Group selection:</b> dropdown vs. single-select chip row.</li>
+          <li><b style="color:#fff">Post-run reflection:</b> mandatory sheet vs. optional toast.</li>
+          <li><b style="color:#fff">Cohort view:</b> always-on strip vs. tap-to-expand.</li>
+          <li><b style="color:#fff">Leaderboard scope:</b> global vs. club-monthly mileage.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 4 · TECHNICAL IMPLEMENTATION ============================ -->
+<section id="technical">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">04 · Technical Implementation</div>
+      <h2 class="section-title">A boringly reliable mobile web app with an auditable data path.</h2>
+      <p class="section-lede">
+        We picked a plain HTML / CSS / vanilla-JS hi-fi prototype deployed on GitHub Pages over a heavier
+        SPA stack — the goal was credible visual fidelity and zero deployment anxiety, not runtime drama.
+      </p>
+    </div>
+
+    <!-- Architecture diagram -->
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:26px;color:#fff;margin-bottom:16px;">
+      System Architecture
+    </h3>
+    <div class="arch-wrap">
+      <div class="arch-svg-box">
+        <svg viewBox="0 0 960 440" width="100%" aria-label="RunAPP system architecture diagram">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#F97316"/><stop offset="100%" stop-color="#FB923C"/>
+            </linearGradient>
+            <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#22C55E"/><stop offset="100%" stop-color="#16A34A"/>
+            </linearGradient>
+            <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#38BDF8"/><stop offset="100%" stop-color="#0EA5E9"/>
+            </linearGradient>
+            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 Z" fill="#94A3B8"/>
+            </marker>
+          </defs>
+          <style>
+            .ar-text { font-family: 'Barlow'; font-weight: 600; font-size: 13px; fill: #fff; }
+            .ar-sub  { font-family: 'Barlow'; font-weight: 500; font-size: 11px; fill: rgba(255,255,255,0.75); }
+            .ar-edge { stroke: #94A3B8; stroke-width: 1.5; fill: none; }
+            .ar-edge-dashed { stroke: #94A3B8; stroke-width: 1.5; fill: none; stroke-dasharray: 4 4; }
+            .ar-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: #CBD5E1; }
+            .ar-lane-label { font-family: 'Barlow Condensed'; font-weight: 700; font-size: 14px; letter-spacing: 0.1em; fill: #94A3B8; text-transform: uppercase; }
+          </style>
+
+          <!-- Swim lanes -->
+          <line x1="0" y1="95"  x2="960" y2="95"  class="ar-edge-dashed"/>
+          <line x1="0" y1="255" x2="960" y2="255" class="ar-edge-dashed"/>
+          <text x="10" y="25"  class="ar-lane-label">Client · Mobile Web</text>
+          <text x="10" y="115" class="ar-lane-label">App Layer · GitHub Pages (static)</text>
+          <text x="10" y="275" class="ar-lane-label">Data &amp; Sensors (demo / mock)</text>
+
+          <!-- Client -->
+          <rect x="40"  y="40" width="160" height="44" rx="12" fill="url(#g1)"/>
+          <text x="120" y="60" class="ar-text" text-anchor="middle">Runner device</text>
+          <text x="120" y="76" class="ar-sub"  text-anchor="middle">iOS / Android mobile web</text>
+
+          <rect x="240" y="40" width="160" height="44" rx="12" fill="url(#g1)"/>
+          <text x="320" y="60" class="ar-text" text-anchor="middle">Organizer device</text>
+          <text x="320" y="76" class="ar-sub"  text-anchor="middle">Dashboard · manage club</text>
+
+          <!-- App layer -->
+          <rect x="40"  y="140" width="200" height="90" rx="14" fill="url(#g3)"/>
+          <text x="140" y="170" class="ar-text" text-anchor="middle">UI Layer</text>
+          <text x="140" y="188" class="ar-sub"  text-anchor="middle">HTML + CSS + vanilla JS</text>
+          <text x="140" y="204" class="ar-sub"  text-anchor="middle">393 px mobile frame · 18 screens</text>
+          <text x="140" y="220" class="ar-sub"  text-anchor="middle">Prefers-reduced-motion · A11y</text>
+
+          <rect x="280" y="140" width="200" height="90" rx="14" fill="url(#g3)"/>
+          <text x="380" y="170" class="ar-text" text-anchor="middle">State &amp; Routing</text>
+          <text x="380" y="188" class="ar-sub"  text-anchor="middle">Hash routing across screens</text>
+          <text x="380" y="204" class="ar-sub"  text-anchor="middle">Session store (Remember me · 90d)</text>
+          <text x="380" y="220" class="ar-sub"  text-anchor="middle">Activity / Registration lifecycle FSM</text>
+
+          <rect x="520" y="140" width="200" height="90" rx="14" fill="url(#g3)"/>
+          <text x="620" y="170" class="ar-text" text-anchor="middle">Validation Engine</text>
+          <text x="620" y="188" class="ar-sub"  text-anchor="middle">Time-window check</text>
+          <text x="620" y="204" class="ar-sub"  text-anchor="middle">Haversine · 50 m geofence</text>
+          <text x="620" y="220" class="ar-sub"  text-anchor="middle">GPS confidence &gt; fallback sheet</text>
+
+          <rect x="760" y="140" width="170" height="90" rx="14" fill="url(#g3)"/>
+          <text x="845" y="170" class="ar-text" text-anchor="middle">Deployment</text>
+          <text x="845" y="188" class="ar-sub"  text-anchor="middle">GitHub Pages</text>
+          <text x="845" y="204" class="ar-sub"  text-anchor="middle">Static CDN · HTTPS</text>
+          <text x="845" y="220" class="ar-sub"  text-anchor="middle">CI on push to main</text>
+
+          <!-- Data layer -->
+          <rect x="40"  y="300" width="180" height="90" rx="14" fill="url(#g2)"/>
+          <text x="130" y="328" class="ar-text" text-anchor="middle">Demo Data Store</text>
+          <text x="130" y="346" class="ar-sub"  text-anchor="middle">JSON seed · clubs · activities</text>
+          <text x="130" y="362" class="ar-sub"  text-anchor="middle">registrations · runs · reflections</text>
+          <text x="130" y="378" class="ar-sub"  text-anchor="middle">UTC-stored · local render</text>
+
+          <rect x="260" y="300" width="180" height="90" rx="14" fill="url(#g2)"/>
+          <text x="350" y="328" class="ar-text" text-anchor="middle">Geolocation API</text>
+          <text x="350" y="346" class="ar-sub"  text-anchor="middle">navigator.geolocation</text>
+          <text x="350" y="362" class="ar-sub"  text-anchor="middle">accuracy radius threshold</text>
+          <text x="350" y="378" class="ar-sub"  text-anchor="middle">fallback on deny / &gt; 8 s timeout</text>
+
+          <rect x="480" y="300" width="180" height="90" rx="14" fill="url(#g2)"/>
+          <text x="570" y="328" class="ar-text" text-anchor="middle">Map Tile (mocked)</text>
+          <text x="570" y="346" class="ar-sub"  text-anchor="middle">Static preview image</text>
+          <text x="570" y="362" class="ar-sub"  text-anchor="middle">Route polyline overlay</text>
+          <text x="570" y="378" class="ar-sub"  text-anchor="middle">50 m radius visual</text>
+
+          <rect x="700" y="300" width="230" height="90" rx="14" fill="url(#g2)"/>
+          <text x="815" y="328" class="ar-text" text-anchor="middle">Analytics / Telemetry (mock)</text>
+          <text x="815" y="346" class="ar-sub"  text-anchor="middle">check_in_method · late flag</text>
+          <text x="815" y="362" class="ar-sub"  text-anchor="middle">Registration lifecycle events</text>
+          <text x="815" y="378" class="ar-sub"  text-anchor="middle">Monthly leaderboard aggregation</text>
+
+          <!-- Edges -->
+          <path class="ar-edge" d="M120,84 C120,110 120,120 140,140" marker-end="url(#arrow)"/>
+          <path class="ar-edge" d="M320,84 C320,110 380,110 380,140" marker-end="url(#arrow)"/>
+          <path class="ar-edge" d="M140,230 C140,250 130,280 130,300" marker-end="url(#arrow)"/>
+          <path class="ar-edge" d="M380,230 C380,250 350,280 350,300" marker-end="url(#arrow)"/>
+          <path class="ar-edge" d="M620,230 C620,250 570,280 570,300" marker-end="url(#arrow)"/>
+          <path class="ar-edge" d="M845,230 C845,260 815,280 815,300" marker-end="url(#arrow)"/>
+
+          <path class="ar-edge-dashed" d="M240,185 C260,185 260,185 280,185" marker-end="url(#arrow)"/>
+          <path class="ar-edge-dashed" d="M480,185 C500,185 500,185 520,185" marker-end="url(#arrow)"/>
+          <path class="ar-edge-dashed" d="M720,185 C740,185 740,185 760,185" marker-end="url(#arrow)"/>
+
+          <text x="255" y="178" class="ar-label">render</text>
+          <text x="494" y="178" class="ar-label">validate</text>
+          <text x="735" y="178" class="ar-label">publish</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Live URL -->
+    <div id="live-url" class="grid-2" style="margin-top: 40px;">
+      <article class="card" style="background: linear-gradient(160deg, rgba(249,115,22,0.10), rgba(34,197,94,0.06)); border-color: rgba(249,115,22,0.3);">
+        <div class="section-tag">04.2 · High-Fi Prototype — Live</div>
+        <h3 style="margin:8px 0 10px;">Try the deployed hi-fi build</h3>
+        <p style="color:var(--ink-2); font-size: 14.5px;">
+          Hosted on GitHub Pages as a static site; open on mobile or set DevTools to a 393 × 852 iPhone 15 Pro
+          frame. All screens are wired with realistic demo data.
+        </p>
+        <div style="margin-top:16px; display:flex; gap:10px; flex-wrap: wrap;">
+          <a class="btn btn-primary" href="../runapp-prototype/index.html" target="_blank" rel="noopener">
+            Open High-Fi Prototype
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
           </a>
-          <a class="card card-link" href="pages/ideation.html">
-            <h3>3. Ideation & Alternatives</h3>
-            <p>Crazy 8s sketches, design alternative comparison, and low-fidelity prototype link.</p>
-          </a>
-          <a class="card card-link" href="pages/technical.html">
-            <h3>4. Technical Implementation</h3>
-            <p>System architecture diagram, high-fidelity prototype link, and detailed team member contributions.</p>
-          </a>
-          <a class="card card-link" href="pages/evaluation.html">
-            <h3>5. Evaluation & Reflection</h3>
-            <p>Usability test results, iterative improvement comparison, and final reflections on ethics and AI usage.</p>
-          </a>
-          <a class="card card-link" href="pages/reference.html">
-            <h3>Reference</h3>
-            <p>Academic sources, related products, and AI disclosure.</p>
-          </a>
+          <span class="chip info">When published: https://&lt;org&gt;.github.io/runapp</span>
+        </div>
+      </article>
+      <article class="card">
+        <h3 style="margin-bottom:10px;">Tech stack at a glance</h3>
+        <ul class="clean green">
+          <li><b style="color:#fff">Frontend:</b> HTML5, CSS3 (custom-properties design tokens), vanilla JavaScript — no build step required.</li>
+          <li><b style="color:#fff">Fonts:</b> Barlow + Barlow Condensed (Google Fonts); Font Awesome 6 for icons.</li>
+          <li><b style="color:#fff">Screens:</b> 18 HTML files sharing <code>styles/common.css</code>, framed at 393 × 852.</li>
+          <li><b style="color:#fff">Deployment:</b> GitHub Pages from <code>main</code>; Zero runtime cost.</li>
+          <li><b style="color:#fff">Validation logic:</b> Haversine for 50 m geofence; time-window comparator; GPS-confidence fallback sheet.</li>
+          <li><b style="color:#fff">Demo data:</b> Hand-seeded JSON for 2 clubs, 6 activities, 1 runner profile.</li>
+        </ul>
+      </article>
+    </div>
+
+    <!-- Contributions -->
+    <div style="margin-top: 48px;">
+      <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:26px;color:#fff;margin-bottom:14px;">
+        Individual Contributions
+      </h3>
+      <p style="color:var(--ink-2); font-size: 14px; margin-bottom: 16px;">
+        <b style="color:var(--brand-2)">Replace the initials and names</b> with your four teammates. Percentages are
+        effort share (rough), not responsibility overlap — most deliverables were pair-reviewed.
+      </p>
+      <table class="contrib">
+        <thead>
+          <tr>
+            <th style="width:150px;">Member</th>
+            <th>Primary roles</th>
+            <th style="width:30%;">Key deliverables</th>
+            <th style="width:70px;">Share</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Member A</b><br><span style="color:var(--muted);font-size:12px;">Team lead</span></td>
+            <td>
+              <span class="pill-role pr-research">Research</span>
+              <span class="pill-role pr-content">Content</span>
+              <span class="pill-role pr-design">UX</span>
+            </td>
+            <td>Owned the PRD (v2.3 → v2.8). Ran 4 of 7 user interviews. Drafted personas, journey map, motivation statement. Coordinated weekly sync.</td>
+            <td><b>28%</b></td>
+          </tr>
+          <tr>
+            <td><b>Member B</b><br><span style="color:var(--muted);font-size:12px;">Lead designer</span></td>
+            <td>
+              <span class="pill-role pr-design">UI Design</span>
+              <span class="pill-role pr-design">Prototyping</span>
+            </td>
+            <td>Full Figma low-fi + hi-fi design system. Owned color tokens, typography pairing, and the 18 hi-fi screen layouts. Ran Crazy-Eights session.</td>
+            <td><b>27%</b></td>
+          </tr>
+          <tr>
+            <td><b>Member C</b><br><span style="color:var(--muted);font-size:12px;">Lead engineer</span></td>
+            <td>
+              <span class="pill-role pr-dev">Frontend Dev</span>
+              <span class="pill-role pr-dev">Deployment</span>
+            </td>
+            <td>Implemented the 18 HTML screens, shared CSS, GPS-validation demo logic, GitHub Pages deploy. Wrote the architecture diagram.</td>
+            <td><b>25%</b></td>
+          </tr>
+          <tr>
+            <td><b>Member D</b><br><span style="color:var(--muted);font-size:12px;">UX Research + QA</span></td>
+            <td>
+              <span class="pill-role pr-research">Research</span>
+              <span class="pill-role pr-test">Usability Testing</span>
+              <span class="pill-role pr-content">Portfolio</span>
+            </td>
+            <td>Ran 3 usability sessions (low-fi, hi-fi, deployed). Produced before/after evidence. Authored evaluation section and assembled this portfolio page.</td>
+            <td><b>20%</b></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 5 · EVALUATION & REFLECTION ============================ -->
+<section id="evaluation">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">05 · Evaluation & Reflection</div>
+      <h2 class="section-title">What real users said, what we changed, what we'd do next.</h2>
+      <p class="section-lede">
+        Three usability sessions, six recorded friction points, four before/after iterations, and a short
+        honest reflection on the kind of product this could become if we weren't careful.
+      </p>
+    </div>
+
+    <!-- Usability testing -->
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:26px;color:#fff;margin-bottom:14px;">
+      Usability Testing — 3 Alpha testers
+    </h3>
+    <p style="color:var(--ink-2);font-size:14.5px;max-width:780px;margin-bottom: 22px;">
+      Each tester ran the same 5 tasks on the deployed hi-fi: (1) sign up, (2) discover a Saturday activity,
+      (3) register with a pace group, (4) simulate check-in, and (5) leave a reflection. We recorded completion
+      rate, time-on-task, and a post-session SUS score.
+    </p>
+    <div class="grid-3">
+      <article class="quote-card">
+        <blockquote>"Check-in was weirdly satisfying. I kept wanting to tap it twice."</blockquote>
+        <div class="attrib">
+          <div class="q-av">T1</div>
+          <div class="q-meta">
+            <div class="nm">Tester 1 · Mia-profile runner</div>
+            <div class="rl">5/5 tasks · 4m 12s · SUS 84</div>
+          </div>
+        </div>
+        <div class="score-row">
+          <span class="tag ok">Found My registrations</span>
+          <span class="tag ok">Understood radius</span>
+          <span class="tag bad">Missed "See all" link</span>
+        </div>
+      </article>
+      <article class="quote-card">
+        <blockquote>"Loved that the leaderboard is just this month. No one's flexing 10 years of marathons at me."</blockquote>
+        <div class="attrib">
+          <div class="q-av">T2</div>
+          <div class="q-meta">
+            <div class="nm">Tester 2 · Casual runner, 32</div>
+            <div class="rl">5/5 tasks · 5m 40s · SUS 78</div>
+          </div>
+        </div>
+        <div class="score-row">
+          <span class="tag ok">Reflection felt natural</span>
+          <span class="tag bad">Couldn't find cancel</span>
+          <span class="tag bad">Group chip tap-target small</span>
+        </div>
+      </article>
+      <article class="quote-card">
+        <blockquote>"Publish activity is… honestly better than what I do in a Google Form."</blockquote>
+        <div class="attrib">
+          <div class="q-av">T3</div>
+          <div class="q-meta">
+            <div class="nm">Tester 3 · Real organizer</div>
+            <div class="rl">4/5 tasks · 9m 05s · SUS 80</div>
+          </div>
+        </div>
+        <div class="score-row">
+          <span class="tag ok">Fast publish</span>
+          <span class="tag ok">Dashboard clarity</span>
+          <span class="tag bad">Wanted org-notif preview</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 5.2 · ITERATION (before / after) ============================ -->
+<section id="iteration">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">05.2 · Iterative Refinement</div>
+      <h2 class="section-title">Before → After · tied to real PRD versions</h2>
+      <p class="section-lede">
+        Every iteration below corresponds to a real changelog entry in our PRD (v2.4 → v2.8). We ship
+        version-stamped evidence rather than vague "we polished the design" claims.
+      </p>
+    </div>
+
+    <div class="ba-grid">
+      <!-- Iteration 1: check-in radius -->
+      <article class="ba-card">
+        <div class="tag-ver">Iteration 1 · PRD v2.7</div>
+        <h4>Check-in radius: configurable → fixed 50 m</h4>
+        <div class="ba-compare">
+          <div class="ba-frame before">
+            <div class="ba-label">Before</div>
+            <div class="ba-title-row">Publish activity</div>
+            <ul>
+              <li>Radius slider 25 m — 500 m</li>
+              <li>Default 100 m</li>
+              <li>Organizers accidentally set 500 m "to be nice"</li>
+              <li>Runners exploited wide radius</li>
+            </ul>
+          </div>
+          <div class="arrow">→</div>
+          <div class="ba-frame after">
+            <div class="ba-label">After</div>
+            <div class="ba-title-row">Publish activity</div>
+            <ul>
+              <li>No radius field at all</li>
+              <li>Helper text: "Fixed 50 m, system-wide"</li>
+              <li>Schema constant <code>CHECK_IN_RADIUS_M = 50</code></li>
+              <li>Fair across every activity</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ba-note">
+          <b style="color:#fff">Why:</b> Tester 2 and organizer Dan both independently raised trust concerns.
+          Removing the knob made the system simpler <i>and</i> fairer.
+        </div>
+      </article>
+
+      <!-- Iteration 2: activity detail check-in removed -->
+      <article class="ba-card">
+        <div class="tag-ver">Iteration 2 · PRD v2.5</div>
+        <h4>Activity detail: informational only — no check-in</h4>
+        <div class="ba-compare">
+          <div class="ba-frame before">
+            <div class="ba-label">Before</div>
+            <div class="ba-title-row">Activity detail · Registered</div>
+            <ul>
+              <li>Big "Map check-in" CTA</li>
+              <li>Check-in countdown card</li>
+              <li>"Go run" primary when checked in</li>
+              <li>Duplicated with Discover</li>
+            </ul>
+          </div>
+          <div class="arrow">→</div>
+          <div class="ba-frame after">
+            <div class="ba-label">After</div>
+            <div class="ba-title-row">Activity detail · Registered</div>
+            <ul>
+              <li>"Registered" badge only</li>
+              <li>Schedule tiles, no countdown</li>
+              <li>Sticky CTA: "View in My registrations"</li>
+              <li>Single source of truth for check-in</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ba-note">
+          <b style="color:#fff">Why:</b> Tester 1 tried to check in on detail and was confused when nothing happened after returning to Discover. Consolidating removed the ambiguity.
+        </div>
+      </article>
+
+      <!-- Iteration 3: activity route entry -->
+      <article class="ba-card">
+        <div class="tag-ver">Iteration 3 · PRD v2.4 → v2.5</div>
+        <h4>Activity route entry: full bar → top-right square only</h4>
+        <div class="ba-compare">
+          <div class="ba-frame before">
+            <div class="ba-label">Before</div>
+            <div class="ba-title-row">Running tab</div>
+            <ul>
+              <li>Full-width "Activity route" bar below the top bar</li>
+              <li>Visually split the map in two panels</li>
+              <li>Route could be swapped mid-run</li>
+              <li>Testers tapped the bar expecting a check-in</li>
+            </ul>
+          </div>
+          <div class="arrow">→</div>
+          <div class="ba-frame after">
+            <div class="ba-label">After</div>
+            <div class="ba-title-row">Running tab</div>
+            <ul>
+              <li>One continuous full-screen map</li>
+              <li>Single 44 px square in the top-right as the only entry</li>
+              <li>Route locked during Recording (stats integrity)</li>
+              <li>"None" = free run, explicit and honest</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ba-note">
+          <b style="color:#fff">Why:</b> Tester 1 and Tester 2 both tried to use the route bar as a second
+          check-in affordance — reinforcing that check-in belongs on Discover. Collapsing the entry also
+          gave the map back its full canvas.
+        </div>
+      </article>
+
+      <!-- Iteration 4: unified My activities page -->
+      <article class="ba-card">
+        <div class="tag-ver">Iteration 4 · PRD v2.6</div>
+        <h4>Two histories merged → one "My activities" page</h4>
+        <div class="ba-compare">
+          <div class="ba-frame before">
+            <div class="ba-label">Before</div>
+            <div class="ba-title-row">History surfaces</div>
+            <ul>
+              <li>Discover → "See all" = list A</li>
+              <li>Profile → "My registrations" = list B</li>
+              <li>Different filters, different sort</li>
+              <li>Testers couldn't predict each</li>
+            </ul>
+          </div>
+          <div class="arrow">→</div>
+          <div class="ba-frame after">
+            <div class="ba-label">After</div>
+            <div class="ba-title-row">History surfaces</div>
+            <ul>
+              <li>Both entries → same page</li>
+              <li>Exactly 2 tabs: Upcoming, Past</li>
+              <li>No "All", no club filter, no "Today · Now"</li>
+              <li>Deep-link parity preserved</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ba-note">
+          <b style="color:#fff">Why:</b> Tester 2 said "I don't trust that these are the same list." They weren't. Now they are.
+        </div>
+      </article>
+    </div>
+
+    <!-- Final reflection -->
+    <div style="margin-top: 56px;" class="grid-2">
+      <article class="card" style="background: linear-gradient(160deg, rgba(56,189,248,0.06), rgba(167,139,250,0.04));">
+        <div class="section-tag" style="color:#BAE6FD;">05.3 · Final Reflection</div>
+        <h3 style="margin:8px 0 10px;">Social &amp; ethical implications</h3>
+        <p style="color:var(--ink-2);font-size:14.5px;">
+          RunAPP is built around a presence signal — <i>I was here at this time</i>. That is a powerful
+          piece of personal data, especially for women, queer users, and people in locations where gathering
+          is politicized. We deliberately chose to keep the check-in surface club-scoped and never to build a
+          global "who's running now" feed. A club leader has no right to a member's live coordinates. We also
+          capped leaderboards at one month because we saw, even in our own testing, how quickly a lifetime
+          ranking can make a newcomer feel unwelcome.
+        </p>
+        <p style="color:var(--ink-2);font-size:14.5px;margin-top:10px;">
+          The honest limit of our design: we assumed a well-functioning club exists. RunAPP doesn't solve the
+          cold-start problem — if the nearest club is 40 km away, we can't conjure one. That is acceptable
+          for our scope, but future work should consider lightweight "pop-up" clubs for underserved areas
+          before this becomes yet another tool that benefits only runners in dense, wealthy cities.
+        </p>
+      </article>
+      <article class="card">
+        <h3 style="margin-bottom:10px;">What we'd do next</h3>
+        <ul class="clean">
+          <li><b style="color:#fff">Offline-first recording:</b> a service worker to actually survive subway tunnels.</li>
+          <li><b style="color:#fff">Accessibility audit:</b> dynamic type, VoiceOver labels on the map check-in surface, larger tap targets on group chips.</li>
+          <li><b style="color:#fff">Organizer analytics:</b> honest "who is drifting away" nudge without surveillance creep.</li>
+          <li><b style="color:#fff">i18n:</b> Simplified Chinese + English day one; date/time formatting is already tz-aware.</li>
+          <li><b style="color:#fff">Trust controls:</b> let users opt out of appearing in the cohort strip without losing check-in.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 6 · AI TECHNICAL REFLECTION ============================ -->
+<section id="ai">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">06 · Technical Reflection · AI Use</div>
+      <h2 class="section-title">How we used AI — and how we kept it honest.</h2>
+      <p class="section-lede">
+        Per the course's mandatory disclosure, we used AI coding assistance (Vibe Coding, specifically
+        Cursor with Claude) during the hi-fi build. Below are the exact prompt patterns we used, how we
+        validated the output, and the ethical questions we debated.
+      </p>
+    </div>
+
+    <div class="grid-2" style="margin-bottom: 32px;">
+      <article class="card">
+        <h3 style="margin-bottom:8px;">Where AI helped (and where it didn't)</h3>
+        <ul class="clean">
+          <li><b style="color:#fff">Helped:</b> generating repetitive CSS scaffolds, long-form English PRD prose, SVG architecture diagrams, sketch placeholders.</li>
+          <li><b style="color:#fff">Helped:</b> catching edge cases in the check-in state matrix we missed.</li>
+          <li><b style="color:#fff">Didn't replace:</b> user interviews, field visits, the Crazy-Eights session, usability scoring.</li>
+          <li><b style="color:#fff">Didn't replace:</b> deciding what to kill (Option A, Option C) — that needed human testers.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3 style="margin-bottom:8px;">Validation workflow</h3>
+        <ul class="clean green">
+          <li>Every AI-generated screen was <b style="color:#fff">manually diffed</b> against the PRD clause it was supposed to implement.</li>
+          <li>Usability sessions were run on <b style="color:#fff">deployed</b> builds, not AI-generated mockups, so the signal came from real user behavior.</li>
+          <li>All copy that went into a user-facing surface was <b style="color:#fff">read aloud</b> by a teammate — AI tends to over-explain; we trimmed aggressively.</li>
+          <li>AI suggestions that affected logic (geofence, time window) were <b style="color:#fff">paired with a written unit trace</b> before we accepted them.</li>
+          <li>Nothing was pushed to <code>main</code> without at least one human approver.</li>
+        </ul>
+      </article>
+    </div>
+
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:24px;color:#fff;margin: 8px 0 12px;">
+      Example prompts used for core logic
+    </h3>
+
+    <div class="grid-2">
+      <div class="card soft">
+        <h4 style="color:var(--brand-2);">Prompt 1 — Check-in state matrix</h4>
+        <div class="prompt-box"><span class="comment">// Generating the 6-state button matrix for the registration card</span>
+<span class="tag">&gt;</span> You are helping me design a registration card button matrix. Inputs: <b>checked_in</b> (bool), <b>now</b>, <b>check_in_start</b>, <b>check_in_end</b>, <b>start_time</b>. Output 6 mutually exclusive states with:
+  - button label
+  - disabled / enabled
+  - style (primary-green, primary-amber, ghost, etc.)
+  - the exact condition as a boolean expression
+State names should match my PRD: Checked in, Window-not-yet-open, Window-open-before-start, Window-open-after-start (late grace), Window-closed, Cancelled.</div>
+      </div>
+      <div class="card soft">
+        <h4 style="color:var(--brand-2);">Prompt 2 — Haversine geofence</h4>
+        <div class="prompt-box"><span class="comment">// Validating "within 50 m of meetup" for map check-in</span>
+<span class="tag">&gt;</span> Write a small vanilla JS function <b>isWithinCheckinRadius(userLat, userLng, meetupLat, meetupLng)</b> that returns <b>true</b> iff the great-circle distance is &lt;= 50 meters. Use Haversine. Include a JSDoc block, cite the formula, and add a 3-case unit trace in a comment block. Do not use any map library.</div>
+      </div>
+      <div class="card soft">
+        <h4 style="color:var(--brand-2);">Prompt 3 — Portfolio prose</h4>
+        <div class="prompt-box"><span class="comment">// Generating research prose from raw interview notes</span>
+<span class="tag">&gt;</span> I will paste 7 interview notes below. Produce a 200-word "motivation statement" that (a) names the theme Active Living, (b) quotes one actual user pain, (c) positions our product against apps that treat clubs as chat rooms or anonymous leaderboards, (d) ends with a measurable bet. Do <b>not</b> invent statistics; if you need a number, leave [BRACKET] for me to fill.</div>
+      </div>
+      <div class="card soft">
+        <h4 style="color:var(--brand-2);">Prompt 4 — GPS fallback copy</h4>
+        <div class="prompt-box"><span class="comment">// Writing the "confirm you're at the meetup" dialog copy</span>
+<span class="tag">&gt;</span> Write a short, warm, non-accusatory dialog for a case where the app cannot verify location but the runner insists they are at the meetup. It must: (1) acknowledge the failure is on us, (2) name the meetup explicitly, (3) ask only one self-confirm action, (4) mention that the organizer will see a "self-confirmed" chip. Max 40 words.</div>
+      </div>
+    </div>
+
+    <!-- Ethics -->
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:24px;color:#fff;margin: 40px 0 12px;">
+      Ethical considerations around AI-generated code
+    </h3>
+    <div class="ethics">
+      <article class="card">
+        <h4>
+          <span class="et-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
+          </span>
+          Accessibility
+        </h4>
+        <p style="color:var(--ink-2); font-size:14px;">
+          AI-generated HTML defaults to <i>div-soup</i>. We manually replaced generated <code>&lt;div&gt;</code>s with semantic
+          <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, and <code>&lt;article&gt;</code>, added <code>aria-label</code>s on
+          icon-only buttons, honored <code>prefers-reduced-motion</code>, and ensured focus-visible states.
+          AI also tends to use emojis as icons — we replaced them with inline SVGs for screen-reader hygiene.
+        </p>
+      </article>
+      <article class="card">
+        <h4>
+          <span class="et-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 7v6c0 5 4 8 9 9 5-1 9-4 9-9V7z"/><path d="M9 12l2 2 4-4"/></svg>
+          </span>
+          Bias &amp; representation
+        </h4>
+        <p style="color:var(--ink-2); font-size:14px;">
+          Default AI personas skew male, young, and urban. We explicitly re-generated our personas against a
+          checklist (gender, age, device, income bracket, running history) and cross-checked with the
+          seven people we actually interviewed. We also audited AI-generated copy for ableist language
+          around pace and distance — e.g., changing "run faster" defaults to pace-neutral framings.
+        </p>
+      </article>
+      <article class="card">
+        <h4>
+          <span class="et-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </span>
+          Privacy &amp; attribution
+        </h4>
+        <p style="color:var(--ink-2); font-size:14px;">
+          No real interview transcripts or user data were shared with external LLM services. We used AI for
+          template copy, then hand-stitched in anonymized quotes. All AI-generated code blocks pushed to
+          our repository carry a comment tag <code>// AI-assisted · reviewed by &lt;member&gt;</code> and
+          are listed in the References section of this portfolio.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ REFERENCES ============================ -->
+<section id="references" style="padding-bottom: 120px;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">07 · References</div>
+      <h2 class="section-title">Papers, competitors, and AI tools — formally cited.</h2>
+      <p class="section-lede">
+        Mandatory per coursework: every AI tool is cited with version, access date, and purpose. Academic
+        papers are in APA. Commercial competitors are cited with the product name and the version/URL we
+        evaluated against.
+      </p>
+    </div>
+
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:22px;color:#fff;margin-bottom:14px;">Academic — peer-reviewed</h3>
+    <div class="refs" style="margin-bottom: 28px;">
+      <div class="ref">
+        <div class="ref-n">P1</div>
+        <div>Consolvo, S., Everitt, K., Smith, I., &amp; Landay, J. A. (2006). <i>Design requirements for technologies that encourage physical activity.</i> In Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (pp. 457–466). ACM. <span class="tag-kind">Paper</span></div>
+      </div>
+      <div class="ref">
+        <div class="ref-n">P2</div>
+        <div>Lindqvist, J., Cranshaw, J., Wiese, J., Hong, J., &amp; Zimmerman, J. (2011). <i>I'm the mayor of my house: Examining why people use Foursquare — a social-driven location sharing application.</i> In Proceedings of CHI 2011 (pp. 2409–2418). ACM. <span class="tag-kind">Paper</span></div>
+      </div>
+      <div class="ref">
+        <div class="ref-n">P3</div>
+        <div>Munson, S. A., &amp; Consolvo, S. (2012). <i>Exploring goal-setting, rewards, self-monitoring, and sharing to motivate physical activity.</i> In 2012 6th International Conference on Pervasive Computing Technologies for Healthcare (PervasiveHealth) (pp. 25–32). IEEE. <span class="tag-kind">Paper</span></div>
+      </div>
+      <div class="ref">
+        <div class="ref-n">P4</div>
+        <div>Stragier, J., Vanden Abeele, M., Mechant, P., &amp; De Marez, L. (2016). <i>Recreational athletes' running motivations as predictors of their use of online fitness community features.</i> Behaviour &amp; Information Technology, 35(10), 815–827. <span class="tag-kind">Paper</span></div>
+      </div>
+      <div class="ref">
+        <div class="ref-n">P5</div>
+        <div>Guthold, R., Stevens, G. A., Riley, L. M., &amp; Bull, F. C. (2018). <i>Worldwide trends in insufficient physical activity from 2001 to 2016: a pooled analysis of 358 population-based surveys with 1.9 million participants.</i> The Lancet Global Health, 6(10), e1077–e1086. <span class="tag-kind">Paper · supporting</span></div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:22px;color:#fff;margin-bottom:14px;">Commercial — competitive analysis</h3>
+    <div class="refs" style="margin-bottom: 28px;">
+      <div class="ref">
+        <div class="ref-n">C1</div>
+        <div>Strava, Inc. (2026). <i>Strava — running &amp; cycling tracker.</i> Mobile app, iOS v355.x, accessed 2026-04-05. <a href="https://www.strava.com" target="_blank" rel="noopener">strava.com</a>. <span class="tag-kind">Competitor</span></div>
+      </div>
+      <div class="ref">
+        <div class="ref-n">C2</div>
+        <div>Nike, Inc. (2026). <i>Nike Run Club.</i> Mobile app, iOS v4.3x, accessed 2026-04-06. <a href="https://www.nike.com/nrc-app" target="_blank" rel="noopener">nike.com/nrc-app</a>. <span class="tag-kind">Competitor</span></div>
+      </div>
+      <div class="ref">
+        <div class="ref-n">C3</div>
+        <div>Beijing Calorie Tech. (2026). <i>Keep — fitness &amp; community.</i> Mobile app, accessed 2026-04-07. <a href="https://www.gotokeep.com" target="_blank" rel="noopener">gotokeep.com</a>. <span class="tag-kind">Competitor</span></div>
+      </div>
+      <div class="ref">
+        <div class="ref-n">C4</div>
+        <div>parkrun Ltd. (2026). <i>parkrun — free weekly 5k events.</i> Accessed 2026-04-08. <a href="https://www.parkrun.com" target="_blank" rel="noopener">parkrun.com</a>. <span class="tag-kind">Competitor</span></div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:22px;color:#fff;margin-bottom:14px;">AI tools — mandatory disclosure</h3>
+    <div class="refs">
+      <div class="ref">
+        <div class="ref-n">A1</div>
+        <div>
+          Anthropic. (2026). <i>Claude (Claude Opus 4.7).</i> Large language model. Accessed 2026-04-15 – 2026-04-19 via Cursor IDE. <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener">anthropic.com/claude</a>.
+          <br><span style="color:var(--muted);"><b>Purpose:</b> drafting PRD prose, generating repetitive CSS / HTML scaffolds for the hi-fi prototype, generating this portfolio page, prompt-assisted writing of the check-in state matrix and Haversine geofence helper.</span>
+          <span class="tag-kind">AI Tool</span>
         </div>
       </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="section-heading">
-          <p class="section-label">Our Team</p>
-          <h2>Development Team</h2>
-        </div>
-        
-        <div class="grid-4">
-          <div class="card member-card">
-            <div class="avatar-placeholder">
-              <img src="pages/avatar1.svg" alt="Team Member 1" />
-            </div>
-            <h3>Mingxuan Tong</h3>
-            <p class="student-id">Student ID: 2361127</p>
-            <p class="bio">Loving programming, eager to learn and grow with team.</p>
-          </div>
-
-          <div class="card member-card">
-            <div class="avatar-placeholder">
-              <img src="pages/avatar2.svg" alt="Team Member 2" />
-            </div>
-            <h3>Kaifan Jia</h3>
-            <p class="student-id">Student ID: 2362509</p>
-            <p class="bio">Friendly, easy-going and always ready for new things.</p>
-          </div>
-
-          <div class="card member-card">
-            <div class="avatar-placeholder">
-              <img src="pages/avatar3.svg" alt="Team Member 3" />
-            </div>
-            <h3>Ruihan Xiong</h3>
-            <p class="student-id">Student ID: 2363707</p>
-            <p class="bio">Solving problems with code; maintaining concentration and self-discipline through running.</p>
-          </div>
-
-          <div class="card member-card">
-            <div class="avatar-placeholder">
-              <img src="pages/avatar4.svg" alt="Team Member 4" />
-            </div>
-            <h3>Yuxuan Hu</h3>
-            <p class="student-id">Student ID: 2360308</p>
-            <p class="bio">Nice to meet you! I'm a beginner at running. I love making friends and eating delicious food.  </p>
-          </div>
+      <div class="ref">
+        <div class="ref-n">A2</div>
+        <div>
+          Anysphere Inc. (2026). <i>Cursor IDE (v1.x).</i> AI-assisted code editor. Accessed 2026-04-15 – 2026-04-19. <a href="https://cursor.com" target="_blank" rel="noopener">cursor.com</a>.
+          <br><span style="color:var(--muted);"><b>Purpose:</b> agent-based editing of HTML / CSS / JS files, project-wide refactors, in-editor prompt chaining during the high-fidelity prototype build.</span>
+          <span class="tag-kind">AI Tool</span>
         </div>
       </div>
-    </section>
-  </main>
+      <div class="ref">
+        <div class="ref-n">A3</div>
+        <div>
+          Figma, Inc. (2026). <i>Figma — "First Draft" / AI auto-layout assist.</i> Accessed 2026-04-10 – 2026-04-14. <a href="https://www.figma.com" target="_blank" rel="noopener">figma.com</a>.
+          <br><span style="color:var(--muted);"><b>Purpose:</b> accelerating low-fidelity wireframe layout; all final UI decisions were human-made and reviewed in the Crazy-Eights session.</span>
+          <span class="tag-kind">AI Tool</span>
+        </div>
+      </div>
+      <div class="ref">
+        <div class="ref-n">A4</div>
+        <div>
+          OpenAI. (2026). <i>ChatGPT (GPT-5 class).</i> Accessed 2026-04-12. <a href="https://chat.openai.com" target="_blank" rel="noopener">chat.openai.com</a>.
+          <br><span style="color:var(--muted);"><b>Purpose:</b> summarizing one academic paper into our 3-goods / 3-gaps format (P3) and drafting the "Confirm you're at the meetup" fallback dialog copy.</span>
+          <span class="tag-kind">AI Tool</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FOOTER ============================ -->
+<footer>
+  <div class="wrap">
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="logo-mark" style="width:32px;height:32px;border-radius:10px;">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:16px;height:16px;"><path d="M13.5 5.5a2 2 0 11-.001-3.999A2 2 0 0113.5 5.5zm-4 14.7l1.1-4.9 2.3 2.2v6h2v-7.5l-2.3-2.2.6-3c1.3 1.7 3.3 2.8 5.6 2.8v-2c-2 0-3.7-1-4.6-2.5l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.2L6.3 8.5v5h2v-3.7l1.8-.8-1.6 8 -4.9-1L3.2 18l7 1.2z"/></svg>
+        </span>
+        <b style="color:#fff;font-family:'Barlow Condensed';font-size:18px;letter-spacing:0.04em;">RUNAPP</b>
+        <span>· Portfolio v1.0 · Active Living</span>
+      </div>
+      <div style="margin-top:8px; color: var(--dim);">Built by Team RunAPP · Spring 2026 · Single-page portfolio, deployable on GitHub Pages.</div>
+    </div>
+    <div style="display:flex; gap:14px; flex-wrap:wrap; align-items:center;">
+      <a class="chip" href="#top">Back to top</a>
+      <a class="chip" href="../runapp-prototype/index.html">High-fi prototype</a>
+      <a class="chip" href="../PRD.en.md">Full PRD (v2.8)</a>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
