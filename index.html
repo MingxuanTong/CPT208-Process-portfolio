@@ -285,11 +285,13 @@
   .kpi .v { font-family: 'Barlow Condensed'; font-weight: 800; color: var(--ink); font-size: 34px; margin-top: 4px; }
 
   /* Papers/Competitors accordion-style table */
-  .research-table { display: flex; flex-direction: column; gap: 12px; }
+  .research-table { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 900px) { .research-table { grid-template-columns: 1fr; } }
   .rt-row {
     background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
     padding: 20px 24px;
     box-shadow: var(--shadow-sm);
+    height: 100%;
   }
   .rt-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
   .rt-idx { font-family: 'Barlow Condensed'; font-weight: 800; font-size: 22px; color: var(--brand); width: 28px; }
@@ -761,25 +763,25 @@
     </div>
 
     <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:var(--ink);margin:48px 0 20px;">
-      The Gap — 4 Academic Papers
+      The Gap — Academic Papers
     </h3>
     <p style="color:var(--ink-2);font-size:15px;max-width:780px;margin-bottom:20px;">
-      Each paper is summarized as <b style="color:#15803D">3 things it gets right</b> and <b style="color:#B91C1C">3 gaps</b> that shaped RunLink's design decisions. Full citations appear in §References.
+      4 papers reviewed to analyse check-in, social motivation, attendance reliability, and club-scoped engagement patterns.
     </p>
 
     <div class="research-table" style="margin-bottom: 40px;">
       <!-- Paper 1 -->
       <article class="rt-row">
         <div class="rt-head">
-          <div class="rt-idx">P1</div>
+          <div class="rt-idx">01</div>
           <div>
-            <div class="rt-title">Consolvo et al. — "Design Requirements for Technologies that Encourage Physical Activity" (CHI '06)</div>
-            <div class="rt-cite">Foundational work on ambient encouragement in fitness UIs.</div>
+            <div class="rt-title">Paper 01 — Consolvo et al. (CHI '06)</div>
+            <div class="rt-cite"><b>Relevance:</b> Foundational work on ambient encouragement in fitness UIs.</div>
           </div>
         </div>
         <div class="rt-body">
           <div class="rt-col good">
-            <h5>What it does well</h5>
+            <h5>Strengths</h5>
             <ul>
               <li>Argues movement feedback should be <i>non-judgmental</i> and <i>ambient</i> — we adopted this for reflections/emoji.</li>
               <li>Identifies "social influence" as a stronger lever than raw data dashboards.</li>
@@ -787,7 +789,7 @@
             </ul>
           </div>
           <div class="rt-col bad">
-            <h5>What it misses</h5>
+            <h5>Limitations</h5>
             <ul>
               <li>2006 mobile context — no GPS / no geofencing for on-site check-in.</li>
               <li>No discussion of what happens when users <i>miss</i> a session (our "Missed" lifecycle).</li>
@@ -800,15 +802,15 @@
       <!-- Paper 2 -->
       <article class="rt-row">
         <div class="rt-head">
-          <div class="rt-idx">P2</div>
+          <div class="rt-idx">02</div>
           <div>
-            <div class="rt-title">Lindqvist, Cranshaw et al. — "I'm the Mayor of My House: Examining Why People Use Foursquare" (CHI '11)</div>
-            <div class="rt-cite">Canonical study of location check-ins as a social game.</div>
+            <div class="rt-title">Paper 02 — Lindqvist et al. (CHI '11)</div>
+            <div class="rt-cite"><b>Relevance:</b> Canonical study of location check-ins as a social game.</div>
           </div>
         </div>
         <div class="rt-body">
           <div class="rt-col good">
-            <h5>What it does well</h5>
+            <h5>Strengths</h5>
             <ul>
               <li>Shows check-ins succeed when there is <i>a person</i> to check in <i>to</i>, not a system.</li>
               <li>Gamified presence but <i>stopped short</i> of competitive leaderboards — matches our monthly-km cap.</li>
@@ -816,7 +818,7 @@
             </ul>
           </div>
           <div class="rt-col bad">
-            <h5>What it misses</h5>
+            <h5>Limitations</h5>
             <ul>
               <li>No notion of a <i>time window</i> — Foursquare check-in is anytime, ours is tied to start/end.</li>
               <li>Gaming the check-in ("I was kind of nearby") is unchecked — we added 50 m geofence + GPS confidence fallback.</li>
@@ -829,15 +831,15 @@
       <!-- Paper 3 -->
       <article class="rt-row">
         <div class="rt-head">
-          <div class="rt-idx">P3</div>
+          <div class="rt-idx">03</div>
           <div>
-            <div class="rt-title">Munson & Consolvo — "Exploring Goal-Setting, Rewards, Self-Monitoring, and Sharing to Motivate Physical Activity" (PervasiveHealth '12)</div>
-            <div class="rt-cite">A/B tested sharing patterns inside a fitness tracker.</div>
+            <div class="rt-title">Paper 03 — Munson & Consolvo (PervasiveHealth '12)</div>
+            <div class="rt-cite"><b>Relevance:</b> A/B tested sharing patterns inside a fitness tracker.</div>
           </div>
         </div>
         <div class="rt-body">
           <div class="rt-col good">
-            <h5>What it does well</h5>
+            <h5>Strengths</h5>
             <ul>
               <li>Sharing progress with a <i>small, known group</i> beats broadcast sharing by 2× adherence.</li>
               <li>Short reflective notes beat photos for emotional stickiness — inspired our 200-char reflections.</li>
@@ -845,7 +847,7 @@
             </ul>
           </div>
           <div class="rt-col bad">
-            <h5>What it misses</h5>
+            <h5>Limitations</h5>
             <ul>
               <li>The study group was pre-existing friends; our users' "club" is looser and needs scaffolding.</li>
               <li>No handling of lapsed users — we added the "Checked in · no run recorded" state.</li>
@@ -858,15 +860,15 @@
       <!-- Paper 4 -->
       <article class="rt-row">
         <div class="rt-head">
-          <div class="rt-idx">P4</div>
+          <div class="rt-idx">04</div>
           <div>
-            <div class="rt-title">Stragier, Vanden Abeele et al. — "Recreational Athletes' Running Motivations as Predictors of Sharing Behavior on Facebook" (Comput. Hum. Behav., 2016)</div>
-            <div class="rt-cite">Survey of 466 runners on why they share (or don't) their runs.</div>
+            <div class="rt-title">Paper 04 — Stragier et al. (2016)</div>
+            <div class="rt-cite"><b>Relevance:</b> Survey of 466 runners on why they share (or don't) their runs.</div>
           </div>
         </div>
         <div class="rt-body">
           <div class="rt-col good">
-            <h5>What it does well</h5>
+            <h5>Strengths</h5>
             <ul>
               <li>Shows intrinsic-motivated runners <i>resent</i> public kudos economies.</li>
               <li>Quantifies "accountability sharing" as a distinct motivation from "performance bragging".</li>
@@ -874,7 +876,7 @@
             </ul>
           </div>
           <div class="rt-col bad">
-            <h5>What it misses</h5>
+            <h5>Limitations</h5>
             <ul>
               <li>Facebook-era — no mobile check-in context, no activity lifecycle.</li>
               <li>Only studies why people <i>post</i>, not why they <i>read</i> others' posts (which drives club retention).</li>
@@ -886,22 +888,25 @@
     </div>
 
     <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:var(--ink);margin:48px 0 20px;">
-      The Gap — 4 Commercial Competitors
+      Commercial Products
     </h3>
+    <p style="color:var(--ink-2);font-size:15px;max-width:780px;margin-bottom:20px;">
+      4 products reviewed to analyse navigation, social loops, exploration, and organizer/runner interaction patterns.
+    </p>
 
     <div class="research-table">
       <!-- Competitor 1 -->
       <article class="rt-row">
         <div class="rt-head">
-          <div class="rt-idx">C1</div>
+          <div class="rt-idx">01</div>
           <div>
-            <div class="rt-title">Strava</div>
-            <div class="rt-cite">The incumbent. Route library, segments, global kudos economy.</div>
+            <div class="rt-title">Product 01 — Strava</div>
+            <div class="rt-cite"><b>Why relevant:</b> Route library + social running baseline for comparison.</div>
           </div>
         </div>
         <div class="rt-body">
           <div class="rt-col good">
-            <h5>What it does well</h5>
+            <h5>Strengths</h5>
             <ul>
               <li>Best-in-class GPS recording, splits, and heart-rate rendering.</li>
               <li>Segments create <i>low-commitment rivalry</i>.</li>
@@ -909,7 +914,7 @@
             </ul>
           </div>
           <div class="rt-col bad">
-            <h5>What it misses</h5>
+            <h5>Limitations</h5>
             <ul>
               <li>No concept of a <i>scheduled club activity</i> with a start time + meetup pin.</li>
               <li>No on-site check-in — you can fake an entire run.</li>
@@ -922,15 +927,15 @@
       <!-- Competitor 2 -->
       <article class="rt-row">
         <div class="rt-head">
-          <div class="rt-idx">C2</div>
+          <div class="rt-idx">02</div>
           <div>
-            <div class="rt-title">Nike Run Club</div>
-            <div class="rt-cite">Guided runs, coached plans, brand-led community events.</div>
+            <div class="rt-title">Product 02 — Nike Run Club</div>
+            <div class="rt-cite"><b>Why relevant:</b> Strong beginner coaching and habit framing in a mainstream running app.</div>
           </div>
         </div>
         <div class="rt-body">
           <div class="rt-col good">
-            <h5>What it does well</h5>
+            <h5>Strengths</h5>
             <ul>
               <li>Guided audio coaching is genuinely great for beginners.</li>
               <li>Clean training plans with sensible defaults.</li>
@@ -938,7 +943,7 @@
             </ul>
           </div>
           <div class="rt-col bad">
-            <h5>What it misses</h5>
+            <h5>Limitations</h5>
             <ul>
               <li>No user-created clubs — only Nike-organized events.</li>
               <li>No check-in; no roster of who's running today.</li>
@@ -951,15 +956,15 @@
       <!-- Competitor 3 -->
       <article class="rt-row">
         <div class="rt-head">
-          <div class="rt-idx">C3</div>
+          <div class="rt-idx">03</div>
           <div>
-            <div class="rt-title">Keep (China)</div>
-            <div class="rt-cite">Hybrid fitness super-app with group activities and live classes.</div>
+            <div class="rt-title">Product 03 — Keep</div>
+            <div class="rt-cite"><b>Why relevant:</b> Local community + event mechanics in a China-context product.</div>
           </div>
         </div>
         <div class="rt-body">
           <div class="rt-col good">
-            <h5>What it does well</h5>
+            <h5>Strengths</h5>
             <ul>
               <li>Strong "local community" surface with nearby clubs and meetups.</li>
               <li>In-app check-in for offline events (QR-based).</li>
@@ -967,7 +972,7 @@
             </ul>
           </div>
           <div class="rt-col bad">
-            <h5>What it misses</h5>
+            <h5>Limitations</h5>
             <ul>
               <li>QR check-in requires another person and a poster — breaks on wet mornings.</li>
               <li>Commerce-heavy: feed is cluttered with paid classes and merch.</li>
@@ -980,15 +985,15 @@
       <!-- Competitor 4 -->
       <article class="rt-row">
         <div class="rt-head">
-          <div class="rt-idx">C4</div>
+          <div class="rt-idx">04</div>
           <div>
-            <div class="rt-title">parkrun (web + paper)</div>
-            <div class="rt-cite">Worldwide free 5k events; barcode scan at finish.</div>
+            <div class="rt-title">Product 04 — parkrun</div>
+            <div class="rt-cite"><b>Why relevant:</b> Large-scale offline run ritual and attendance verification model.</div>
           </div>
         </div>
         <div class="rt-body">
           <div class="rt-col good">
-            <h5>What it does well</h5>
+            <h5>Strengths</h5>
             <ul>
               <li>Rituals of physical check-in + results email after — powerful emotional loop.</li>
               <li>100% free, volunteer-run, gloriously unhurried.</li>
@@ -996,7 +1001,7 @@
             </ul>
           </div>
           <div class="rt-col bad">
-            <h5>What it misses</h5>
+            <h5>Limitations</h5>
             <ul>
               <li>Paper barcode is a real friction — left at home = no result.</li>
               <li>Only 5k Saturdays — no weekday intervals, no trail, no custom distances.</li>
@@ -1005,6 +1010,33 @@
           </div>
         </div>
       </article>
+    </div>
+
+    <div style="margin-top: 40px;">
+      <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:var(--ink);margin:0 0 10px;">
+        Gap Summary
+      </h3>
+      <p style="color:var(--ink-2);font-size:15px;max-width:780px;margin-bottom:20px;">
+        What existing work does well and what it still misses.
+      </p>
+      <div class="grid-2">
+        <article class="card">
+          <h4 style="margin-bottom:10px;color:#15803D;">3 Things They Did Well</h4>
+          <ul class="clean green">
+            <li>They show strong potential for combining route guidance with place-aware context.</li>
+            <li>They support self-paced participation and active exploration behavior.</li>
+            <li>They show social and playful interactions can improve engagement.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h4 style="margin-bottom:10px;color:#B91C1C;">3 Things They Missed</h4>
+          <ul class="clean red">
+            <li>They rarely model runner and organizer roles together in one coherent system flow.</li>
+            <li>They under-specify attendance reliability under GPS failure and strict time-window constraints.</li>
+            <li>They offer limited club-scoped reflection, feedback, and discussion tied to each activity.</li>
+          </ul>
+        </article>
+      </div>
     </div>
 
     <!-- Personas anchor -->
