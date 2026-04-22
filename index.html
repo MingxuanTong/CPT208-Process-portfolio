@@ -735,19 +735,16 @@
       <article class="card">
         <h3 style="margin-bottom:12px;">The Why — Our Motivation</h3>
         <p style="color:var(--ink-2); font-size:15.5px;">
-          We chose <b style="color:var(--ink)">Active Living</b> because every team member has at some point
-          signed up for a gym, a 10k, or a "new year I'll actually run" pact — and quietly dropped it within
-          six weeks. The WHO reports that <b style="color:var(--ink)">27.5% of adults fall short of recommended
-          activity levels</b>, and the strongest mitigating factor in the literature is not another fitness
-          tracker but a <i>social commitment device</i>: a small group that notices when you don't show up.
-          Running clubs already exist in every city, yet the apps we tried treat them as either
-          private chat rooms (Telegram/WeChat groups) or anonymous global leaderboards (Strava segments).
-          Neither makes it <i>easy</i> to walk out the door on Saturday at 6:45 AM and know exactly where 12
-          other humans will be waiting. Our product bet: if we can compress the entire "register → remember →
-          show up → record → reflect" loop into a mobile web app that never asks more than one tap at a time,
-          casual runners will stay with a club, and clubs will retain members long enough for habit formation
-          to actually happen.
-          <span style="display:block;margin-top:10px;color:var(--dim);font-size:13px;">— 211 words, team position statement</span>
+          We chose <b style="color:var(--ink)">Active Living</b> because our team has repeatedly seen the same
+          pattern: people start running with good intentions, then stop when the routine becomes hard to sustain.
+          The WHO reports that <b style="color:var(--ink)">27.5% of adults do not meet recommended activity levels</b>.
+          Our interviews and field visits suggest the core issue is not motivation alone, but broken social routines:
+          people forget sessions, feel awkward joining groups, or lose confidence when they cannot find the meetup
+          flow quickly. Existing apps either emphasize global performance feeds or private chat groups, but rarely
+          support a reliable local club loop from registration to attendance to reflection. RunLink is our response:
+          a club-scoped mobile web app that reduces friction across one weekly loop —
+          <i>register → check in → run → reflect</i> — so more casual runners can return consistently and clubs can
+          retain members long enough for healthy habits to form.
         </p>
       </article>
       <article class="card" style="background: linear-gradient(160deg, rgba(249,115,22,0.06), rgba(34,197,94,0.04));">
@@ -833,25 +830,25 @@
         <div class="rt-head">
           <div class="rt-idx">03</div>
           <div>
-            <div class="rt-title">Paper 03 — Munson & Consolvo (PervasiveHealth '12)</div>
-            <div class="rt-cite"><b>Relevance:</b> A/B tested sharing patterns inside a fitness tracker.</div>
+            <div class="rt-title">Paper 03 — A Game-based AR Navigation System for Makerspace Education</div>
+            <div class="rt-cite">Chen, Hwang &amp; Lin (2023) · <b>Relevance:</b> Shows how AR and gamification can support active exploration.</div>
           </div>
         </div>
         <div class="rt-body">
           <div class="rt-col good">
             <h5>Strengths</h5>
             <ul>
-              <li>Sharing progress with a <i>small, known group</i> beats broadcast sharing by 2× adherence.</li>
-              <li>Short reflective notes beat photos for emotional stickiness — inspired our 200-char reflections.</li>
-              <li>Rewards should be <i>social</i>, not monetary.</li>
+              <li>Combines AR with gamified missions and rewards.</li>
+              <li>Provides a clear and structured interaction flow.</li>
+              <li>Supports active learning through problem-solving tasks.</li>
             </ul>
           </div>
           <div class="rt-col bad">
             <h5>Limitations</h5>
             <ul>
-              <li>The study group was pre-existing friends; our users' "club" is looser and needs scaffolding.</li>
-              <li>No handling of lapsed users — we added the "Checked in · no run recorded" state.</li>
-              <li>No discussion of organizer/moderator load.</li>
+              <li>May prioritise engagement over learning depth.</li>
+              <li>Context is limited to a library makerspace.</li>
+              <li>Interaction design may be too complex for general mobile users.</li>
             </ul>
           </div>
         </div>
@@ -901,7 +898,7 @@
           <div class="rt-idx">01</div>
           <div>
             <div class="rt-title">Product 01 — Strava</div>
-            <div class="rt-cite"><b>Why relevant:</b> Route library + social running baseline for comparison.</div>
+            <div class="rt-cite"><b>Relevance:</b> Route library + social running baseline for comparison.</div>
           </div>
         </div>
         <div class="rt-body">
@@ -930,7 +927,7 @@
           <div class="rt-idx">02</div>
           <div>
             <div class="rt-title">Product 02 — Nike Run Club</div>
-            <div class="rt-cite"><b>Why relevant:</b> Strong beginner coaching and habit framing in a mainstream running app.</div>
+            <div class="rt-cite"><b>Relevance:</b> Strong beginner coaching and habit framing in a mainstream running app.</div>
           </div>
         </div>
         <div class="rt-body">
@@ -959,7 +956,7 @@
           <div class="rt-idx">03</div>
           <div>
             <div class="rt-title">Product 03 — Keep</div>
-            <div class="rt-cite"><b>Why relevant:</b> Local community + event mechanics in a China-context product.</div>
+            <div class="rt-cite"><b>Relevance:</b> Local community + event mechanics in a China-context product.</div>
           </div>
         </div>
         <div class="rt-body">
@@ -988,7 +985,7 @@
           <div class="rt-idx">04</div>
           <div>
             <div class="rt-title">Product 04 — parkrun</div>
-            <div class="rt-cite"><b>Why relevant:</b> Large-scale offline run ritual and attendance verification model.</div>
+            <div class="rt-cite"><b>Relevance:</b> Large-scale offline run ritual and attendance verification model.</div>
           </div>
         </div>
         <div class="rt-body">
@@ -1019,7 +1016,7 @@
       <p style="color:var(--ink-2);font-size:15px;max-width:780px;margin-bottom:20px;">
         What existing work does well and what it still misses.
       </p>
-      <div class="grid-2">
+      <div style="display:grid;grid-template-columns:1fr;gap:16px;">
         <article class="card">
           <h4 style="margin-bottom:10px;color:#15803D;">3 Things They Did Well</h4>
           <ul class="clean green">
@@ -1052,62 +1049,19 @@
         Community tab, but isn't a daily-driver persona.
       </p>
       <div class="grid-2">
-        <!-- Primary · Tom -->
-        <article class="persona">
-          <div class="p-head">
-            <div class="p-av">TM</div>
-            <div>
-              <div class="p-role">Primary Persona · Runner · Market 70% · Typical</div>
-              <div class="p-name">Tom, 20</div>
-              <div style="color:var(--muted);font-size:13px;">Undergraduate · Suzhou, CN · &lt;1 year running · ~7:30 / km</div>
-            </div>
-          </div>
-          <blockquote class="p-quote">"I want a running app that helps me join the right activity, find my way easily, and run without feeling lost or embarrassed."</blockquote>
-          <div class="p-block">
-            <h5>Background</h5>
-            <p>A 20-year-old student who started running to relieve academic stress. Solo runs feel repetitive and hard to sustain; beginner-friendly clubs feel intimidating to join cold. Wants a low-pressure way to discover, register, check in, and follow a route — all from one map.</p>
-          </div>
-          <div class="p-block">
-            <h5>Goals</h5>
-            <p>Join suitable activities easily (discover + pick a pace group + register + check in with minimal pressure). Run with confidence on a single full-screen map. Build a weekly habit through club participation and light social interaction.</p>
-          </div>
-          <div class="p-block">
-            <h5>Frustrations</h5>
-            <p>Can't tell which events are genuinely beginner-friendly or whether his 7:30/km will keep up. Arriving at the wrong spot or missing check-in is stressful. Repetitive solo routes are easy to drop — "nobody noticed anyway."</p>
-          </div>
-          <div class="p-block">
-            <h5>Motivation &amp; Tech</h5>
-            <p><b>Top drivers:</b> habit-building · social connection · route confidence.  <b>Low:</b> competitive performance.  Mobile web on iPhone; urban GPS is often low-confidence between buildings — <b>needs</b> one-tap check-in, visible pace targets on every card, and the organizer's route drawn onto the map he's already looking at.</p>
-          </div>
+        <article class="card" style="padding:14px;">
+          <img
+            src="./personas/tom.png"
+            alt="Persona card image: Tom"
+            style="width:100%;height:auto;border-radius:14px;border:1px solid var(--line);"
+          />
         </article>
-
-        <!-- Secondary · Hanqin Wan -->
-        <article class="persona alt">
-          <div class="p-head">
-            <div class="p-av">HW</div>
-            <div>
-              <div class="p-role">Secondary Persona · Organizer · Market 10–15% · Power User</div>
-              <div class="p-name">Hanqin Wan, 31</div>
-              <div style="color:var(--muted);font-size:13px;">PM by day · Club owner · Shanghai · ~60 members · weekly 10 k</div>
-            </div>
-          </div>
-          <blockquote class="p-quote">"Running this club is supposed to be about running with people I love — not re-typing the same form and chasing folks for a check-in code every Saturday morning."</blockquote>
-          <div class="p-block">
-            <h5>Background</h5>
-            <p>Founded a public club along the Huangpu riverfront 3 years ago. Weekly 10 k Saturday morning + occasional trail run. Runs the club on top of a full-time PM job, so operational efficiency, safe delegation and data-driven decisions matter as much as choosing a good route.</p>
-          </div>
-          <div class="p-block">
-            <h5>Goals</h5>
-            <p>Publish an activity in under 2 min by reusing a proven structure. Run the event, not the queue. Grow the club with evidence (monthly mileage, attendance, late ratio). Safely delegate to a trusted helper without handing over the club itself.</p>
-          </div>
-          <div class="p-block">
-            <h5>Frustrations</h5>
-            <p>Refilling the same form every week. Scan-code queues and "weird GPS" disputes he can't verify or settle. Has no built-in month-over-month view to justify schedule or route changes. No safe way to let a helper publish when he travels.</p>
-          </div>
-          <div class="p-block">
-            <h5>Motivation &amp; Tech</h5>
-            <p><b>Top drivers:</b> community growth · operational efficiency · data-driven insight.  <b>Low:</b> personal PBs.  Android on the ground, laptop on Sundays. <b>Needs</b> a structured publish form, zero-approval registration gated by capacity, a three-layer check-in safety net (auto · self-confirmed · organizer-manual), and a bounded <i>Co-organizer</i> role.</p>
-          </div>
+        <article class="card" style="padding:14px;">
+          <img
+            src="./personas/Jonas.png"
+            alt="Persona card image: Jonas"
+            style="width:100%;height:auto;border-radius:14px;border:1px solid var(--line);"
+          />
         </article>
       </div>
     </div>
@@ -1127,116 +1081,21 @@
       </p>
     </div>
 
-    <!-- Runner journey · Tom -->
-    <div class="journey">
-      <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:0 0 20px;">
-        <div>
-          <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:22px;color:var(--ink);margin:0 0 4px;">
-            Runner journey — Tom's Saturday <span style="color:var(--brand);">(primary)</span>
-          </h3>
-          <p style="color:var(--muted);font-size:13px;margin:0;">Five stages, one mobile web app, one full-screen map.</p>
-        </div>
-        <span class="chip brand">Primary persona: Tom · Beginner Runner</span>
-      </div>
-      <div class="jm-grid">
-        <div class="jm-label"></div>
-        <div class="jm-stage">1 · Discover</div>
-        <div class="jm-stage">2 · Register</div>
-        <div class="jm-stage">3 · Arrive &amp; check in</div>
-        <div class="jm-stage">4 · Run</div>
-        <div class="jm-stage">5 · Reflect</div>
-
-        <div class="jm-label">Doing</div>
-        <div class="jm-c">Browses Discover &amp; Nearby clubs; opens an activity detail to read pace groups, times, &amp; seats.</div>
-        <div class="jm-c">Single-selects one <code>group_options</code> entry, taps <b>Register</b> — no approval queue.</div>
-        <div class="jm-c">At the meetup, opens Discover → My registrations and taps <b>Map check-in</b>.</div>
-        <div class="jm-c">Opens Running tab; Leaflet map + organizer <code>route_geojson</code> overlay; optional activity link via route square; taps <b>START</b>.</div>
-        <div class="jm-c">Taps <b>End</b>, returns to Start run, opens Activity detail → Reflections, leaves an emoji + a short note.</div>
-
-        <div class="jm-label">Feeling</div>
-        <div class="jm-c emoji">🤔</div>
-        <div class="jm-c emoji">🙂</div>
-        <div class="jm-c emoji">😰</div>
-        <div class="jm-c emoji">😤</div>
-        <div class="jm-c emoji">😊</div>
-
-        <div class="jm-label">Thinking</div>
-        <div class="jm-c">"Can I actually keep up with this pace group?"</div>
-        <div class="jm-c">"If Saturday rains, can I back out without guilt?"</div>
-        <div class="jm-c">"Did that tap count? Am I already late?"</div>
-        <div class="jm-c">"Is the lead pack already half a km ahead?"</div>
-        <div class="jm-c">"Did anyone even notice I showed up today?"</div>
-
-        <div class="jm-label">Pain points</div>
-        <div class="jm-c pain">Activity cards hide pace &amp; per-group caps.</div>
-        <div class="jm-c pain">Missed deadlines; no clean way to cancel.</div>
-        <div class="jm-c pain">Paper codes, GPS dropouts, queues between buildings.</div>
-        <div class="jm-c pain">Doesn't know the course; gets lost at the first fork.</div>
-        <div class="jm-c pain">Effort evaporates — no shared closure with the group.</div>
-
-        <div class="jm-label">Opportunities</div>
-        <div class="jm-c opp"><code>group_options</code> with target pace &amp; per-group capacity on every card.</div>
-        <div class="jm-c opp">One-tap register; cancel until <code>start_time</code> to free the seat.</div>
-        <div class="jm-c opp">Single-tap <b>Map check-in</b>: time window + 50 m geofence + GPS fallback dialog.</div>
-        <div class="jm-c opp"><b>Club route overlaid on the Running map</b> (OSM basemap · GeoJSON) + realtime club toasts.</div>
-        <div class="jm-c opp">≤ 200-char reflection + 1 emoji per activity — club-scoped, never a global feed.</div>
-      </div>
-    </div>
-
-    <!-- Organizer journey · Hanqin Wan -->
-    <div class="journey" style="margin-top: 24px;">
-      <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:0 0 20px;">
-        <div>
-          <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:22px;color:var(--ink);margin:0 0 4px;">
-            Organizer workflow — Hanqin's weekly loop <span style="color:var(--accent);">(secondary)</span>
-          </h3>
-          <p style="color:var(--muted);font-size:13px;margin:0;">Publish → manage → run the event → review — the same five stages, organizer-side.</p>
-        </div>
-        <span class="chip accent">Secondary persona: Hanqin Wan · Owner / Co-organizer</span>
-      </div>
-      <div class="jm-grid">
-        <div class="jm-label"></div>
-        <div class="jm-stage">1 · Plan &amp; publish</div>
-        <div class="jm-stage">2 · Registration</div>
-        <div class="jm-stage">3 · On-site check-in</div>
-        <div class="jm-stage">4 · During activity</div>
-        <div class="jm-stage">5 · Review</div>
-
-        <div class="jm-label">Doing</div>
-        <div class="jm-c">Fills Publish form: <code>start / end</code>, check-in window, meetup lat/lng, GPX route, <code>group_options</code>, optional caps.</div>
-        <div class="jm-c">Watches sign-ups on the dashboard; approves nothing (zero-approval). Cancellations self-release seats.</div>
-        <div class="jm-c">Arrives early; most runners auto-check-in; GPS-fail rows come in as <i>Self-confirmed</i>.</div>
-        <div class="jm-c">Leads the run while the dashboard updates <b>Late</b> and <b>Cancelled</b> counts in real time.</div>
-        <div class="jm-c">Opens Data dashboard + Monthly leaderboard + Reflections — plans next week's route and timing.</div>
-
-        <div class="jm-label">Feeling</div>
-        <div class="jm-c emoji">😑</div>
-        <div class="jm-c emoji">🙂</div>
-        <div class="jm-c emoji">😓</div>
-        <div class="jm-c emoji">😌</div>
-        <div class="jm-c emoji">📊</div>
-
-        <div class="jm-label">Thinking</div>
-        <div class="jm-c">"Why am I refilling every field from scratch again?"</div>
-        <div class="jm-c">"Do we still have room in the 5:30 group?"</div>
-        <div class="jm-c">"Who's the person whose GPS 'always fails'?"</div>
-        <div class="jm-c">"Did anyone drop out mid-way? Will I even know?"</div>
-        <div class="jm-c">"Is attendance actually trending up? Prove it."</div>
-
-        <div class="jm-label">Pain points</div>
-        <div class="jm-c pain">Retyping every field every week; no template reuse.</div>
-        <div class="jm-c pain">Approval queues + DM'd cancellations to chase.</div>
-        <div class="jm-c pain">Manual sign-ins + disputes over "weird GPS".</div>
-        <div class="jm-c pain">No live view of who actually ran vs. only showed up.</div>
-        <div class="jm-c pain">No month-over-month data — decisions run on gut.</div>
-
-        <div class="jm-label">Opportunities</div>
-        <div class="jm-c opp">Activity carries <code>template_name</code>; structured form; fixed 50 m geofence — one less knob.</div>
-        <div class="jm-c opp">Zero-approval + <code>capacity_total</code> / <code>capacity_per_group</code> + self-cancel releases the seat.</div>
-        <div class="jm-c opp">Auto <b>Map check-in</b> + <i>Confirm you're at the meetup</i> fallback + <i>Mark as checked in</i>.</div>
-        <div class="jm-c opp">Dashboard: signups · check-ins · <b>Late</b> · <b>Cancelled</b> · audit-tagged method chips.</div>
-        <div class="jm-c opp">Monthly mileage leaderboard + aggregated Reflections per activity.</div>
-      </div>
+    <div style="display:grid;grid-template-columns:1fr;gap:20px;">
+      <article class="card" style="padding:14px;">
+        <img
+          src="./user journey map/Beginner.png"
+          alt="User journey map image for beginner runner persona"
+          style="width:100%;height:auto;border-radius:14px;border:1px solid var(--line);"
+        />
+      </article>
+      <article class="card" style="padding:14px;">
+        <img
+          src="./user journey map/Group leader.png"
+          alt="User journey map image for group leader persona"
+          style="width:100%;height:auto;border-radius:14px;border:1px solid var(--line);"
+        />
+      </article>
     </div>
 
     <!-- Requirements -->
@@ -1371,34 +1230,33 @@
         Evidence of Life — Field Research
       </h3>
       <p style="color:var(--ink-2); max-width:760px; margin-bottom: 22px;">
-        Five pieces of in-the-wild evidence from our interviews and field visits. Each tile is a placeholder —
-        <b style="color:var(--brand-2)">replace the background with your own photo or video thumb</b> when you finalize your portfolio assets.
+        Five pieces of in-the-wild evidence from our interviews and field visits.
       </p>
       <div class="evidence">
-        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(249,115,22,0.14), rgba(255,247,237,0.6)); color:#9A3412;">
+        <figure class="ev-tile" style="background-image: linear-gradient(to top, rgba(15,23,42,0.78) 0%, rgba(15,23,42,0.22) 50%, transparent 100%), url('Evidence of Life — Field Research/1.jpg'); background-size: cover; background-position: center; color:#FED7AA; border-style: solid; border-color: rgba(249,115,22,0.3);">
           <div class="ev-n">01</div>
-          <span class="ev-tag">Interview · café</span>
-          <figcaption><b style="color:var(--ink)">Tom (P2)</b> — 34-min sit-down, campus café in Suzhou. Discussed 10-month run history &amp; first-time club anxiety.</figcaption>
+          <span class="ev-tag">Interview · runner</span>
+          <figcaption><b style="color:#fff">Tom</b> — 40-min sit-down. Discussed 10-month run history &amp; first-time club anxiety.</figcaption>
         </figure>
-        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(22,163,74,0.14), rgba(240,253,244,0.6)); color:#15803D;">
+        <figure class="ev-tile" style="background-image: linear-gradient(to top, rgba(15,23,42,0.78) 0%, rgba(15,23,42,0.22) 50%, transparent 100%), url('Evidence of Life — Field Research/2.jpg'); background-size: cover; background-position: center; color:#BBF7D0; border-style: solid; border-color: rgba(22,163,74,0.3);">
           <div class="ev-n">02</div>
-          <span class="ev-tag green">Field · parkrun</span>
-          <figcaption><b style="color:var(--ink)">Saturday parkrun, Century Park</b> — 120 runners, 3 volunteers. Observed paper barcode friction first-hand.</figcaption>
+          <span class="ev-tag green">Field · weekly activity</span>
+          <figcaption><b style="color:#fff">Club weekly activity, Dushu Lake</b> — 40 runners, 3 volunteers. Conducting on-site investigation of running community activities.</figcaption>
         </figure>
-        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(2,132,199,0.14), rgba(240,249,255,0.6)); color:#075985;">
+        <figure class="ev-tile" style="background-image: linear-gradient(to top, rgba(15,23,42,0.78) 0%, rgba(15,23,42,0.22) 50%, transparent 100%), url('Evidence of Life — Field Research/3.jpg'); background-size: cover; background-position: center; color:#BAE6FD; border-style: solid; border-color: rgba(56,189,248,0.3);">
           <div class="ev-n">03</div>
           <span class="ev-tag">Interview · organizer</span>
-          <figcaption><b style="color:var(--ink)">Hanqin (O1)</b> — 45-min call with a club owner. Walked through his weekly publish / check-in / review load.</figcaption>
+          <figcaption><b style="color:#fff">Hanqin</b> — 45-min call with a club owner. Walked through his weekly publish / check-in / review load.</figcaption>
         </figure>
-        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(124,58,237,0.14), rgba(245,243,255,0.6)); color:#5B21B6;">
+        <figure class="ev-tile" style="background-image: linear-gradient(to top, rgba(15,23,42,0.78) 0%, rgba(15,23,42,0.22) 50%, transparent 100%), url('Evidence of Life — Field Research/4.jpg'); background-size: cover; background-position: center; color:#DDD6FE; border-style: solid; border-color: rgba(124,58,237,0.3);">
           <div class="ev-n">04</div>
           <span class="ev-tag">Field · track night</span>
-          <figcaption><b style="color:var(--ink)">Weekday interval session</b> — 40 runners on a wet Thursday. Observed poor group-finding behavior in the dark.</figcaption>
+          <figcaption><b style="color:#fff">Weekday interval session</b> — 40 runners on a wet Thursday. Observed poor group-finding behavior in the dark.</figcaption>
         </figure>
-        <figure class="ev-tile" style="background-image: linear-gradient(135deg, rgba(220,38,38,0.12), rgba(254,242,242,0.6)); color:#B91C1C;">
+        <figure class="ev-tile" style="background-image: linear-gradient(to top, rgba(15,23,42,0.78) 0%, rgba(15,23,42,0.22) 50%, transparent 100%), url('Evidence of Life — Field Research/5.jpg'); background-size: cover; background-position: center; color:#FECACA; border-style: solid; border-color: rgba(220,38,38,0.3);">
           <div class="ev-n">05</div>
           <span class="ev-tag">Interview · lapsed</span>
-          <figcaption><b style="color:var(--ink)">Three lapsed runners</b> — 20-min group chat about why each stopped going. "Nobody noticed" came up 3×.</figcaption>
+          <figcaption><b style="color:#fff">Three lapsed runners</b> — 20-min group chat about why each stopped going. "Nobody noticed" came up 3×.</figcaption>
         </figure>
         <figure class="ev-tile" style="background: repeating-linear-gradient(45deg, #F8FAFC, #F8FAFC 10px, #F1F5F9 10px, #F1F5F9 20px); color:#64748B;">
           <div class="ev-n" style="background:rgba(15,23,42,0.55)">➕</div>
@@ -1427,152 +1285,69 @@
       Crazy Eights — 8 minutes, 8 UI directions
     </h3>
     <p style="color:var(--ink-2); font-size:14px; margin-bottom: 20px;">
-      The tiles below are low-fidelity SVG reconstructions of our paper sketches. Each team member drew two; we
-      voted with dots. <b style="color:var(--brand-2)">You may replace the SVGs with photos of your actual paper sketches.</b>
+      Final Crazy Eights output from our paper ideation sprint.
     </p>
-    <div class="c8">
-      <!-- 8 sketches as inline SVG -->
-      <figure class="c8-tile">
-        <div class="c8-num">01</div>
-        <svg class="c8-sketch sketch" viewBox="0 0 150 120">
-          <rect x="8" y="8" width="134" height="16" rx="4"/><text class="text" x="14" y="20">Discover</text>
-          <rect x="8" y="34" width="134" height="50" rx="6"/><text class="text" x="14" y="50">Sat 7AM · Sunrise</text>
-          <circle class="fill" cx="22" cy="70" r="7"/><rect class="fill" x="36" y="64" width="60" height="10" rx="3"/>
-          <rect x="8" y="92" width="134" height="22" rx="10"/><text class="text" x="52" y="107">Map check-in</text>
-        </svg>
-        <div class="c8-label">Card-centric</div>
-        <div class="c8-desc">Single CTA on discover card</div>
-      </figure>
-      <figure class="c8-tile">
-        <div class="c8-num">02</div>
-        <svg class="c8-sketch sketch" viewBox="0 0 150 120">
-          <circle cx="75" cy="60" r="44"/>
-          <circle cx="75" cy="60" r="14" class="fill"/>
-          <line x1="75" y1="16" x2="75" y2="26"/><line x1="119" y1="60" x2="109" y2="60"/>
-          <line x1="75" y1="104" x2="75" y2="94"/><line x1="31" y1="60" x2="41" y2="60"/>
-          <text class="text" x="46" y="114">radius + pulse</text>
-        </svg>
-        <div class="c8-label">Radial check-in</div>
-        <div class="c8-desc">Map-first, pulsing radius</div>
-      </figure>
-      <figure class="c8-tile">
-        <div class="c8-num">03</div>
-        <svg class="c8-sketch sketch" viewBox="0 0 150 120">
-          <rect x="8" y="8" width="134" height="88" rx="6"/>
-          <path d="M20 80 Q 50 30 80 60 T 130 50"/>
-          <circle class="fill" cx="130" cy="50" r="5"/>
-          <text class="text" x="14" y="22">Running tab</text>
-          <rect x="8" y="102" width="134" height="12" rx="3"/><text class="text" x="54" y="112">Start run</text>
-        </svg>
-        <div class="c8-label">Map-first</div>
-        <div class="c8-desc">Check-in via running tab</div>
-      </figure>
-      <figure class="c8-tile">
-        <div class="c8-num">04</div>
-        <svg class="c8-sketch sketch" viewBox="0 0 150 120">
-          <rect x="12" y="10" width="126" height="20" rx="4"/><text class="text" x="18" y="24">Sat · 06:58 AM</text>
-          <rect x="12" y="36" width="126" height="20" rx="4"/><text class="text" x="18" y="50">⏱ 2 min to window</text>
-          <rect x="12" y="62" width="126" height="20" rx="4"/><text class="text" x="18" y="76">📍 32 m to meetup</text>
-          <rect x="12" y="88" width="126" height="24" rx="10"/><text class="text" x="54" y="104">Check me in</text>
-        </svg>
-        <div class="c8-label">Receipt-style</div>
-        <div class="c8-desc">All proofs visible up-front</div>
-      </figure>
-      <figure class="c8-tile">
-        <div class="c8-num">05</div>
-        <svg class="c8-sketch sketch" viewBox="0 0 150 120">
-          <rect x="18" y="10" width="114" height="84" rx="8"/>
-          <rect x="28" y="20" width="94" height="10" rx="2"/>
-          <rect x="28" y="36" width="70" height="8" rx="2"/>
-          <circle cx="90" cy="66" r="16"/><text class="text" x="78" y="70">QR</text>
-          <text class="text" x="40" y="110">scan at gate</text>
-        </svg>
-        <div class="c8-label">QR turnstile</div>
-        <div class="c8-desc">Organizer holds a code</div>
-      </figure>
-      <figure class="c8-tile">
-        <div class="c8-num">06</div>
-        <svg class="c8-sketch sketch" viewBox="0 0 150 120">
-          <rect x="10" y="10" width="130" height="18" rx="4"/><text class="text" x="16" y="23">Activity detail</text>
-          <rect x="10" y="34" width="130" height="30" rx="6"/><text class="text" x="16" y="52">Countdown · 04:12</text>
-          <rect x="10" y="70" width="130" height="30" rx="10"/><text class="text" x="42" y="89">Go run ▶</text>
-          <text class="text" x="40" y="114">(killed in v2.5)</text>
-        </svg>
-        <div class="c8-label">Detail-driven</div>
-        <div class="c8-desc">Check-in on activity page</div>
-      </figure>
-      <figure class="c8-tile">
-        <div class="c8-num">07</div>
-        <svg class="c8-sketch sketch" viewBox="0 0 150 120">
-          <circle cx="32" cy="62" r="12"/><circle cx="62" cy="62" r="12"/><circle cx="92" cy="62" r="12"/><circle cx="122" cy="62" r="12"/>
-          <text class="text" x="24" y="96">cohort strip</text>
-          <text class="text" x="12" y="24">✓ checked-in peers</text>
-        </svg>
-        <div class="c8-label">Cohort-first</div>
-        <div class="c8-desc">Faces of who's here now</div>
-      </figure>
-      <figure class="c8-tile">
-        <div class="c8-num">08</div>
-        <svg class="c8-sketch sketch" viewBox="0 0 150 120">
-          <rect x="10" y="10" width="130" height="26" rx="4"/><text class="text" x="16" y="28">Today · 7:00 AM</text>
-          <rect x="10" y="42" width="130" height="26" rx="4"/><text class="text" x="16" y="60">Tomorrow · 6 PM</text>
-          <rect x="10" y="74" width="130" height="26" rx="4"/><text class="text" x="16" y="92">Sat · track 5k</text>
-          <text class="text" x="14" y="114">agenda list</text>
-        </svg>
-        <div class="c8-label">Agenda</div>
-        <div class="c8-desc">Calendar-style list</div>
-      </figure>
-    </div>
+    <article class="card" style="padding:14px;">
+      <img
+        src="./Crazy Eights.jpg"
+        alt="Crazy Eights ideation board"
+        style="width:100%;height:auto;border-radius:14px;border:1px solid var(--line);"
+      />
+    </article>
 
     <!-- Alternatives -->
     <div style="margin-top: 56px;">
       <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:26px;color:var(--ink);margin-bottom:8px;">
-        Design Alternatives — three systems compared
+        Design Alternatives — three system models compared
       </h3>
       <p style="color:var(--ink-2); max-width:760px; margin-bottom: 24px;">
-        We compared three end-to-end interaction systems for "how a runner proves they showed up". The chosen
-        option (B) survived usability testing; A and C were explicitly killed with recorded rationale.
+        Three system-level models — each with its own check-in mechanism, power balance, and community loop. Option B alone satisfies all persona pain points.
       </p>
       <div class="alt-grid">
         <article class="alt">
           <div class="alt-badge">Option A · Rejected</div>
-          <h4>Organizer-held QR turnstile</h4>
-          <p>The organizer prints / displays a rotating QR at the meetup; runners scan to check in. Heavily inspired by parkrun barcodes and Keep events.</p>
+          <h4>Organizer-Centralised Model</h4>
+          <p>Organizer as gatekeeper: QR scan at the meetup, manual attendance verification, exclusive control of publishing and community content. Runners are passive consumers.</p>
           <div class="pros-cons">
-            <div class="pc"><b>+</b><span>Visible human moment — a volunteer at the gate.</span></div>
-            <div class="pc"><b>+</b><span>Cannot be faked without physical presence.</span></div>
-            <div class="pc minus"><b>–</b><span>Breaks in rain; needs charged phone + poster.</span></div>
-            <div class="pc minus"><b>–</b><span>Dead on day 1 without a volunteer present.</span></div>
-            <div class="pc minus"><b>–</b><span>Two-app flow (scanner → return) violates R1.</span></div>
+            <div class="pc"><b>+</b><span>Physical QR scan — strong attendance integrity.</span></div>
+            <div class="pc"><b>+</b><span>Visible "welcome moment" at the gate.</span></div>
+            <div class="pc minus"><b>–</b><span>Single point of failure: no volunteer → no check-in.</span></div>
+            <div class="pc minus"><b>–</b><span>Two-device flow violates "one-tap" requirement.</span></div>
+            <div class="pc minus"><b>–</b><span>Amplifies organiser burden (O1: 45+ min/week on logistics).</span></div>
+            <div class="pc minus"><b>–</b><span>Passive runners disengage — "Nobody noticed I stopped".</span></div>
           </div>
-          <div class="pick-line" style="color:#B91C1C;">✗ Killed — violates "one-tap" and requires volunteer logistics small clubs don't have.</div>
+          <div class="pick-line" style="color:#B91C1C;">✗ Killed — small clubs cannot sustain volunteer-gate logistics; violates "reduce organiser load" requirement.</div>
         </article>
 
         <article class="alt chosen">
           <div class="alt-badge">Option B · Chosen</div>
-          <h4>Silent GPS-window check-in (50 m + time window)</h4>
-          <p>A single tap on the Discover "My registrations" card triggers auto-GPS + time-window validation against the organizer's meetup pin. No UI-level knobs. GPS-denied cases fall back to a "Confirm you're at the meetup" dialog.</p>
+          <h4>Peer-Community Model</h4>
+          <p>GPS self-check-in (one tap, 50 m + time window). Shared community tools: reflections, reactions, co-organizer role. Organiser shifts from gatekeeper to enabler.</p>
           <div class="pros-cons">
-            <div class="pc"><b>+</b><span>Single tap; zero state to manage on the runner's side.</span></div>
-            <div class="pc"><b>+</b><span>Fixed 50 m radius — fair across all activities, no organizer guesswork.</span></div>
-            <div class="pc"><b>+</b><span>Fallback + audit trail (gps_verified / manual_confirmed / organizer_manual).</span></div>
-            <div class="pc minus"><b>–</b><span>Requires location permission the first time.</span></div>
+            <div class="pc"><b>+</b><span>One-tap check-in — no volunteer needed.</span></div>
+            <div class="pc"><b>+</b><span>Audit trail (gps_verified / manual_confirmed / organiser_manual).</span></div>
+            <div class="pc"><b>+</b><span>Co-organizer distributes workload (addresses O1).</span></div>
+            <div class="pc"><b>+</b><span>Reflections &amp; reactions give runners agency (addresses P1).</span></div>
+            <div class="pc minus"><b>–</b><span>Requires location permission on first use.</span></div>
+            <div class="pc minus"><b>–</b><span>Self-check-in theoretically spoofable — mitigated by 50 m + time-window constraints.</span></div>
           </div>
-          <div class="pick-line">✓ Chosen — cleared usability with all 3 testers; visibly reduced organizer load in interviews.</div>
+          <div class="pick-line">✓ Chosen — reduces organiser burden (O1), gives runners agency (P1), keeps attendance reliable (P2). Cleared usability with all 3 testers.</div>
         </article>
 
         <article class="alt">
           <div class="alt-badge">Option C · Rejected</div>
-          <h4>Proof-by-recording (no explicit check-in)</h4>
-          <p>Runner simply starts a run inside the app during the activity window near the meetup pin; the system <i>infers</i> attendance from the recorded track. No check-in button at all.</p>
+          <h4>Runner-First Individual Model</h4>
+          <p>Personal tracking is core; clubs are a lightweight overlay. Attendance inferred from GPS tracks near the meetup — no explicit check-in. Minimal community features.</p>
           <div class="pros-cons">
-            <div class="pc"><b>+</b><span>Minimalism — one less step in the flow.</span></div>
-            <div class="pc"><b>+</b><span>Great telemetry for the organizer's dashboard.</span></div>
-            <div class="pc minus"><b>–</b><span>Runners who chat before starting get "no show" — harsh and wrong.</span></div>
-            <div class="pc minus"><b>–</b><span>Breaks for runners who forget to press Start.</span></div>
-            <div class="pc minus"><b>–</b><span>No moment of "I'm here" — kills the social ritual that motivates showing up.</span></div>
+            <div class="pc"><b>+</b><span>No check-in step — "just run" philosophy.</span></div>
+            <div class="pc"><b>+</b><span>Rich personal telemetry for data-driven runners.</span></div>
+            <div class="pc"><b>+</b><span>Simpler system — fewer edge cases.</span></div>
+            <div class="pc minus"><b>–</b><span>No "I'm here" moment — testers wanted an arrival act.</span></div>
+            <div class="pc minus"><b>–</b><span>Socialising before Start = "no show" — punitive for club culture.</span></div>
+            <div class="pc minus"><b>–</b><span>Organiser has zero operational visibility.</span></div>
+            <div class="pc minus"><b>–</b><span>Misaligned with brief — this is a <i>club companion</i>, not a solo tracker.</span></div>
           </div>
-          <div class="pick-line" style="color:#B91C1C;">✗ Killed — confirmed in usability round 1: testers wanted an explicit act of arrival.</div>
+          <div class="pick-line" style="color:#B91C1C;">✗ Killed — contradicts project brief; inferred attendance punishes social behaviour; no organiser insight.</div>
         </article>
       </div>
     </div>
@@ -1588,11 +1363,10 @@
           wireframe kit with no final type or color — purely flow-testing.
         </p>
         <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
-          <a class="btn btn-primary" href="#" data-figma-placeholder>
+          <a class="btn btn-primary" href="https://www.figma.com/proto/sds18LSETOrgmDcOEG7adS/RunAPP-%E2%80%94-Lo-Fi-Wireframe--iPhone-15-Pro---Copy-?node-id=0-1&t=6CcQGVZFpizUpyGP-1" target="_blank" rel="noopener">
             Open Figma Low-Fi
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
-          <span class="chip">Replace href with your Figma share URL</span>
         </div>
       </article>
       <article class="card">
@@ -1749,11 +1523,10 @@
           reflections, and runs persist under RLS.
         </p>
         <div style="margin-top:16px; display:flex; gap:10px; flex-wrap: wrap;">
-          <a class="btn btn-primary" href="../RunLink/index.html" target="_blank" rel="noopener">
-            Open RunLink (local path)
+          <a class="btn btn-primary" href="https://run-link-nu.vercel.app/" target="_blank" rel="noopener">
+            Open RunLink (live)
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
           </a>
-          <span class="chip info">Configure <code>scripts/supabase.js</code> for your project URL + anon key</span>
         </div>
       </article>
       <article class="card">
@@ -1775,59 +1548,61 @@
         Individual Contributions
       </h3>
       <p style="color:var(--ink-2); font-size: 14px; margin-bottom: 16px;">
-        <b style="color:var(--brand-2)">Replace the initials and names</b> with your four teammates. Percentages are
-        effort share (rough), not responsibility overlap — most deliverables were pair-reviewed.
+        Team members, role focus, and rough effort share. Percentages indicate contribution weight, with most
+        deliverables pair-reviewed.
       </p>
-      <table class="contrib">
-        <thead>
-          <tr>
-            <th style="width:150px;">Member</th>
-            <th>Primary roles</th>
-            <th style="width:30%;">Key deliverables</th>
-            <th style="width:70px;">Share</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><b>Member A</b><br><span style="color:var(--muted);font-size:12px;">Team lead</span></td>
-            <td>
-              <span class="pill-role pr-research">Research</span>
-              <span class="pill-role pr-content">Content</span>
-              <span class="pill-role pr-design">UX</span>
-            </td>
-            <td>Owned product spec &amp; RunLink README alignment. Ran 4 of 7 user interviews. Drafted personas, journey map, motivation statement. Coordinated weekly sync.</td>
-            <td><b>28%</b></td>
-          </tr>
-          <tr>
-            <td><b>Member B</b><br><span style="color:var(--muted);font-size:12px;">Lead designer</span></td>
-            <td>
-              <span class="pill-role pr-design">UI Design</span>
-              <span class="pill-role pr-design">Prototyping</span>
-            </td>
-            <td>Full Figma low-fi + hi-fi design system. Owned color tokens, typography pairing, and the 18 hi-fi screen layouts. Ran Crazy-Eights session.</td>
-            <td><b>27%</b></td>
-          </tr>
-          <tr>
-            <td><b>Member C</b><br><span style="color:var(--muted);font-size:12px;">Lead engineer</span></td>
-            <td>
-              <span class="pill-role pr-dev">Frontend Dev</span>
-              <span class="pill-role pr-dev">Deployment</span>
-            </td>
-            <td>Implemented RunLink SPA views, <code>api.js</code> / geofence / map modules, Supabase integration, deploy. Co-authored architecture diagram.</td>
-            <td><b>25%</b></td>
-          </tr>
-          <tr>
-            <td><b>Member D</b><br><span style="color:var(--muted);font-size:12px;">UX Research + QA</span></td>
-            <td>
-              <span class="pill-role pr-research">Research</span>
-              <span class="pill-role pr-test">Usability Testing</span>
-              <span class="pill-role pr-content">Portfolio</span>
-            </td>
-            <td>Ran 3 usability sessions (low-fi, hi-fi, deployed). Produced before/after evidence. Authored evaluation section and assembled this portfolio page.</td>
-            <td><b>20%</b></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="grid-4">
+        <article class="card" style="padding:18px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <img src="./Team member/Mingxuan Tong.jpg" alt="Mingxuan Tong avatar" style="width:42px;height:42px;border-radius:50%;object-fit:cover;border:1px solid var(--line);" />
+            <div><b>Mingxuan Tong</b><br><span style="color:var(--muted);font-size:12px;">Team lead</span></div>
+          </div>
+          <p style="margin:0 0 10px;color:var(--ink-2);font-size:13px;"><i>I focus on turning research insight into clear product decisions.</i></p>
+          <div style="margin-bottom:10px;">
+            <span class="pill-role pr-research">Research</span>
+            <span class="pill-role pr-content">Content</span>
+            <span class="pill-role pr-design">UX</span>
+          </div>
+          <p style="margin:0;color:var(--ink-2);font-size:13px;">Owned product spec &amp; README alignment, interviews, personas, journey map, and weekly coordination.</p>
+        </article>
+        <article class="card" style="padding:18px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <img src="./Team member/Kaifan Jia.jpg" alt="Kaifan Jia avatar" style="width:42px;height:42px;border-radius:50%;object-fit:cover;border:1px solid var(--line);" />
+            <div><b>Kaifan Jia</b><br><span style="color:var(--muted);font-size:12px;">Lead designer</span></div>
+          </div>
+          <p style="margin:0 0 10px;color:var(--ink-2);font-size:13px;"><i>I design visual systems that keep interfaces simple and consistent.</i></p>
+          <div style="margin-bottom:10px;">
+            <span class="pill-role pr-design">UI Design</span>
+            <span class="pill-role pr-design">Prototyping</span>
+          </div>
+          <p style="margin:0;color:var(--ink-2);font-size:13px;">Led low-fi/hi-fi visual system, layout language, and Crazy-Eights facilitation.</p>
+        </article>
+        <article class="card" style="padding:18px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <img src="./Team member/Ruihan Xiong.jpg" alt="Ruihan Xiong avatar" style="width:42px;height:42px;border-radius:50%;object-fit:cover;border:1px solid var(--line);" />
+            <div><b>Ruihan Xiong</b><br><span style="color:var(--muted);font-size:12px;">Lead engineer</span></div>
+          </div>
+          <p style="margin:0 0 10px;color:var(--ink-2);font-size:13px;"><i>I build reliable front-end flows and data-connected features.</i></p>
+          <div style="margin-bottom:10px;">
+            <span class="pill-role pr-dev">Frontend Dev</span>
+            <span class="pill-role pr-dev">Deployment</span>
+          </div>
+          <p style="margin:0;color:var(--ink-2);font-size:13px;">Implemented SPA views/modules, Supabase integration, and deployment pipeline.</p>
+        </article>
+        <article class="card" style="padding:18px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <img src="./Team member/Yuxuan Hu.jpg" alt="Yuxuan Hu avatar" style="width:42px;height:42px;border-radius:50%;object-fit:cover;border:1px solid var(--line);" />
+            <div><b>Yuxuan Hu</b><br><span style="color:var(--muted);font-size:12px;">UX Research + QA</span></div>
+          </div>
+          <p style="margin:0 0 10px;color:var(--ink-2);font-size:13px;"><i>I validate design decisions through user testing and iteration evidence.</i></p>
+          <div style="margin-bottom:10px;">
+            <span class="pill-role pr-research">Research</span>
+            <span class="pill-role pr-test">Usability Testing</span>
+            <span class="pill-role pr-content">Portfolio</span>
+          </div>
+          <p style="margin:0;color:var(--ink-2);font-size:13px;">Ran usability rounds, captured before/after evidence, and assembled evaluation outputs.</p>
+        </article>
+      </div>
     </div>
   </div>
 </section>
@@ -2280,14 +2055,6 @@ State names should align with RunLink: activity lifecycle (<code>open</code> / <
         <div>
           Figma, Inc. (2026). <i>Figma — "First Draft" / AI auto-layout assist.</i> Accessed 2026-04-10 – 2026-04-14. <a href="https://www.figma.com" target="_blank" rel="noopener">figma.com</a>.
           <br><span style="color:var(--muted);"><b>Purpose:</b> accelerating low-fidelity wireframe layout; all final UI decisions were human-made and reviewed in the Crazy-Eights session.</span>
-          <span class="tag-kind">AI Tool</span>
-        </div>
-      </div>
-      <div class="ref">
-        <div class="ref-n">A4</div>
-        <div>
-          OpenAI. (2026). <i>ChatGPT (GPT-5 class).</i> Accessed 2026-04-12. <a href="https://chat.openai.com" target="_blank" rel="noopener">chat.openai.com</a>.
-          <br><span style="color:var(--muted);"><b>Purpose:</b> summarizing one academic paper into our 3-goods / 3-gaps format (P3) and drafting the "Confirm you're at the meetup" fallback dialog copy.</span>
           <span class="tag-kind">AI Tool</span>
         </div>
       </div>
