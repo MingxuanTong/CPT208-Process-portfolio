@@ -1109,44 +1109,43 @@
             <div class="et-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-7 8-13a8 8 0 10-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>
             </div>
-            <h4>R1 — One-tap Map check-in</h4>
+            <h4>R1 — Attendance must be effortless</h4>
           </div>
           <p style="color:var(--ink-2);font-size:14.5px;">
-            A registered runner must be able to mark themselves present with <b>a single tap</b>, taken from a
-            card on Discover → My registrations. No form, no scanner, no second screen. The system silently
-            auto-acquires GPS, validates the time window, and enforces a fixed 50 m geofence.
+            A runner must prove they showed up with <b>minimal friction</b> — no scanner, no volunteer, no second
+            screen. The system validates presence automatically (GPS + time window + 50 m geofence) so that
+            even a first-timer like P2 can check in without anxiety about "doing it wrong".
           </p>
-          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">RunLink: <code>geofence.js</code> · activity detail check-in</div>
+          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">Satisfied by: one-tap GPS check-in · fallback dialog · audit trail</div>
         </article>
         <article class="card">
           <div style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;">
             <div class="et-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17s3-9 8-9 8 9 8 9"/><circle cx="4" cy="17" r="2"/><circle cx="20" cy="17" r="2"/><path d="M8 8l1-3m7 3l-1-3"/></svg>
             </div>
-            <h4>R2 — Activity route on the running map</h4>
+            <h4>R2 — Organiser workload must shrink</h4>
           </div>
           <p style="color:var(--ink-2);font-size:14.5px;">
-            After check-in, the organizer’s uploaded GPX/KML is stored as <code>route_geojson</code> and rendered with
-            <b>Leaflet</b> on the Running tab’s full-bleed map — entry is the <b>top-right route square</b>, which opens a
-            picker for checked-in activities. Free-run (no linked activity) stays available. While a session is
-            recording, the linked route stays fixed so distance and course don’t drift apart.
+            Small clubs cannot afford a dedicated volunteer at every meetup. The system must <b>automate or
+            distribute</b> operational tasks — attendance verification, activity publishing, data dashboards — so
+            that an organiser like O1 (45+ min/week on logistics) is no longer a single point of failure.
           </p>
-          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">RunLink: <code>map.js</code> · <code>views.js</code> Running tab</div>
+          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">Satisfied by: GPS self-check-in · co-organizer role · auto dashboards</div>
         </article>
         <article class="card">
           <div style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;">
             <div class="et-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
             </div>
-            <h4>R3 — Club-scoped reflection</h4>
+            <h4>R3 — Runners must feel seen</h4>
           </div>
           <p style="color:var(--ink-2);font-size:14.5px;">
-            Checked-in runners react with a preset emoji and an optional short note on the <b>activity detail</b> page;
-            others see a chronological reflection feed for that activity only. Nothing is published to a global
-            or cross-club feed — scope stays inside the club’s activity. (Posting is gated until the runner has
-            checked in from Discover → My registrations.)
+            Lapsed runners leave because <b>"nobody noticed I stopped"</b>. The system must create visible moments
+            of social recognition — an explicit arrival act, an activity route rendered on the shared map so runners
+            can see and follow the course together, a space for post-run reflections, a cohort view of who ran — so
+            that participation is witnessed, not invisible.
           </p>
-          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">RunLink: <code>reflections</code> table · RLS · <code>views.js</code></div>
+          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">Satisfied by: check-in confirmation · activity route on map · reflections &amp; reactions · cohort view</div>
         </article>
       </div>
     </div>
