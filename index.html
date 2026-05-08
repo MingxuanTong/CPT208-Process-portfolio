@@ -540,6 +540,45 @@
   .ba-frame ul { padding-left: 18px; margin: 6px 0 0; }
   .ba-frame li { font-size: 11.5px; margin: 2px 0; color: #334155; }
   .ba-note { color: var(--ink-2); font-size: 13px; border-top: 1px dashed var(--line); padding-top: 14px; margin-top: 4px; }
+  .ba-screenshot {
+    width: 160px; height: 344px; margin: 10px auto 6px;
+    border-radius: 10px; overflow: hidden; margin: 10px 0 6px;
+    background: var(--surface-2); border: 1px dashed var(--line-2);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--dim); font-size: 12px; font-weight: 600; text-align: center;
+    letter-spacing: 0.02em; line-height: 1.4;
+  }
+  .ba-screenshot img { width: 100%; height: 100%; object-fit: cover; }
+  .ba-frame.before .ba-screenshot { border-color: #FECACA; background: #FEF2F2; }
+  .ba-frame.after  .ba-screenshot { border-color: #BBF7D0; background: #F0FDF4; }
+  .tester-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin: 28px 0 30px; }
+  @media (max-width: 900px) { .tester-grid { grid-template-columns: 1fr; } }
+  .tester-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,250,252,0.96));
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: var(--shadow-sm);
+  }
+  .tester-card h4 { font-family: 'Barlow Condensed'; font-weight: 700; font-size: 22px; color: var(--ink); margin-bottom: 10px; }
+  .tester-role {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 10px; border-radius: 999px;
+    background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.20);
+    color: #9A3412; font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .tester-quote {
+    margin: 0 0 14px; padding: 12px 14px;
+    background: rgba(15,23,42,0.03); border-left: 3px solid var(--brand);
+    border-radius: 0 12px 12px 0; color: var(--ink); font-size: 15px;
+  }
+  .tester-block { margin-top: 12px; }
+  .tester-block .lb {
+    display: block; margin-bottom: 4px;
+    color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .tester-block p { margin: 0; color: var(--ink-2); font-size: 14px; line-height: 1.6; }
 
   /* AI prompts block */
   .prompt-box {
@@ -631,20 +670,22 @@
         <span class="eyebrow"><span class="dot"></span>Design Theme · Active Living</span>
         <h1>Turning <span class="hl">club runs</span> into the easiest healthy habit in your week.</h1>
         <p class="hero-lede">
-          <b style="color:var(--ink)">RunLink</b> is a club-scoped mobile web app: runners
-          <b style="color:var(--ink)">prove attendance with a location-based map check-in</b> (Haversine · fixed 50&nbsp;m),
-          follow the <b style="color:var(--ink)">organizer’s route overlaid on the full-screen Running map</b> (Leaflet,
-          OpenStreetMap tiles, GeoJSON polyline), then leave
-          <b style="color:var(--ink)">lightweight club-only reflections</b> (emoji + note) on the activity — never a global
-          social feed. Organizers publish activities, upload GPX/route data, watch a live registration/check-in
-          dashboard, and rely on <b style="color:var(--ink)">Supabase</b> (Postgres + Row Level Security) for real data
-          behind the static front end.
+          <b style="color:var(--ink)">RunLink</b> is a club-scoped mobile web app for running clubs. Organizers
+          <b style="color:var(--ink)">publish activities with map-based check-in</b> (GPS geofence + manual fallback),
+          overlay <b style="color:var(--ink)">routes on a full-screen Leaflet + OSM map</b>,
+          and manage registrations through a live dashboard. Members
+          <b style="color:var(--ink)">record GPS-tracked runs</b> with distance, pace, and polyline,
+          compete on <b style="color:var(--ink)">monthly club leaderboards</b>,
+          join <b style="color:var(--ink)">club challenges</b>, and leave
+          <b style="color:var(--ink)">post-run reflections</b> (emoji + note) — all within their club, never a global social feed.
+          Built with <b style="color:var(--ink)">Vue 3</b>, <b style="color:var(--ink)">Vite</b>,
+          and <b style="color:var(--ink)">Supabase</b> (Postgres + RLS + Realtime).
         </p>
         <div class="hero-meta">
           <span class="chip brand">Active Living</span>
-          <span class="chip accent">Check-in · Route on map · Reflections</span>
-          <span class="chip info">Vanilla ES modules · Supabase backend</span>
-          <span class="chip">Leaflet · OSM · GeoJSON routes</span>
+          <span class="chip accent">Check-in · Run tracking · Leaderboards</span>
+          <span class="chip info">Vue 3 · Vite · Supabase</span>
+          <span class="chip">Leaflet · OSM · Realtime</span>
         </div>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#live-url">
@@ -656,10 +697,10 @@
           </a>
         </div>
         <div class="kpi-row">
-          <div class="kpi"><div class="k">Core loop pillars</div><div class="v">3</div></div>
+          <div class="kpi"><div class="k">App views</div><div class="v">14</div></div>
           <div class="kpi"><div class="k">Check-in radius</div><div class="v">50m</div></div>
-          <div class="kpi"><div class="k">Usability sessions</div><div class="v">3</div></div>
-          <div class="kpi"><div class="k">Data layer</div><div class="v">PG</div></div>
+          <div class="kpi"><div class="k">Usability rounds</div><div class="v">3</div></div>
+          <div class="kpi"><div class="k">DB tables</div><div class="v">8</div></div>
         </div>
       </div>
 
@@ -1109,43 +1150,44 @@
             <div class="et-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-7 8-13a8 8 0 10-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>
             </div>
-            <h4>R1 — Attendance must be effortless</h4>
+            <h4>R1 — One-tap Map check-in</h4>
           </div>
           <p style="color:var(--ink-2);font-size:14.5px;">
-            A runner must prove they showed up with <b>minimal friction</b> — no scanner, no volunteer, no second
-            screen. The system validates presence automatically (GPS + time window + 50 m geofence) so that
-            even a first-timer like P2 can check in without anxiety about "doing it wrong".
+            A registered runner must be able to mark themselves present with <b>a single tap</b>, taken from a
+            card on Discover → My registrations. No form, no scanner, no second screen. The system silently
+            auto-acquires GPS, validates the time window, and enforces a fixed 50 m geofence.
           </p>
-          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">Satisfied by: one-tap GPS check-in · fallback dialog · audit trail</div>
+          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">RunLink: <code>geofence.js</code> · activity detail check-in</div>
         </article>
         <article class="card">
           <div style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;">
             <div class="et-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17s3-9 8-9 8 9 8 9"/><circle cx="4" cy="17" r="2"/><circle cx="20" cy="17" r="2"/><path d="M8 8l1-3m7 3l-1-3"/></svg>
             </div>
-            <h4>R2 — Organiser workload must shrink</h4>
+            <h4>R2 — Activity route on the running map</h4>
           </div>
           <p style="color:var(--ink-2);font-size:14.5px;">
-            Small clubs cannot afford a dedicated volunteer at every meetup. The system must <b>automate or
-            distribute</b> operational tasks — attendance verification, activity publishing, data dashboards — so
-            that an organiser like O1 (45+ min/week on logistics) is no longer a single point of failure.
+            After check-in, the organizer’s uploaded GPX/KML is stored as <code>route_geojson</code> and rendered with
+            <b>Leaflet</b> on the Running tab’s full-bleed map — entry is the <b>top-right route square</b>, which opens a
+            picker for checked-in activities. Free-run (no linked activity) stays available. While a session is
+            recording, the linked route stays fixed so distance and course don’t drift apart.
           </p>
-          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">Satisfied by: GPS self-check-in · co-organizer role · auto dashboards</div>
+          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">RunLink: <code>map.js</code> · <code>views.js</code> Running tab</div>
         </article>
         <article class="card">
           <div style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;">
             <div class="et-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
             </div>
-            <h4>R3 — Runners must feel seen</h4>
+            <h4>R3 — Club-scoped reflection</h4>
           </div>
           <p style="color:var(--ink-2);font-size:14.5px;">
-            Lapsed runners leave because <b>"nobody noticed I stopped"</b>. The system must create visible moments
-            of social recognition — an explicit arrival act, an activity route rendered on the shared map so runners
-            can see and follow the course together, a space for post-run reflections, a cohort view of who ran — so
-            that participation is witnessed, not invisible.
+            Checked-in runners react with a preset emoji and an optional short note on the <b>activity detail</b> page;
+            others see a chronological reflection feed for that activity only. Nothing is published to a global
+            or cross-club feed — scope stays inside the club’s activity. (Posting is gated until the runner has
+            checked in from Discover → My registrations.)
           </p>
-          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">Satisfied by: check-in confirmation · activity route on map · reflections &amp; reactions · cohort view</div>
+          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">RunLink: <code>reflections</code> table · RLS · <code>views.js</code></div>
         </article>
       </div>
     </div>
@@ -1256,11 +1298,6 @@
           <div class="ev-n">05</div>
           <span class="ev-tag">Interview · lapsed</span>
           <figcaption><b style="color:#fff">Three lapsed runners</b> — 20-min group chat about why each stopped going. "Nobody noticed" came up 3×.</figcaption>
-        </figure>
-        <figure class="ev-tile" style="background: repeating-linear-gradient(45deg, #F8FAFC, #F8FAFC 10px, #F1F5F9 10px, #F1F5F9 20px); color:#64748B;">
-          <div class="ev-n" style="background:rgba(15,23,42,0.55)">➕</div>
-          <span class="ev-tag" style="background:rgba(15,23,42,0.06); color:var(--muted); border-color:var(--line-2)">replace</span>
-          <figcaption>Drop in your 5th field photo or short video here; keep a consistent 4:3 aspect.</figcaption>
         </figure>
       </div>
     </div>
@@ -1531,12 +1568,14 @@
       <article class="card">
         <h3 style="margin-bottom:10px;">Tech stack at a glance</h3>
         <ul class="clean green">
-          <li><b style="color:var(--ink)">Frontend:</b> SPA shell (<code>index.html</code>), <code>styles/app.css</code>, ES modules in <code>scripts/</code> — no bundler.</li>
-          <li><b style="color:var(--ink)">Routing:</b> <code>app.js</code> hash router + <code>views.js</code> render functions.</li>
-          <li><b style="color:var(--ink)">Backend:</b> Supabase Auth + Postgres; <code>api.js</code> typed data access; every table protected by RLS.</li>
-          <li><b style="color:var(--ink)">Maps:</b> Leaflet + OSM (or CARTO dark) tiles; <code>map.js</code> <code>addRouteGeoJson</code> for club routes on the Running tab.</li>
-          <li><b style="color:var(--ink)">Check-in:</b> <code>geofence.js</code> Haversine · default 50 m; GPS fallback + organizer manual mark.</li>
-          <li><b style="color:var(--ink)">Realtime:</b> Supabase <code>postgres_changes</code> for registration toasts; optional CI deploy to GitHub Pages / Vercel.</li>
+          <li><b style="color:var(--ink)">Framework:</b> Vue 3.5 Composition API + <code>&lt;script setup&gt;</code> SFCs (plain JavaScript, no TypeScript).</li>
+          <li><b style="color:var(--ink)">Build:</b> Vite 8 (Rolldown-based) with <code>@</code> path alias → <code>./src</code>; Vant components auto-imported via <code>unplugin-vue-components</code>.</li>
+          <li><b style="color:var(--ink)">State & Routing:</b> Pinia 3 (single <code>useAuthStore</code>); Vue Router 5 hash history, 16 lazy-loaded routes with <code>meta.auth</code> / <code>meta.shell</code> gating.</li>
+          <li><b style="color:var(--ink)">UI:</b> Vant 4 mobile components (tabbar, toast, dialogs); shell-based layout — <code>AuthShell</code> for login/signup, <code>AppShell</code> with sidebar (≥900 px) + bottom tabbar.</li>
+          <li><b style="color:var(--ink)">Backend:</b> Supabase JS 2 — Auth, Postgres (RLS on every table), Storage bucket <code>activity-assets</code>, Realtime subscriptions.</li>
+          <li><b style="color:var(--ink)">Maps:</b> Leaflet 1.9 + OSM tiles; <code>utils/map.js</code> handles route GeoJSON, meetup picker, and run recorder (~300 lines).</li>
+          <li><b style="color:var(--ink)">Check-in:</b> <code>utils/geofence.js</code> Haversine · 50 m geofence; GPS accuracy filter + exponential smoothing; manual fallback.</li>
+          <li><b style="color:var(--ink)">Realtime:</b> <code>postgres_changes</code> on <code>registrations</code> for live toasts; broadcast channels <code>run:{id}</code> for GPS tracking during runs.</li>
         </ul>
       </article>
     </div>
@@ -1682,142 +1721,216 @@
   <div class="wrap">
     <div class="section-head">
       <div class="section-tag">05.2 · Iterative Refinement</div>
-      <h2 class="section-title">Before → After · usability-driven iterations</h2>
+      <h2 class="section-title">Before -> After · usability-driven iterations</h2>
       <p class="section-lede">
-        These snapshots come from our research and usability rounds as we tightened RunLink — the same product
-        story you can run in the repo today (hash router, Supabase, Leaflet route overlay).
+        We translated each round of user feedback into clearer product decisions. The four iteration points
+        below map directly to simulated tester perspectives used to stress-test the alpha flow.
       </p>
     </div>
 
+    <div class="tester-grid">
+      <article class="tester-card">
+        <div class="tester-role">User A | Beginner runner</div>
+        <h4>Accidental taps during running</h4>
+        <blockquote class="tester-quote">"I accidentally tapped the END button while running and my recording stopped."</blockquote>
+        <div class="tester-block">
+          <span class="lb">Issue Found</span>
+          <p>During an active run, the bottom tabbar remained visible. Runners could accidentally tap a tab and navigate away from the tracking screen, losing their in-progress run view. Pause and stop buttons were also easy to trigger unintentionally.</p>
+        </div>
+        <div class="tester-block">
+          <span class="lb">Iteration Direction</span>
+          <p>Enter fullscreen mode on run start: hide the bottom tabbar, sidebar, and top header entirely. Replace single-tap pause with a long-press gesture to prevent accidental pauses. Keep only the map, run stats, and controls on screen.</p>
+        </div>
+      </article>
+      <article class="tester-card">
+        <div class="tester-role">User B | Casual runner</div>
+        <h4>Running alone during a club activity felt disconnected</h4>
+        <blockquote class="tester-quote">"I checked in and started running, but I had no idea where the other runners were. It felt like I was just on a solo jog."</blockquote>
+        <div class="tester-block">
+          <span class="lb">Issue Found</span>
+          <p>After check-in, the Recording screen showed only the user's own GPS track. There was no visibility into other club members' live progress, pace, or position — making a group run feel no different from a solo run.</p>
+        </div>
+        <div class="tester-block">
+          <span class="lb">Iteration Direction</span>
+          <p>Add a Crew Strip at the bottom of Recording that shows same-group checked-in runners' live distance and pace via Supabase Realtime. Flag runners whose pace has slowed > 30% below group median with a ❤️ Cheer button for one-tap encouragement.</p>
+        </div>
+      </article>
+      <article class="tester-card">
+        <div class="tester-role">User C | Club organizer</div>
+        <h4>Organizers wanted a runner-side preview</h4>
+        <blockquote class="tester-quote">"Publishing activities is useful, but I want to know how runners will see the activity before I publish it."</blockquote>
+        <div class="tester-block">
+          <span class="lb">Issue Found</span>
+          <p>The organizer flow lacked a preview or confirmation step, which made it easy to worry about wrong time, location, route, or pace-group information before publishing.</p>
+        </div>
+        <div class="tester-block">
+          <span class="lb">Iteration Direction</span>
+          <p>Add a Preview before publish page so organizers can verify the activity card, route preview, and check-in window exactly as runners will experience them.</p>
+        </div>
+      </article>
+      <article class="tester-card">
+        <div class="tester-role">User D | Privacy-conscious student</div>
+        <h4>Privacy rules needed clearer explanation</h4>
+        <blockquote class="tester-quote">"I like club-only reflection, but I want to know who can see my reflection and location."</blockquote>
+        <div class="tester-block">
+          <span class="lb">Issue Found</span>
+          <p>Check-in and post-run reflection both touch sensitive data. Users may not know whether exact location is stored, who can view reflections, or whether content stays club-only.</p>
+        </div>
+        <div class="tester-block">
+          <span class="lb">Iteration Direction</span>
+          <p>Add concise privacy copy on the check-in and reflection screens: exact location is only used to verify attendance, and reflections are visible only within the club activity.</p>
+        </div>
+      </article>
+    </div>
+
     <div class="ba-grid">
-      <!-- Iteration 1: check-in radius -->
+      <!-- Iteration 1: fullscreen running + long-press pause -->
       <article class="ba-card">
-        <div class="tag-ver">Iteration 1 · Fairness</div>
-        <h4>Check-in radius: configurable → fixed 50 m</h4>
+        <div class="tag-ver">Iteration 1 | Running anti-accidental-touch</div>
+        <h4>Running view: tabbar visible during run -> fullscreen with long-press pause</h4>
         <div class="ba-compare">
           <div class="ba-frame before">
             <div class="ba-label">Before</div>
-            <div class="ba-title-row">Publish activity</div>
+            <div class="ba-title-row">Running | in-progress screen</div>
+            <div class="ba-screenshot">
+              <img src="iterations/1-before.png" alt="Before: running screen with tabbar visible" loading="lazy" />
+            </div>
             <ul>
-              <li>Radius slider 25 m — 500 m</li>
-              <li>Default 100 m</li>
-              <li>Organizers accidentally set 500 m "to be nice"</li>
-              <li>Runners exploited wide radius</li>
+              <li>Bottom tabbar remained visible during active run</li>
+              <li>Accidental tab taps could navigate away from tracking</li>
+              <li>Pause button triggered on single tap — easy to hit while running</li>
             </ul>
           </div>
-          <div class="arrow">→</div>
+          <div class="arrow">-></div>
           <div class="ba-frame after">
             <div class="ba-label">After</div>
-            <div class="ba-title-row">Publish activity</div>
+            <div class="ba-title-row">Running | fullscreen recording</div>
+            <div class="ba-screenshot">
+              <img src="iterations/1-after.png" alt="After: fullscreen running view with long-press controls" loading="lazy" />
+            </div>
             <ul>
-              <li>No radius field at all</li>
-              <li>Helper text: "Fixed 50 m, system-wide"</li>
-              <li>Schema constant <code>CHECK_IN_RADIUS_M = 50</code></li>
-              <li>Fair across every activity</li>
+              <li>Clicking Start enters fullscreen — tabbar, sidebar, and header all hidden</li>
+              <li>Only map, run stats, and controls remain on screen</li>
+              <li>Long-press required to pause — prevents accidental taps while running</li>
             </ul>
           </div>
         </div>
         <div class="ba-note">
-          <b style="color:var(--ink)">Why:</b> Tester 2 and an organizer tester both raised trust concerns.
-          Removing the knob made the system simpler <i>and</i> fairer.
+          <b style="color:var(--ink)">Why:</b> User A's feedback showed that running is a high-motion activity. The UI needs to adapt by removing interactive surfaces that are easy to hit accidentally, and replacing single-tap pause with a deliberate long-press gesture.
         </div>
       </article>
 
-      <!-- Iteration 2: activity detail check-in removed -->
+      <!-- Iteration 2: Crew Run -->
       <article class="ba-card">
-        <div class="tag-ver">Iteration 2 · Single check-in surface</div>
-        <h4>Activity detail: informational only — no check-in</h4>
+        <div class="tag-ver">Iteration 2 | Crew Run</div>
+        <h4>Solo recording -> real-time crew strip with live distance, pace &amp; Cheer</h4>
         <div class="ba-compare">
           <div class="ba-frame before">
             <div class="ba-label">Before</div>
-            <div class="ba-title-row">Activity detail · Registered</div>
+            <div class="ba-title-row">Recording screen</div>
+            <div class="ba-screenshot">
+              <img src="iterations/2-before.png" alt="Before: solo recording with no crew awareness" loading="lazy" />
+            </div>
             <ul>
-              <li>Big "Map check-in" CTA</li>
-              <li>Check-in countdown card</li>
-              <li>"Go run" primary when checked in</li>
-              <li>Duplicated with Discover</li>
+              <li>Runner records alone — no visibility into other club members' progress</li>
+              <li>Running tab feels like a personal tracker, not a club activity</li>
+              <li>No sense of "we're in this together" during a group session</li>
+              <li>Falling-behind runners have no way to receive encouragement</li>
             </ul>
           </div>
-          <div class="arrow">→</div>
+          <div class="arrow">-></div>
           <div class="ba-frame after">
             <div class="ba-label">After</div>
-            <div class="ba-title-row">Activity detail · Registered</div>
+            <div class="ba-title-row">Recording + Crew Strip</div>
+            <div class="ba-screenshot">
+              <img src="iterations/2-after.png" alt="After: crew strip showing live distance and pace of teammates" loading="lazy" />
+            </div>
             <ul>
-              <li>"Registered" badge only</li>
-              <li>Schedule tiles, no countdown</li>
-              <li>Sticky CTA: "View in My registrations"</li>
-              <li>Single source of truth for check-in</li>
+              <li>Crew Strip shows teammates' live distance &amp; pace in real time</li>
+              <li>❤️ Cheer button for runners falling behind (> 30% slower than median)</li>
+              <li>One-tap Cheer broadcasts encouragement to the target runner</li>
+              <li>Teammate GPS positions shown as markers on each map</li>
             </ul>
           </div>
         </div>
         <div class="ba-note">
-          <b style="color:var(--ink)">Why:</b> Tester 1 tried to check in on detail and was confused when nothing happened after returning to Discover. Consolidating removed the ambiguity.
+          <b style="color:var(--ink)">Why:</b> Field research showed the hardest part of running is showing up alone. Crew Run turns a solo tracker into a shared experience — live progress visibility + Cheer turns slowing down from private failure into group support. Built on Supabase Realtime with broadcast channels for live GPS.
         </div>
       </article>
 
-      <!-- Iteration 3: activity route entry -->
+      <!-- Iteration 3: organizer preview -->
       <article class="ba-card">
-        <div class="tag-ver">Iteration 3 · Running map · route UI</div>
-        <h4>Activity route entry: full bar → top-right square only</h4>
+        <div class="tag-ver">Iteration 3 | Organizer confidence</div>
+        <h4>Publishing flow: direct publish -> preview before publish</h4>
         <div class="ba-compare">
           <div class="ba-frame before">
             <div class="ba-label">Before</div>
-            <div class="ba-title-row">Running tab</div>
+            <div class="ba-title-row">Organizer publish flow</div>
+            <div class="ba-screenshot">
+              <img src="iterations/3-before.png" alt="Before: direct publish without preview" loading="lazy" />
+            </div>
             <ul>
-              <li>Full-width "Activity route" bar below the top bar</li>
-              <li>Visually split the map in two panels</li>
-              <li>Route could be swapped mid-run</li>
-              <li>Testers tapped the bar expecting a check-in</li>
+              <li>Organizer entered details and published immediately</li>
+              <li>No runner-side preview of the activity card</li>
+              <li>Route, check-in window, and pace groups were easy to worry about</li>
+              <li>Errors would only be caught after publishing</li>
             </ul>
           </div>
-          <div class="arrow">→</div>
+          <div class="arrow">-></div>
           <div class="ba-frame after">
             <div class="ba-label">After</div>
-            <div class="ba-title-row">Running tab</div>
+            <div class="ba-title-row">Organizer publish flow</div>
+            <div class="ba-screenshot">
+              <img src="iterations/3-after.png" alt="After: preview before publish" loading="lazy" />
+            </div>
             <ul>
-              <li>One continuous full-screen map</li>
-              <li>Single 44 px square in the top-right as the only entry</li>
-              <li>Route locked during Recording (stats integrity)</li>
-              <li>"None" = free run, explicit and honest</li>
+              <li>Preview before publish page added</li>
+              <li>Organizer can inspect runner-facing card and route preview</li>
+              <li>Check-in window shown before final confirmation</li>
+              <li>Publishing becomes a deliberate review step</li>
             </ul>
           </div>
         </div>
         <div class="ba-note">
-          <b style="color:var(--ink)">Why:</b> Tester 1 and Tester 2 both tried to use the route bar as a second
-          check-in affordance — reinforcing that check-in belongs on Discover. Collapsing the entry also
-          gave the map back its full canvas.
+          <b style="color:var(--ink)">Why:</b> User C's concern was less about speed and more about confidence. A preview step reduces organizer anxiety and helps catch mistakes before they reach runners.
         </div>
       </article>
 
-      <!-- Iteration 4: unified My activities page -->
+      <!-- Iteration 4: privacy explanation -->
       <article class="ba-card">
-        <div class="tag-ver">Iteration 4 · My activities unity</div>
-        <h4>Two histories merged → one "My activities" page</h4>
+        <div class="tag-ver">Iteration 4 | Privacy communication</div>
+        <h4>Sensitive flows: implicit privacy model -> visible privacy notice</h4>
         <div class="ba-compare">
           <div class="ba-frame before">
             <div class="ba-label">Before</div>
-            <div class="ba-title-row">History surfaces</div>
+            <div class="ba-title-row">Check-in + reflection</div>
+            <div class="ba-screenshot">
+              <img src="iterations/4-before.png" alt="Before: implicit privacy model" loading="lazy" />
+            </div>
             <ul>
-              <li>Discover → "See all" = list A</li>
-              <li>Profile → "My registrations" = list B</li>
-              <li>Different filters, different sort</li>
-              <li>Testers couldn't predict each</li>
+              <li>Privacy rules were implied rather than stated</li>
+              <li>Users could not easily tell who sees reflections</li>
+              <li>Exact-location handling was not explained in-context</li>
+              <li>Trust depended on assumption, not disclosure</li>
             </ul>
           </div>
-          <div class="arrow">→</div>
+          <div class="arrow">-></div>
           <div class="ba-frame after">
             <div class="ba-label">After</div>
-            <div class="ba-title-row">History surfaces</div>
+            <div class="ba-title-row">Check-in + reflection</div>
+            <div class="ba-screenshot">
+              <img src="iterations/4-after.png" alt="After: visible privacy notice" loading="lazy" />
+            </div>
             <ul>
-              <li>Both entries → same page</li>
-              <li>Exactly 2 tabs: Upcoming, Past</li>
-              <li>No "All", no club filter, no "Today · Now"</li>
-              <li>Deep-link parity preserved</li>
+              <li>Short privacy note added to check-in and reflection surfaces</li>
+              <li>States that location is used only to verify attendance</li>
+              <li>States that reflections stay inside the club activity</li>
+              <li>Trust is supported by explicit product language</li>
             </ul>
           </div>
         </div>
         <div class="ba-note">
-          <b style="color:var(--ink)">Why:</b> Tester 2 said "I don't trust that these are the same list." They weren't. Now they are.
+          <b style="color:var(--ink)">Why:</b> User D's feedback highlighted that privacy is not just a backend policy problem. It has to be explained at the exact moment people share location or reflection content.
         </div>
       </article>
     </div>
