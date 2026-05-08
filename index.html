@@ -697,7 +697,7 @@
           </a>
         </div>
         <div class="kpi-row">
-          <div class="kpi"><div class="k">App views</div><div class="v">14</div></div>
+          <div class="kpi"><div class="k">App views</div><div class="v">15</div></div>
           <div class="kpi"><div class="k">Check-in radius</div><div class="v">50m</div></div>
           <div class="kpi"><div class="k">Usability rounds</div><div class="v">3</div></div>
           <div class="kpi"><div class="k">DB tables</div><div class="v">8</div></div>
@@ -1200,8 +1200,8 @@
             Spotlight — Professional Club Operations
           </h3>
           <p style="color:var(--ink-2);max-width:720px;margin:0;">
-            Beyond the core runner loop (<b>check-in → route on map → reflect</b>), RunLink ships organizer tooling backed by
-            <b>real Postgres data</b> and RLS — not hand-seeded JSON. The six capabilities below mirror what the shipped app does
+            Beyond the core runner loop (<b>check-in → route on map → reflect</b>), RunLink ships organizer tooling and club features backed by
+            <b>real Supabase data</b> (Postgres + RLS + Realtime). The eight capabilities below mirror what the shipped app does
             today.
           </p>
         </div>
@@ -1427,9 +1427,9 @@
       <div class="section-tag">04 · Technical Implementation</div>
       <h2 class="section-title">A boringly reliable mobile web app with an auditable data path.</h2>
       <p class="section-lede">
-        RunLink is a <b>hash-routed single-page app</b> (HTML/CSS + vanilla ES modules, no bundler) talking to
-        <b>Supabase</b> for auth, Postgres, Row Level Security, and Realtime. Static files can sit on GitHub Pages,
-        Vercel, or Netlify; only the Supabase URL and anon key ship to the client.
+        RunLink is a <b>Vue 3 SPA</b> (Composition API + <code>&lt;script setup&gt;</code>) bundled with <b>Vite 8</b>
+        and backed by <b>Supabase</b> — auth, Postgres with RLS, Storage, and Realtime. Auto-imports keep imports
+        minimal; only the Supabase publishable key ships to the client.
       </p>
     </div>
 
@@ -1568,14 +1568,13 @@
       <article class="card">
         <h3 style="margin-bottom:10px;">Tech stack at a glance</h3>
         <ul class="clean green">
-          <li><b style="color:var(--ink)">Framework:</b> Vue 3.5 Composition API + <code>&lt;script setup&gt;</code> SFCs (plain JavaScript, no TypeScript).</li>
-          <li><b style="color:var(--ink)">Build:</b> Vite 8 (Rolldown-based) with <code>@</code> path alias → <code>./src</code>; Vant components auto-imported via <code>unplugin-vue-components</code>.</li>
-          <li><b style="color:var(--ink)">State & Routing:</b> Pinia 3 (single <code>useAuthStore</code>); Vue Router 5 hash history, 16 lazy-loaded routes with <code>meta.auth</code> / <code>meta.shell</code> gating.</li>
-          <li><b style="color:var(--ink)">UI:</b> Vant 4 mobile components (tabbar, toast, dialogs); shell-based layout — <code>AuthShell</code> for login/signup, <code>AppShell</code> with sidebar (≥900 px) + bottom tabbar.</li>
-          <li><b style="color:var(--ink)">Backend:</b> Supabase JS 2 — Auth, Postgres (RLS on every table), Storage bucket <code>activity-assets</code>, Realtime subscriptions.</li>
-          <li><b style="color:var(--ink)">Maps:</b> Leaflet 1.9 + OSM tiles; <code>utils/map.js</code> handles route GeoJSON, meetup picker, and run recorder (~300 lines).</li>
-          <li><b style="color:var(--ink)">Check-in:</b> <code>utils/geofence.js</code> Haversine · 50 m geofence; GPS accuracy filter + exponential smoothing; manual fallback.</li>
-          <li><b style="color:var(--ink)">Realtime:</b> <code>postgres_changes</code> on <code>registrations</code> for live toasts; broadcast channels <code>run:{id}</code> for GPS tracking during runs.</li>
+          <li><b style="color:var(--ink)">Framework:</b> Vue 3.5 + Composition API + <code>&lt;script setup&gt;</code></li>
+          <li><b style="color:var(--ink)">Build:</b> Vite 8 (Rolldown)</li>
+          <li><b style="color:var(--ink)">State:</b> Pinia 3</li>
+          <li><b style="color:var(--ink)">Routing:</b> Vue Router 5 (hash history)</li>
+          <li><b style="color:var(--ink)">UI:</b> Vant 4</li>
+          <li><b style="color:var(--ink)">Backend:</b> Supabase — Auth, Postgres + RLS, Storage, Realtime</li>
+          <li><b style="color:var(--ink)">Maps:</b> Leaflet 1.9 + OSM</li>
         </ul>
       </article>
     </div>
@@ -1976,9 +1975,10 @@
       <div class="section-tag">06 · Technical Reflection · AI Use</div>
       <h2 class="section-title">How we used AI — and how we kept it honest.</h2>
       <p class="section-lede">
-        Per the course's mandatory disclosure, we used AI coding assistance (Vibe Coding, specifically
-        Cursor with Claude) during the hi-fi build. Below are the exact prompt patterns we used, how we
-        validated the output, and the ethical questions we debated.
+        Per the course's mandatory disclosure, we used <b>Vibe Coding</b> (Cursor with Claude) to build
+        the functional prototype, and <b>Figma MCP</b> to accelerate wireframe layout. All design decisions,
+        user research, and product logic remain the group's original work. Below: what we prompted,
+        how we verified, and what we debated.
       </p>
     </div>
 
@@ -1986,53 +1986,49 @@
       <article class="card">
         <h3 style="margin-bottom:8px;">Where AI helped (and where it didn't)</h3>
         <ul class="clean">
-          <li><b style="color:var(--ink)">Helped:</b> generating repetitive CSS scaffolds, RunLink README and SQL-adjacent prose, SVG architecture diagrams, sketch placeholders.</li>
-          <li><b style="color:var(--ink)">Helped:</b> catching edge cases in the check-in state matrix we missed.</li>
-          <li><b style="color:var(--ink)">Didn't replace:</b> user interviews, field visits, the Crazy-Eights session, usability scoring.</li>
-          <li><b style="color:var(--ink)">Didn't replace:</b> deciding what to kill (Option A, Option C) — that needed human testers.</li>
+          <li><b style="color:var(--ink)">Helped:</b> scaffolding the Supabase schema, RLS policies, geofence check-in logic, activity state machine, leaderboard view, and the Vue 3 migration.</li>
+          <li><b style="color:var(--ink)">Helped:</b> catching edge cases in the check-in state matrix and GPS fallback paths we missed in manual review.</li>
+          <li><b style="color:var(--ink)">Helped:</b> accelerating low-fidelity wireframe layout via Figma MCP — AI drafted the initial component structure, all final UI decisions were human-made.</li>
+          <li><b style="color:var(--ink)">Didn't replace:</b> user interviews, field visits, the Crazy-Eights session, usability scoring, or the Crew Run feature design.</li>
+          <li><b style="color:var(--ink)">Didn't replace:</b> deciding which features to cut or defer — that needed human testers and product judgment.</li>
         </ul>
       </article>
       <article class="card">
         <h3 style="margin-bottom:8px;">Validation workflow</h3>
         <ul class="clean green">
-          <li>Every AI-generated module was <b style="color:var(--ink)">manually diffed</b> against the behaviour described in our spec and in <code>RunLink/README.md</code>.</li>
-          <li>Usability sessions were run on <b style="color:var(--ink)">deployed</b> builds, not AI-generated mockups, so the signal came from real user behavior.</li>
-          <li>All copy that went into a user-facing surface was <b style="color:var(--ink)">read aloud</b> by a teammate — AI tends to over-explain; we trimmed aggressively.</li>
-          <li>AI suggestions that affected logic (geofence, time window) were <b style="color:var(--ink)">paired with a written unit trace</b> before we accepted them.</li>
-          <li>Nothing was pushed to <code>main</code> without at least one human approver.</li>
+          <li>Every AI-generated module was <b style="color:var(--ink)">manually diffed</b> against our PRD and spec before merging.</li>
+          <li>Usability sessions ran on <b style="color:var(--ink)">deployed builds</b> — not AI-generated mockups — so feedback came from real user behaviour.</li>
+          <li>Logic-critical code (geofence, time window, RLS) was <b style="color:var(--ink)">paired with a written unit trace</b> before acceptance.</li>
+          <li>All user-facing copy was <b style="color:var(--ink)">read aloud</b> by a teammate — AI over-explains; we trimmed aggressively.</li>
+          <li>Nothing pushed to <code>main</code> without at least one human approver via pull request.</li>
         </ul>
       </article>
     </div>
 
     <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:24px;color:var(--ink);margin: 8px 0 12px;">
-      Example prompts used for core logic
+      Core prompts — full transcripts in <code>/ai-logs</code>
     </h3>
 
     <div class="grid-2">
       <div class="card soft">
-        <h4 style="color:var(--brand-2);">Prompt 1 — Check-in state matrix</h4>
-        <div class="prompt-box"><span class="comment">// Generating the 6-state button matrix for the registration card</span>
-<span class="tag">&gt;</span> You are helping me design a registration card button matrix. Inputs: <b>checked_in</b> (bool), <b>now</b>, <b>check_in_start</b>, <b>check_in_end</b>, <b>start_time</b>. Output 6 mutually exclusive states with:
-  - button label
-  - disabled / enabled
-  - style (primary-green, primary-amber, ghost, etc.)
-  - the exact condition as a boolean expression
-State names should align with RunLink: activity lifecycle (<code>open</code> / <code>registered</code> / <code>checked_in</code> / <code>past</code> / <code>cancelled</code>) plus the check-in window relative to <b>now</b>.</div>
+        <h4 style="color:var(--brand-2);">Prompt 1 — Supabase schema</h4>
+        <div class="prompt-box"><span class="comment">// Designing the full Postgres schema for RunLink</span>
+<span class="tag">&gt;</span> Design a PostgreSQL schema that covers the RunLink PRD: Profiles (1-to-1 with auth.users), Clubs with owner + visibility, Club memberships (owner / co_organizer / member), Activities with meetup coordinates, 50 m geofence, and check-in window, Registrations with status machine (registered → checked_in → completed), Runs (distance_m, duration_s, polyline), Reflections (emoji + note). Include updated_at triggers, useful indices, and a monthly leaderboard view.</div>
       </div>
       <div class="card soft">
-        <h4 style="color:var(--brand-2);">Prompt 2 — Haversine geofence</h4>
-        <div class="prompt-box"><span class="comment">// Validating "within 50 m of meetup" for map check-in</span>
-<span class="tag">&gt;</span> Write a small vanilla JS function <b>isWithinCheckinRadius(userLat, userLng, meetupLat, meetupLng)</b> that returns <b>true</b> iff the great-circle distance is &lt;= 50 meters. Use Haversine. Include a JSDoc block, cite the formula, and add a 3-case unit trace in a comment block. Do not use any map library.</div>
+        <h4 style="color:var(--brand-2);">Prompt 2 — RLS policies</h4>
+        <div class="prompt-box"><span class="comment">// Row Level Security for every public table</span>
+<span class="tag">&gt;</span> Enable RLS on all tables. Policies: profiles world-readable but owner-only write; public clubs world-readable, private clubs member-only; users can only mutate their own registrations, runs, reflections; organizers of the parent activity can read registrations. Provide helper functions is_club_organizer() and is_club_member() with security definer.</div>
       </div>
       <div class="card soft">
-        <h4 style="color:var(--brand-2);">Prompt 3 — Portfolio prose</h4>
-        <div class="prompt-box"><span class="comment">// Generating research prose from raw interview notes</span>
-<span class="tag">&gt;</span> I will paste 7 interview notes below. Produce a 200-word "motivation statement" that (a) names the theme Active Living, (b) quotes one actual user pain, (c) positions our product against apps that treat clubs as chat rooms or anonymous leaderboards, (d) ends with a measurable bet. Do <b>not</b> invent statistics; if you need a number, leave [BRACKET] for me to fill.</div>
+        <h4 style="color:var(--brand-2);">Prompt 3 — Geofence check-in</h4>
+        <div class="prompt-box"><span class="comment">// GPS validation + fallback modal for attendance</span>
+<span class="tag">&gt;</span> Implement a check-in flow: read activity.meetup_lat/lng and geofence_m (default 50 m). Use navigator.geolocation with enableHighAccuracy and 8 s timeout. Compute Haversine distance. If ≤ radius AND accuracy ≤ 80 m → auto mark checked_in with method gps. If accuracy too low → show confirm dialog for self-certification with method fallback. Make validateCheckin() Promise-based.</div>
       </div>
       <div class="card soft">
-        <h4 style="color:var(--brand-2);">Prompt 4 — GPS fallback copy</h4>
-        <div class="prompt-box"><span class="comment">// Writing the "confirm you're at the meetup" dialog copy</span>
-<span class="tag">&gt;</span> Write a short, warm, non-accusatory dialog for a case where the app cannot verify location but the runner insists they are at the meetup. It must: (1) acknowledge the failure is on us, (2) name the meetup explicitly, (3) ask only one self-confirm action, (4) mention that the organizer will see a "self-confirmed" chip. Max 40 words.</div>
+        <h4 style="color:var(--brand-2);">Prompt 4 — Activity state machine</h4>
+        <div class="prompt-box"><span class="comment">// Auto-switching activity page across 5 visual states</span>
+<span class="tag">&gt;</span> On /activity/:id, render the same page in one of five states based on (registration, time, activity.status): cancelled, past, registered, checked_in, open. Each state swaps only the action area at the bottom. Past activities reveal reflection composer. Organizers see Dashboard + Cancel buttons.</div>
       </div>
     </div>
 
@@ -2049,10 +2045,11 @@ State names should align with RunLink: activity lifecycle (<code>open</code> / <
           Accessibility
         </h4>
         <p style="color:var(--ink-2); font-size:14px;">
-          AI-generated HTML defaults to <i>div-soup</i>. We manually replaced generated <code>&lt;div&gt;</code>s with semantic
-          <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, and <code>&lt;article&gt;</code>, added <code>aria-label</code>s on
-          icon-only buttons, honored <code>prefers-reduced-motion</code>, and ensured focus-visible states.
-          AI also tends to use emojis as icons — we replaced them with inline SVGs for screen-reader hygiene.
+          AI-generated Vue templates defaulted to <i>div-soup</i>. We manually replaced them with semantic
+          <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, and <code>&lt;article&gt;</code> elements, added
+          <code>aria-label</code>s on icon-only buttons, honoured <code>prefers-reduced-motion</code>, and ensured
+          focus-visible states on all interactive elements. Font Awesome icons were kept as <code>&lt;i&gt;</code> with
+          <code>aria-hidden="true"</code> to avoid screen-reader noise.
         </p>
       </article>
       <article class="card">
@@ -2063,10 +2060,11 @@ State names should align with RunLink: activity lifecycle (<code>open</code> / <
           Bias &amp; representation
         </h4>
         <p style="color:var(--ink-2); font-size:14px;">
-          Default AI personas skew male, young, and urban. We explicitly re-generated our personas against a
-          checklist (gender, age, device, income bracket, running history) and cross-checked with the
-          seven people we actually interviewed. We also audited AI-generated copy for ableist language
-          around pace and distance — e.g., changing "run faster" defaults to pace-neutral framings.
+          Our two personas (Jonas and Tom) were designed entirely by the team from raw interview
+          data — no AI was involved. Both were validated against the seven real interviewees to
+          ensure accurate demographics, device context, and running history. Any AI-generated
+          copy mentioning pace or distance was audited for ableist framing and reworded to
+          neutral, inclusive language.
         </p>
       </article>
       <article class="card">
@@ -2077,10 +2075,10 @@ State names should align with RunLink: activity lifecycle (<code>open</code> / <
           Privacy &amp; attribution
         </h4>
         <p style="color:var(--ink-2); font-size:14px;">
-          No real interview transcripts or user data were shared with external LLM services. We used AI for
-          template copy, then hand-stitched in anonymized quotes. All AI-generated code blocks pushed to
-          our repository carry a comment tag <code>// AI-assisted · reviewed by &lt;member&gt;</code> and
-          are listed in the References section of this portfolio.
+          No real interview transcripts or personal data were shared with external LLM services.
+          Interview quotes were anonymised before use. All AI-assisted code carries a comment tag
+          <code>// AI-assisted · reviewed by &lt;member&gt;</code>. Every tool is formally cited in
+          the References section below, as required by university policy.
         </p>
       </article>
     </div>
@@ -2149,7 +2147,7 @@ State names should align with RunLink: activity lifecycle (<code>open</code> / <
       <div class="ref">
         <div class="ref-n">A1</div>
         <div>
-          Anthropic. (2026). <i>Claude (Claude Opus 4.7).</i> Large language model. Accessed 2026-04-15 – 2026-04-19 via Cursor IDE. <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener">anthropic.com/claude</a>.
+          Anthropic. (2026). <i>Claude (Claude Opus 4.6).</i> Large language model. Via Cursor IDE. <a href="https://www.anthropic.com/claude" target="_blank" rel="noopener">anthropic.com/claude</a>.
           <br><span style="color:var(--muted);"><b>Purpose:</b> RunLink README and UI copy, repetitive CSS / HTML / JS scaffolds, this portfolio page, check-in state matrix and Haversine geofence helper.</span>
           <span class="tag-kind">AI Tool</span>
         </div>
@@ -2157,7 +2155,7 @@ State names should align with RunLink: activity lifecycle (<code>open</code> / <
       <div class="ref">
         <div class="ref-n">A2</div>
         <div>
-          Anysphere Inc. (2026). <i>Cursor IDE (v1.x).</i> AI-assisted code editor. Accessed 2026-04-15 – 2026-04-19. <a href="https://cursor.com" target="_blank" rel="noopener">cursor.com</a>.
+          Anysphere Inc. (2026). <i>Cursor IDE (v1.x).</i> AI-assisted code editor. <a href="https://cursor.com" target="_blank" rel="noopener">cursor.com</a>.
           <br><span style="color:var(--muted);"><b>Purpose:</b> agent-based editing of HTML / CSS / JS files, project-wide refactors, in-editor prompt chaining during the high-fidelity prototype build.</span>
           <span class="tag-kind">AI Tool</span>
         </div>
@@ -2165,8 +2163,8 @@ State names should align with RunLink: activity lifecycle (<code>open</code> / <
       <div class="ref">
         <div class="ref-n">A3</div>
         <div>
-          Figma, Inc. (2026). <i>Figma — "First Draft" / AI auto-layout assist.</i> Accessed 2026-04-10 – 2026-04-14. <a href="https://www.figma.com" target="_blank" rel="noopener">figma.com</a>.
-          <br><span style="color:var(--muted);"><b>Purpose:</b> accelerating low-fidelity wireframe layout; all final UI decisions were human-made and reviewed in the Crazy-Eights session.</span>
+          Figma, Inc. (2026). <i>Figma — MCP server for AI-assisted design.</i> <a href="https://www.figma.com" target="_blank" rel="noopener">figma.com</a>.
+          <br><span style="color:var(--muted);"><b>Purpose:</b> accelerating low-fidelity wireframe layout via Figma MCP — AI drafted initial component structure; all final UI decisions were human-made and reviewed in the Crazy-Eights session.</span>
           <span class="tag-kind">AI Tool</span>
         </div>
       </div>
