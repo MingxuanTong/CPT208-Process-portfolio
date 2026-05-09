@@ -512,8 +512,7 @@
   .score-row .tag.bad { background: rgba(220,38,38,0.08); color: #B91C1C; border-color: rgba(220,38,38,0.25); }
 
   /* Before/After */
-  .ba-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-  @media (max-width: 900px) { .ba-grid { grid-template-columns: 1fr; } }
+  .ba-grid { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start; }
   .ba-card {
     background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px;
     box-shadow: var(--shadow-sm);
@@ -1904,12 +1903,15 @@
             <div class="ba-label">Before</div>
             <div class="ba-title-row">Check-in + reflection</div>
             <div class="ba-screenshot">
-              <img src="iterations/4-before.png" alt="Before: implicit privacy model" loading="lazy" />
+              <img src="iterations/4-before-1.png" alt="Before: check-in card without explicit privacy emphasis" loading="lazy" />
+            </div>
+            <div class="ba-screenshot">
+              <img src="iterations/4-before-2.png" alt="Before: reflection area with less explicit privacy guidance" loading="lazy" />
             </div>
             <ul>
               <li>Privacy rules were implied rather than stated</li>
-              <li>Users could not easily tell who sees reflections</li>
-              <li>Exact-location handling was not explained in-context</li>
+              <li>Users could not quickly tell who sees reflections and how check-in location is used</li>
+              <li>Location handling was not explained clearly at the action point</li>
               <li>Trust depended on assumption, not disclosure</li>
             </ul>
           </div>
@@ -1918,12 +1920,15 @@
             <div class="ba-label">After</div>
             <div class="ba-title-row">Check-in + reflection</div>
             <div class="ba-screenshot">
-              <img src="iterations/4-after.png" alt="After: visible privacy notice" loading="lazy" />
+              <img src="iterations/4-after-2.png" alt="After: activity detail with visible privacy note near reflections" loading="lazy" />
+            </div>
+            <div class="ba-screenshot">
+              <img src="iterations/4-after-1.png" alt="After: discover card with visible privacy note near check-in" loading="lazy" />
             </div>
             <ul>
-              <li>Short privacy note added to check-in and reflection surfaces</li>
-              <li>States that location is used only to verify attendance</li>
-              <li>States that reflections stay inside the club activity</li>
+              <li>Short privacy note added directly in the check-in and activity-detail flow</li>
+              <li>Copy states that location is used only to verify attendance</li>
+              <li>Copy states that reflections stay inside the club activity scope</li>
               <li>Trust is supported by explicit product language</li>
             </ul>
           </div>
