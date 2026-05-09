@@ -794,7 +794,7 @@
           <li><b style="color:var(--ink)">7 user interviews</b> with active runners (3) and lapsed runners (4), 30–45 min each.</li>
           <li><b style="color:var(--ink)">2 field visits</b> to XJTLU Running Club weekly activity + a weekday track session.</li>
           <li><b style="color:var(--ink)">5 peer-reviewed papers</b> covering behavior change, social exercise, and mobile HCI.</li>
-          <li><b style="color:var(--ink)">4 commercial teardowns</b> (Strava, Nike Run Club, Keep, JoinClubs).</li>
+          <li><b style="color:var(--ink)">4 commercial teardowns</b> (Codoon, Joyrun, Keep, HUAWEI Health).</li>
           <li><b style="color:var(--ink)">3 usability rounds</b> on Figma low-fi, early RunLink build, and the deployed Supabase-backed app.</li>
         </ul>
       </article>
@@ -804,7 +804,7 @@
       The Gap — Academic Papers
     </h3>
     <p style="color:var(--ink-2);font-size:15px;max-width:780px;margin-bottom:20px;">
-      4 papers reviewed to analyse check-in, social motivation, attendance reliability, and club-scoped engagement patterns.
+      4 core papers were critically analyzed for check-in, social motivation, attendance reliability, and club-scoped engagement patterns; 1 additional paper was used as background evidence for inactivity prevalence.
     </p>
 
     <div class="research-table" style="margin-bottom: 40px;">
@@ -938,25 +938,25 @@
         <div class="rt-head">
           <div class="rt-idx">01</div>
           <div>
-            <div class="rt-title">Product 01 — Strava</div>
-            <div class="rt-cite"><b>Relevance:</b> Route library + social running baseline for comparison.</div>
+            <div class="rt-title">Product 01 — Codoon (咕咚)</div>
+            <div class="rt-cite"><b>Relevance:</b> China-local running community with event + route + social baseline.</div>
           </div>
         </div>
         <div class="rt-body">
           <div class="rt-col good">
             <h5>Strengths</h5>
             <ul>
-              <li>Best-in-class GPS recording, splits, and heart-rate rendering.</li>
-              <li>Segments create <i>low-commitment rivalry</i>.</li>
-              <li>Flyby/Group runs lets you see who overlapped with you.</li>
+              <li>Strong China-local event ecosystem with broad user coverage.</li>
+              <li>Mature run recording and basic training data feedback.</li>
+              <li>Community and activity operations are familiar to local runners.</li>
             </ul>
           </div>
           <div class="rt-col bad">
             <h5>Limitations</h5>
             <ul>
-              <li>No concept of a <i>scheduled club activity</i> with a start time + meetup pin.</li>
-              <li>No on-site check-in — you can fake an entire run.</li>
-              <li>Community is global; small clubs drown under elite athletes' feeds.</li>
+              <li>Community feed is broad and noisy; small club coordination signal is weak.</li>
+              <li>Organizer workflow still depends on manual communication for attendance confidence.</li>
+              <li>Reflection and discussion are not tightly bound to a single club activity lifecycle.</li>
             </ul>
           </div>
         </div>
@@ -967,25 +967,25 @@
         <div class="rt-head">
           <div class="rt-idx">02</div>
           <div>
-            <div class="rt-title">Product 02 — Nike Run Club</div>
-            <div class="rt-cite"><b>Relevance:</b> Strong beginner coaching and habit framing in a mainstream running app.</div>
+            <div class="rt-title">Product 02 — Joyrun (悦跑圈)</div>
+            <div class="rt-cite"><b>Relevance:</b> Widely used domestic running app with events, rankings, and city-level communities.</div>
           </div>
         </div>
         <div class="rt-body">
           <div class="rt-col good">
             <h5>Strengths</h5>
             <ul>
-              <li>Guided audio coaching is genuinely great for beginners.</li>
-              <li>Clean training plans with sensible defaults.</li>
-              <li>Beautiful achievement system with modest rewards.</li>
+              <li>Strong challenge mechanics and city/community participation loops.</li>
+              <li>Beginner-friendly run tracking and milestone motivation.</li>
+              <li>Good local fit for event-based participation habits.</li>
             </ul>
           </div>
           <div class="rt-col bad">
             <h5>Limitations</h5>
             <ul>
-              <li>No user-created clubs — only Nike-organized events.</li>
-              <li>No check-in; no roster of who's running today.</li>
-              <li>Zero organizer tools — one direction only (brand → user).</li>
+              <li>Club organizer operations are still lightweight for attendance-critical scenarios.</li>
+              <li>Hard to verify "who actually arrived at meetup point" without external tools.</li>
+              <li>Activity-bound private reflection is less explicit than we need for RunLink's scope.</li>
             </ul>
           </div>
         </div>
@@ -1025,25 +1025,25 @@
         <div class="rt-head">
           <div class="rt-idx">04</div>
           <div>
-            <div class="rt-title">Product 04 — parkrun</div>
-            <div class="rt-cite"><b>Relevance:</b> Large-scale offline run ritual and attendance verification model.</div>
+            <div class="rt-title">Product 04 — HUAWEI Health (华为运动健康)</div>
+            <div class="rt-cite"><b>Relevance:</b> Device-linked mainstream health app with broad domestic adoption and running entry flows.</div>
           </div>
         </div>
         <div class="rt-body">
           <div class="rt-col good">
             <h5>Strengths</h5>
             <ul>
-              <li>Rituals of physical check-in + results email after — powerful emotional loop.</li>
-              <li>100% free, volunteer-run, gloriously unhurried.</li>
-              <li>Results pages are evergreen — great for long-term motivation.</li>
+              <li>Strong hardware integration and stable daily activity tracking.</li>
+              <li>Clear health dashboards and broad mainstream accessibility.</li>
+              <li>Convenient entry for casual users transitioning from health tracking to running.</li>
             </ul>
           </div>
           <div class="rt-col bad">
             <h5>Limitations</h5>
             <ul>
-              <li>Paper barcode is a real friction — left at home = no result.</li>
-              <li>Only 5k Saturdays — no weekday intervals, no trail, no custom distances.</li>
-              <li>No in-app social layer — everything is email + Facebook.</li>
+              <li>Not designed around club organizer workflows or meetup attendance verification.</li>
+              <li>Social/community layer is secondary compared with personal health tracking.</li>
+              <li>Lacks an activity-scoped check-in + reflection loop for club retention use cases.</li>
             </ul>
           </div>
         </div>
@@ -2110,7 +2110,7 @@
       </div>
       <div class="ref">
         <div class="ref-n">P3</div>
-        <div>Munson, S. A., &amp; Consolvo, S. (2012). <i>Exploring goal-setting, rewards, self-monitoring, and sharing to motivate physical activity.</i> In 2012 6th International Conference on Pervasive Computing Technologies for Healthcare (PervasiveHealth) (pp. 25–32). IEEE. <span class="tag-kind">Paper</span></div>
+        <div>Chen, C.-M., Hwang, G.-J., &amp; Lin, Y.-H. (2023). <i>A game-based AR navigation system for makerspace education.</i> Journal article. <span class="tag-kind">Paper</span></div>
       </div>
       <div class="ref">
         <div class="ref-n">P4</div>
@@ -2126,11 +2126,11 @@
     <div class="refs" style="margin-bottom: 28px;">
       <div class="ref">
         <div class="ref-n">C1</div>
-        <div>Strava, Inc. (2026). <i>Strava — running &amp; cycling tracker.</i> Mobile app, iOS v355.x, accessed 2026-04-05. <a href="https://www.strava.com" target="_blank" rel="noopener">strava.com</a>. <span class="tag-kind">Competitor</span></div>
+        <div>Chengdu Ledong Information Technology Co., Ltd. (2026). <i>Codoon (咕咚) — running &amp; fitness community.</i> Mobile app, accessed 2026-04-05. <a href="https://www.codoon.com" target="_blank" rel="noopener">codoon.com</a>. <span class="tag-kind">Competitor</span></div>
       </div>
       <div class="ref">
         <div class="ref-n">C2</div>
-        <div>Nike, Inc. (2026). <i>Nike Run Club.</i> Mobile app, iOS v4.3x, accessed 2026-04-06. <a href="https://www.nike.com/nrc-app" target="_blank" rel="noopener">nike.com/nrc-app</a>. <span class="tag-kind">Competitor</span></div>
+        <div>Joyrun Technology. (2026). <i>Joyrun (悦跑圈).</i> Mobile app, accessed 2026-04-06. <a href="https://www.thejoyrun.com" target="_blank" rel="noopener">thejoyrun.com</a>. <span class="tag-kind">Competitor</span></div>
       </div>
       <div class="ref">
         <div class="ref-n">C3</div>
@@ -2138,7 +2138,7 @@
       </div>
       <div class="ref">
         <div class="ref-n">C4</div>
-        <div>parkrun Ltd. (2026). <i>parkrun — free weekly 5k events.</i> Accessed 2026-04-08. <a href="https://www.parkrun.com" target="_blank" rel="noopener">parkrun.com</a>. <span class="tag-kind">Competitor</span></div>
+        <div>Huawei Device Co., Ltd. (2026). <i>HUAWEI Health (华为运动健康).</i> Mobile app, accessed 2026-04-08. <a href="https://consumer.huawei.com/cn/mobileservices/health/" target="_blank" rel="noopener">consumer.huawei.com/cn/mobileservices/health/</a>. <span class="tag-kind">Competitor</span></div>
       </div>
     </div>
 
