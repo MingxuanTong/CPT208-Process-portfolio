@@ -512,7 +512,8 @@
   .score-row .tag.bad { background: rgba(220,38,38,0.08); color: #B91C1C; border-color: rgba(220,38,38,0.25); }
 
   /* Before/After */
-  .ba-grid { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start; }
+  .ba-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .ba-grid { grid-template-columns: 1fr; } }
   .ba-card {
     background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px;
     box-shadow: var(--shadow-sm);
