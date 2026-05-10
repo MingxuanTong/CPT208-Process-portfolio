@@ -1118,7 +1118,9 @@
       <p class="section-lede">
         We mapped Tom's Saturday stage-by-stage — and on the other side of the platform, Hanqin's weekly
         organizer workflow — then highlighted the points each one silently gives up, and distilled that
-        into a short list of "if this isn't true, we haven't shipped."
+        into a short list of "if this isn't true, we haven't shipped." Each requirement (R1–R3) traces forward
+        to a design goal (DG1–DG3) and a set of system features (F1–F9) — and backward to the research that
+        motivated it.
       </p>
     </div>
 
@@ -1144,50 +1146,77 @@
       <h3 style="font-family:'Barlow Condensed';font-weight:700;font-size:28px;color:var(--ink);margin-bottom:18px;">
         Three core requirements the system must meet
       </h3>
+      <p style="color:var(--ink-2);font-size:14px;margin-bottom:24px;max-width:780px;">
+        Each requirement maps to a <b>design goal</b> (what we set out to achieve) and a set of <b>system features</b>
+        (what we built). This traceability runs through the portfolio — from research to evaluation.
+      </p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;">
+        <span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:700;background:rgba(249,115,22,0.1);color:#F97316;">R1 → DG1 → F1 · F2 · F3</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:700;background:rgba(34,197,94,0.1);color:#22C55E;">R2 → DG2 → F4 · F5 · F6</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:700;background:rgba(56,189,248,0.1);color:#0EA5E9;">R3 → DG3 → F7 · F8 · F9</span>
+      </div>
       <div class="grid-3">
         <article class="card">
           <div style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;">
             <div class="et-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-7 8-13a8 8 0 10-16 0c0 6 8 13 8 13z"/><circle cx="12" cy="9" r="3"/></svg>
             </div>
-            <h4>R1 — One-tap Map check-in</h4>
+            <h4>R1 — End-to-end runner journey</h4>
           </div>
           <p style="color:var(--ink-2);font-size:14.5px;">
-            A registered runner must be able to mark themselves present with <b>a single tap</b>, taken from a
-            card on Discover → My registrations. No form, no scanner, no second screen. The system silently
-            auto-acquires GPS, validates the time window, and enforces a fixed 50 m geofence.
+            The full loop in one app: <b>register</b> for an activity with a single tap, <b>check in</b> on-site
+            via GPS (with manual fallback if accuracy is poor), and <b>reflect</b> afterwards with an emoji or
+            short note. Each step feeds the next — registration unlocks check-in, check-in unlocks the activity
+            route and the reflection composer — so runners move through the journey without switching screens.
           </p>
-          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">RunLink: <code>geofence.js</code> · activity detail check-in</div>
+          <div style="margin-top:14px;display:flex;gap:6px;flex-wrap:wrap;">
+            <span style="padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700;background:rgba(249,115,22,0.1);color:#F97316;">DG1 · Seamless participation loop</span>
+            <span style="padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(100,116,139,0.08);color:var(--ink-2);">F1 Registration</span>
+            <span style="padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(100,116,139,0.08);color:var(--ink-2);">F2 GPS Check-in</span>
+            <span style="padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(100,116,139,0.08);color:var(--ink-2);">F3 Reflections</span>
+          </div>
         </article>
         <article class="card">
           <div style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;">
             <div class="et-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17s3-9 8-9 8 9 8 9"/><circle cx="4" cy="17" r="2"/><circle cx="20" cy="17" r="2"/><path d="M8 8l1-3m7 3l-1-3"/></svg>
             </div>
-            <h4>R2 — Activity route on the running map</h4>
+            <h4>R2 — GPS run recording with activity route</h4>
           </div>
           <p style="color:var(--ink-2);font-size:14.5px;">
-            After check-in, the organizer’s uploaded GPX/KML is stored as <code>route_geojson</code> and rendered with
-            <b>Leaflet</b> on the Running tab’s full-bleed map — entry is the <b>top-right route square</b>, which opens a
-            picker for checked-in activities. Free-run (no linked activity) stays available. While a session is
-            recording, the linked route stays fixed so distance and course don’t drift apart.
+            Runners record their workout with live GPS tracking — distance, pace, duration, and a map polyline.
+            After check-in, the organizer’s route appears on the full-bleed map for visual guidance; free-run
+            (no linked activity) is always available. During an activity session, a crew strip shows the live
+            distance and pace of same-group runners in real time, so everyone can see who’s keeping up and
+            cheer each other on. The recorder handles background tracking, signal loss, and force-quit recovery
+            so no data is lost mid-session.
           </p>
-          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">RunLink: <code>map.js</code> · <code>views.js</code> Running tab</div>
+          <div style="margin-top:14px;display:flex;gap:6px;flex-wrap:wrap;">
+            <span style="padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700;background:rgba(34,197,94,0.1);color:#22C55E;">DG2 · Live run tracking with group awareness</span>
+            <span style="padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(100,116,139,0.08);color:var(--ink-2);">F4 GPS Recorder</span>
+            <span style="padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(100,116,139,0.08);color:var(--ink-2);">F5 Route Overlay</span>
+            <span style="padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(100,116,139,0.08);color:var(--ink-2);">F6 Crew Strip</span>
+          </div>
         </article>
         <article class="card">
           <div style="display:flex; align-items:center; gap:10px; margin-bottom: 10px;">
             <div class="et-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
             </div>
-            <h4>R3 — Club-scoped reflection</h4>
+            <h4>R3 — Club organizer toolkit</h4>
           </div>
           <p style="color:var(--ink-2);font-size:14.5px;">
-            Checked-in runners react with a preset emoji and an optional short note on the <b>activity detail</b> page;
-            others see a chronological reflection feed for that activity only. Nothing is published to a global
-            or cross-club feed — scope stays inside the club’s activity. (Posting is gated until the runner has
-            checked in from Discover → My registrations.)
+            Organizers publish activities in minutes — set a time window, upload a route, configure groups and
+            capacity limits. A live data dashboard tracks registrations, check-ins, and no-shows per activity.
+            When GPS fails, organizers can manually mark a runner in. Role-based governance keeps things tidy:
+            one owner, any number of co-organizers, and members who browse and join.
           </p>
-          <div style="margin-top:14px; font-size:12px; color:var(--accent-2); font-weight:700;">RunLink: <code>reflections</code> table · RLS · <code>views.js</code></div>
+          <div style="margin-top:14px;display:flex;gap:6px;flex-wrap:wrap;">
+            <span style="padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700;background:rgba(56,189,248,0.1);color:#0EA5E9;">DG3 · Organizer enablement</span>
+            <span style="padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(100,116,139,0.08);color:var(--ink-2);">F7 Publish Activity</span>
+            <span style="padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(100,116,139,0.08);color:var(--ink-2);">F8 Data Dashboard</span>
+            <span style="padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(100,116,139,0.08);color:var(--ink-2);">F9 Role Governance</span>
+          </div>
         </article>
       </div>
     </div>
@@ -1201,8 +1230,8 @@
           </h3>
           <p style="color:var(--ink-2);max-width:720px;margin:0;">
             Beyond the core runner loop (<b>check-in → route on map → reflect</b>), RunLink ships organizer tooling backed by
-            <b>real Postgres data</b> and RLS — not hand-seeded JSON. The six capabilities below mirror what the shipped app does
-            today.
+            a live database with row-level security — not mock data. The six capabilities below mirror what the shipped app does
+            today — all traceable to <b style="color:var(--ink)">R3 / DG3</b>.
           </p>
         </div>
         <span class="chip brand">Secondary persona: Hanqin Wan · Owner / Co-organizer</span>
@@ -1214,8 +1243,11 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18M8 14h2M14 14h2M8 18h2M14 18h2"/></svg>
           </div>
           <h4>Publish activity in ≈ 2 min</h4>
-          <p>Schedule with start / end + check-in window, upload a GPX route (parsed to GeoJSON), set per-group options with optional per-group capacity, and an optional total capacity. Helper copy enforces the 50 m geofence rule — one less knob to misconfigure.</p>
-          <div class="ops-meta"><code>PublishActivityView</code> · <code>parseRouteFile</code> · route → GeoJSON</div>
+          <p>Schedule with start / end + check-in window, upload a route file, set per-group options with optional per-group capacity, and an optional total capacity. Helper copy enforces the 50 m geofence rule — one less knob to misconfigure.</p>
+          <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+            <span style="padding:2px 8px;border-radius:999px;font-size:10px;font-weight:700;background:rgba(56,189,248,0.1);color:#0EA5E9;">R3 · DG3</span>
+            <span style="padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600;background:rgba(100,116,139,0.08);color:var(--ink-2);">F7</span>
+          </div>
         </article>
 
         <article class="ops-card">
@@ -1223,8 +1255,11 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-6 4 3 5-8"/></svg>
           </div>
           <h4>Live data dashboard</h4>
-          <p>Per-activity counts: registrations (<code>n / capacity_total</code> when capped), check-ins, <b>Late</b>, <b>Cancelled</b>, and <b>No-show</b>. Per-group breakdown with progress bars when per-group caps are set. Every check-in row is audit-tagged <code>gps_verified</code>, <code>manual_confirmed</code>, or <code>organizer_manual</code>.</p>
-          <div class="ops-meta"><code>DataDashboardView</code> · organizer-only</div>
+          <p>Per-activity counts: registrations (with capacity limits), check-ins, <b>Late</b>, <b>Cancelled</b>, and <b>No-show</b>. Per-group breakdown with progress bars when per-group caps are set. Every check-in is audit-tagged by method — GPS-verified, manual-confirmed, or organizer-marked.</p>
+          <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+            <span style="padding:2px 8px;border-radius:999px;font-size:10px;font-weight:700;background:rgba(56,189,248,0.1);color:#0EA5E9;">R3 · DG3</span>
+            <span style="padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600;background:rgba(100,116,139,0.08);color:var(--ink-2);">F8</span>
+          </div>
         </article>
 
         <article class="ops-card">
@@ -1232,8 +1267,11 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 7-7"/><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12z"/></svg>
           </div>
           <h4>Manual mark check-in</h4>
-          <p>For runners whose GPS failed inside the window, organizers can tap <i>Mark in</i> on a not-checked-in row. Runner-side “Confirm you’re at the meetup” when accuracy is poor is logged as <code>fallback</code> method for organizer review.</p>
-          <div class=”ops-meta”><code>api.manualCheckIn</code> · method: <code>fallback</code></div>
+          <p>For runners whose GPS failed inside the window, organizers can tap <i>Mark in</i> on a not-checked-in row. When GPS accuracy is poor, runners can self-certify their presence — this is logged as a fallback method for organizer review.</p>
+          <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+            <span style="padding:2px 8px;border-radius:999px;font-size:10px;font-weight:700;background:rgba(249,115,22,0.1);color:#F97316;">R1 · DG1</span>
+            <span style="padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600;background:rgba(100,116,139,0.08);color:var(--ink-2);">F2</span>
+          </div>
         </article>
 
         <article class="ops-card">
@@ -1241,8 +1279,11 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M17 11a3 3 0 100-6 3 3 0 000 6z"/><path d="M3 21v-2a6 6 0 016-6 6 6 0 016 6v2M17 14a5 5 0 015 5v2"/></svg>
           </div>
           <h4>Role-based governance</h4>
-          <p>Exactly one <b>Owner</b> per club. Any number of <b>Co-organizers</b> (publish + dashboard + manual check-in). <b>Members</b> browse and join. Ownership can be transferred; club deletion stays owner-gated via <code>delete_owned_club</code> RPC.</p>
-          <div class="ops-meta"><code>club_members</code> · <code>setMemberRole</code> · <code>transferClubOwnership</code></div>
+          <p>Exactly one <b>Owner</b> per club. Any number of <b>Co-organizers</b> (publish + dashboard + manual check-in). <b>Members</b> browse and join. Ownership can be transferred; club deletion stays owner-gated.</p>
+          <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+            <span style="padding:2px 8px;border-radius:999px;font-size:10px;font-weight:700;background:rgba(56,189,248,0.1);color:#0EA5E9;">R3 · DG3</span>
+            <span style="padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600;background:rgba(100,116,139,0.08);color:var(--ink-2);">F9</span>
+          </div>
         </article>
 
         <article class="ops-card">
@@ -1251,7 +1292,9 @@
           </div>
           <h4>Club-scoped monthly leaderboard</h4>
           <p>Current-month distance ranking for the <i>active club</i> only — gold / silver / bronze-style ranks and tier badges, not a global Strava-style board.</p>
-          <div class="ops-meta"><code>v_monthly_mileage</code> · Community tab</div>
+          <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+            <span style="padding:2px 8px;border-radius:999px;font-size:10px;font-weight:700;background:rgba(56,189,248,0.1);color:#0EA5E9;">R3 · DG3</span>
+          </div>
         </article>
 
         <article class="ops-card">
@@ -1259,8 +1302,11 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
           </div>
           <h4>Realtime club awareness</h4>
-          <p>Supabase <b>Realtime</b> subscription: when someone registers for an activity you can see, a toast fires (“Someone just joined…”). During active runs, <b>broadcast channels</b> share live GPS positions between crew members — no public feed, no coordinate storage.</p>
-          <div class=”ops-meta”><code>postgres_changes</code> · broadcast <code>run:{activityId}</code></div>
+          <p>When someone registers for an activity you can see, a toast fires (“Someone just joined…”). During active runs, live GPS positions are shared between crew members — no public feed, no coordinate storage.</p>
+          <div style=”margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;”>
+            <span style=”padding:2px 8px;border-radius:999px;font-size:10px;font-weight:700;background:rgba(34,197,94,0.1);color:#22C55E;”>R2 · DG2</span>
+            <span style=”padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600;background:rgba(100,116,139,0.08);color:var(--ink-2);”>F6</span>
+          </div>
         </article>
       </div>
     </div>
@@ -1592,15 +1638,15 @@
         <article class="card" style="padding:18px;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
             <img src="./Team member/Mingxuan Tong.jpg" alt="Mingxuan Tong avatar" style="width:42px;height:42px;border-radius:50%;object-fit:cover;border:1px solid var(--line);" />
-            <div><b>Mingxuan Tong</b><br><span style="color:var(--muted);font-size:12px;">Team lead</span></div>
+            <div><b>Mingxuan Tong</b><br><span style="color:var(--muted);font-size:12px;">Team lead · Full-stack</span></div>
           </div>
-          <p style="margin:0 0 10px;color:var(--ink-2);font-size:13px;"><i>I focus on turning research insight into clear product decisions.</i></p>
+          <p style="margin:0 0 10px;color:var(--ink-2);font-size:13px;"><i>I build the product from the ground up — code, research, and everything in between.</i></p>
           <div style="margin-bottom:10px;">
+            <span class="pill-role pr-dev">Web App</span>
             <span class="pill-role pr-research">Research</span>
             <span class="pill-role pr-content">Content</span>
-            <span class="pill-role pr-design">UX</span>
           </div>
-          <p style="margin:0;color:var(--ink-2);font-size:13px;">Owned product spec &amp; README alignment, interviews, personas, journey map, and weekly coordination.</p>
+          <p style="margin:0;color:var(--ink-2);font-size:13px;">Built the Vue SPA and Supabase backend, conducted user interviews, wrote the product spec, and coordinated weekly progress.</p>
         </article>
         <article class="card" style="padding:18px;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
@@ -1612,19 +1658,19 @@
             <span class="pill-role pr-design">UI Design</span>
             <span class="pill-role pr-design">Prototyping</span>
           </div>
-          <p style="margin:0;color:var(--ink-2);font-size:13px;">Led low-fi/hi-fi visual system, layout language, and Crazy-Eights facilitation.</p>
+          <p style="margin:0;color:var(--ink-2);font-size:13px;">Led the visual design system from wireframes to hi-fi mockups, facilitated Crazy-Eights sessions, and maintained layout consistency.</p>
         </article>
         <article class="card" style="padding:18px;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
             <img src="./Team member/Ruihan Xiong.jpg" alt="Ruihan Xiong avatar" style="width:42px;height:42px;border-radius:50%;object-fit:cover;border:1px solid var(--line);" />
             <div><b>Ruihan Xiong</b><br><span style="color:var(--muted);font-size:12px;">Lead engineer</span></div>
           </div>
-          <p style="margin:0 0 10px;color:var(--ink-2);font-size:13px;"><i>I build reliable front-end flows and data-connected features.</i></p>
+          <p style="margin:0 0 10px;color:var(--ink-2);font-size:13px;"><i>I implement interactive features and make sure the app runs smoothly in production.</i></p>
           <div style="margin-bottom:10px;">
             <span class="pill-role pr-dev">Frontend Dev</span>
             <span class="pill-role pr-dev">Deployment</span>
           </div>
-          <p style="margin:0;color:var(--ink-2);font-size:13px;">Implemented SPA views/modules, Supabase integration, and deployment pipeline.</p>
+          <p style="margin:0;color:var(--ink-2);font-size:13px;">Implemented the map-based check-in flow, run recorder, leaderboard, and managed the deployment pipeline.</p>
         </article>
         <article class="card" style="padding:18px;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
@@ -1633,11 +1679,10 @@
           </div>
           <p style="margin:0 0 10px;color:var(--ink-2);font-size:13px;"><i>I validate design decisions through user testing and iteration evidence.</i></p>
           <div style="margin-bottom:10px;">
-            <span class="pill-role pr-research">Research</span>
             <span class="pill-role pr-test">Usability Testing</span>
             <span class="pill-role pr-content">Portfolio</span>
           </div>
-          <p style="margin:0;color:var(--ink-2);font-size:13px;">Ran usability rounds, captured before/after evidence, and assembled evaluation outputs.</p>
+          <p style="margin:0;color:var(--ink-2);font-size:13px;">Ran usability rounds, captured before/after evidence, and assembled the design portfolio.</p>
         </article>
       </div>
     </div>
@@ -1662,8 +1707,8 @@
     </h3>
     <p style="color:var(--ink-2);font-size:14.5px;max-width:780px;margin-bottom: 22px;">
       Each tester ran the same 5 tasks on the deployed hi-fi: (1) sign up, (2) discover a Saturday activity,
-      (3) register with a pace group, (4) simulate check-in, and (5) leave a reflection. We recorded completion
-      rate, time-on-task, and a post-session SUS score.
+      (3) register with a pace group, (4) simulate check-in, and (5) leave a reflection — covering the full
+      <b style="color:var(--ink)">R1</b> runner journey. We recorded completion rate, time-on-task, and a post-session SUS score.
     </p>
     <div class="grid-3">
       <article class="quote-card">
@@ -1682,11 +1727,11 @@
         </div>
       </article>
       <article class="quote-card">
-        <blockquote>"Loved that the leaderboard is just this month. No one's flexing 10 years of marathons at me."</blockquote>
+        <blockquote>"Loved that the leaderboard resets every month. As a new runner I actually have a shot at showing up on it."</blockquote>
         <div class="attrib">
           <div class="q-av">T2</div>
           <div class="q-meta">
-            <div class="nm">Tester 2 · Casual runner, 32</div>
+            <div class="nm">Tester 2 · University student, 20</div>
             <div class="rl">5/5 tasks · 5m 40s · SUS 78</div>
           </div>
         </div>
@@ -1723,13 +1768,14 @@
       <h2 class="section-title">Before -> After · usability-driven iterations</h2>
       <p class="section-lede">
         We translated each round of user feedback into clearer product decisions. The four iteration points
-        below map directly to simulated tester perspectives used to stress-test the alpha flow.
+        below map directly to simulated tester perspectives used to stress-test the alpha flow — each tagged
+        with the requirement (<b>R1–R3</b>) and design goal (<b>DG1–DG3</b>) it addresses.
       </p>
     </div>
 
     <div class="tester-grid">
       <article class="tester-card">
-        <div class="tester-role">User A | Beginner runner</div>
+        <div class="tester-role">User A | Beginner runner · <span style="color:#F97316;">R2 · DG2</span></div>
         <h4>Accidental taps during running</h4>
         <blockquote class="tester-quote">"I accidentally tapped the END button while running and my recording stopped."</blockquote>
         <div class="tester-block">
@@ -1742,7 +1788,7 @@
         </div>
       </article>
       <article class="tester-card">
-        <div class="tester-role">User B | Casual runner</div>
+        <div class="tester-role">User B | Casual runner · <span style="color:#22C55E;">R2 · DG2 · F6</span></div>
         <h4>Running alone during a club activity felt disconnected</h4>
         <blockquote class="tester-quote">"I checked in and started running, but I had no idea where the other runners were. It felt like I was just on a solo jog."</blockquote>
         <div class="tester-block">
@@ -1755,7 +1801,7 @@
         </div>
       </article>
       <article class="tester-card">
-        <div class="tester-role">User C | Club organizer</div>
+        <div class="tester-role">User C | Club organizer · <span style="color:#0EA5E9;">R3 · DG3 · F7</span></div>
         <h4>Organizers wanted a runner-side preview</h4>
         <blockquote class="tester-quote">"Publishing activities is useful, but I want to know how runners will see the activity before I publish it."</blockquote>
         <div class="tester-block">
@@ -1768,7 +1814,7 @@
         </div>
       </article>
       <article class="tester-card">
-        <div class="tester-role">User D | Privacy-conscious student</div>
+        <div class="tester-role">User D | Privacy-conscious student · <span style="color:#F97316;">R1 · DG1</span></div>
         <h4>Privacy rules needed clearer explanation</h4>
         <blockquote class="tester-quote">"I like club-only reflection, but I want to know who can see my reflection and location."</blockquote>
         <div class="tester-block">
@@ -1785,7 +1831,7 @@
     <div class="ba-grid">
       <!-- Iteration 1: fullscreen running + long-press pause -->
       <article class="ba-card">
-        <div class="tag-ver">Iteration 1 | Running anti-accidental-touch</div>
+        <div class="tag-ver">Iteration 1 | Running anti-accidental-touch · R2 · DG2</div>
         <h4>Running view: tabbar visible during run -> fullscreen with long-press pause</h4>
         <div class="ba-compare">
           <div class="ba-frame before">
@@ -1821,7 +1867,7 @@
 
       <!-- Iteration 2: Crew Run -->
       <article class="ba-card">
-        <div class="tag-ver">Iteration 2 | Crew Run</div>
+        <div class="tag-ver">Iteration 2 | Crew Run · R2 · DG2 · F6</div>
         <h4>Solo recording -> real-time crew strip with live distance, pace &amp; Cheer</h4>
         <div class="ba-compare">
           <div class="ba-frame before">
@@ -1859,7 +1905,7 @@
 
       <!-- Iteration 3: organizer preview -->
       <article class="ba-card">
-        <div class="tag-ver">Iteration 3 | Organizer confidence</div>
+        <div class="tag-ver">Iteration 3 | Organizer confidence · R3 · DG3 · F7</div>
         <h4>Publishing flow: direct publish -> preview before publish</h4>
         <div class="ba-compare">
           <div class="ba-frame before">
@@ -1897,7 +1943,7 @@
 
       <!-- Iteration 4: privacy explanation -->
       <article class="ba-card">
-        <div class="tag-ver">Iteration 4 | Privacy communication</div>
+        <div class="tag-ver">Iteration 4 | Privacy communication · R1 · DG1</div>
         <h4>Sensitive flows: implicit privacy model -> visible privacy notice</h4>
         <div class="ba-compare">
           <div class="ba-frame before">
@@ -1947,11 +1993,11 @@
         <h3 style="margin:8px 0 10px;">Social &amp; ethical implications</h3>
         <p style="color:var(--ink-2);font-size:14.5px;">
           RunLink is built around a presence signal — <i>I was here at this time</i>. That is a powerful
-          piece of personal data, especially for women, queer users, and people in locations where gathering
-          is politicized. We deliberately chose to keep the check-in surface club-scoped and never to build a
-          global "who's running now" feed. A club leader has no right to a member's live coordinates. We also
-          capped leaderboards at one month because we saw, even in our own testing, how quickly a lifetime
-          ranking can make a newcomer feel unwelcome.
+          piece of personal data, and exposing it carelessly can put real people at risk. We deliberately
+          chose to keep the check-in surface club-scoped and never to build a global "who's running now"
+          feed. A club leader has no right to a member's live coordinates. We also capped leaderboards at
+          one month because we saw, even in our own testing, how quickly a lifetime ranking can make a
+          newcomer feel unwelcome.
         </p>
         <p style="color:var(--ink-2);font-size:14.5px;margin-top:10px;">
           The honest limit of our design: we assumed a well-functioning club exists. RunLink doesn't solve the
@@ -2019,22 +2065,22 @@
       <div class="card soft">
         <h4 style="color:var(--brand-2);">Prompt 1 — Supabase schema</h4>
         <div class="prompt-box"><span class="comment">// Designing the full Postgres schema for RunLink</span>
-<span class="tag">&gt;</span> Design a PostgreSQL schema that covers the RunLink PRD: Profiles (1-to-1 with auth.users), Clubs with owner + visibility, Club memberships (owner / co_organizer / member), Activities with meetup coordinates, 50 m geofence, and check-in window, Registrations with status machine (registered → checked_in → completed), Runs (distance_m, duration_s, polyline), Reflections (emoji + note). Include updated_at triggers, useful indices, and a monthly leaderboard view.</div>
+<span class="tag">&gt;</span> Design a database schema for RunLink. We need tables for user profiles, clubs (with owner and visibility settings), club memberships with roles, activities with a meetup location and check-in window, registrations that track status from registered to checked-in to completed, runs that store distance and route data, and reflections with emoji reactions and short notes. Add automatic timestamps, useful indices, and a view that shows each club's monthly mileage leaderboard.</div>
       </div>
       <div class="card soft">
         <h4 style="color:var(--brand-2);">Prompt 2 — RLS policies</h4>
         <div class="prompt-box"><span class="comment">// Row Level Security for every public table</span>
-<span class="tag">&gt;</span> Enable RLS on all tables. Policies: profiles world-readable but owner-only write; public clubs world-readable, private clubs member-only; users can only mutate their own registrations, runs, reflections; organizers of the parent activity can read registrations. Provide helper functions is_club_organizer() and is_club_member() with security definer.</div>
+<span class="tag">&gt;</span> Set up row-level security on every table. Anyone can read profiles but only the owner can edit them. Public clubs are visible to everyone; private clubs only to members. Users can create, edit, and delete their own registrations, runs, and reflections — nothing else. Activity organizers should be able to view registrations for their activities. Write helper functions to check whether a user is an organizer or member of a club.</div>
       </div>
       <div class="card soft">
         <h4 style="color:var(--brand-2);">Prompt 3 — Geofence check-in</h4>
         <div class="prompt-box"><span class="comment">// GPS validation + fallback modal for attendance</span>
-<span class="tag">&gt;</span> Implement a check-in flow: read activity.meetup_lat/lng and geofence_m (default 50 m). Use navigator.geolocation with enableHighAccuracy and 8 s timeout. Compute Haversine distance. If ≤ radius AND accuracy ≤ 80 m → auto mark checked_in with method gps. If accuracy too low → show confirm dialog for self-certification with method fallback. Make validateCheckin() Promise-based.</div>
+<span class="tag">&gt;</span> Build a check-in flow for activities. When a runner taps check-in, grab their GPS location with high accuracy and compare it to the activity's meetup point. If they are within the 50-meter radius and GPS accuracy is good enough, confirm attendance automatically. If the signal is too weak or they are out of range, show a modal explaining the problem and offer a manual check-in option so nobody is locked out by a bad signal.</div>
       </div>
       <div class="card soft">
         <h4 style="color:var(--brand-2);">Prompt 4 — Activity state machine</h4>
         <div class="prompt-box"><span class="comment">// Auto-switching activity page across 5 visual states</span>
-<span class="tag">&gt;</span> On /activity/:id, render the same page in one of five states based on (registration, time, activity.status): cancelled, past, registered, checked_in, open. Each state swaps only the action area at the bottom. Past activities reveal reflection composer. Organizers see Dashboard + Cancel buttons.</div>
+<span class="tag">&gt;</span> Design an activity detail page that adapts its bottom action area based on context. There are five states: cancelled, past, registered, checked-in, and open for sign-up. Past activities should show the reflection composer so runners can share their experience. Organizers should see extra controls like a dashboard link and a cancel button. The rest of the page stays the same across all states.</div>
       </div>
     </div>
 
@@ -2051,11 +2097,9 @@
           Accessibility
         </h4>
         <p style="color:var(--ink-2); font-size:14px;">
-          AI-generated Vue templates defaulted to <i>div-soup</i>. We manually replaced them with semantic
-          <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, and <code>&lt;article&gt;</code> elements, added
-          <code>aria-label</code>s on icon-only buttons, honoured <code>prefers-reduced-motion</code>, and ensured
-          focus-visible states on all interactive elements. Font Awesome icons were kept as <code>&lt;i&gt;</code> with
-          <code>aria-hidden="true"</code> to avoid screen-reader noise.
+          AI-generated templates defaulted to meaningless markup. We replaced them with semantic elements
+          for proper screen-reader parsing, labeled icon-only buttons, respected reduced-motion preferences,
+          and added visible focus indicators for keyboard navigation.
         </p>
       </article>
       <article class="card">
@@ -2066,11 +2110,9 @@
           Bias &amp; representation
         </h4>
         <p style="color:var(--ink-2); font-size:14px;">
-          Our two personas (Jonas and Tom) were designed entirely by the team from raw interview
-          data — no AI was involved. Both were validated against the seven real interviewees to
-          ensure accurate demographics, device context, and running history. Any AI-generated
-          copy mentioning pace or distance was audited for ableist framing and reworded to
-          neutral, inclusive language.
+          Personas were built from raw interview data without AI and validated against real
+          interviewees for demographic accuracy. AI-generated copy about pace or distance was
+          audited for ableist framing and rewritten to inclusive language.
         </p>
       </article>
       <article class="card">
@@ -2081,10 +2123,9 @@
           Privacy &amp; attribution
         </h4>
         <p style="color:var(--ink-2); font-size:14px;">
-          No real interview transcripts or personal data were shared with external LLM services.
-          Interview quotes were anonymised before use. All AI-assisted code carries a comment tag
-          <code>// AI-assisted · reviewed by &lt;member&gt;</code>. Every tool is formally cited in
-          the References section below, as required by university policy.
+          No interview transcripts or personal data were shared with external AI services.
+          All AI-assisted changes were reviewed by a team member, and every tool is formally
+          cited per university policy.
         </p>
       </article>
     </div>
